@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AABE65E7-2909-4C2C-96E8-D0D3F2464EC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{DC6DBD5B-5AE0-40D7-A958-FE1B18F52F88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5805886F-A3FF-4C7A-BD75-F136ED5B636A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Systems", "Systems", "{C58D84F9-1B9B-407C-8B03-04ACB468ABAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{C49F534E-40C5-4467-A250-3F31D0BCC091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Api", "Systems\Api\MeetingOrganizer.Api\MeetingOrganizer.Api.csproj", "{E74AF201-20C7-4571-B435-942F104E347E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Common", "Shared\MeetingOrganizer.Common\MeetingOrganizer.Common.csproj", "{FCB3CA7F-0341-4883-BC98-B090D5B9BA16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Settings", "Shared\MeetingOrganizer.Settings\MeetingOrganizer.Settings.csproj", "{539E9690-5CD6-4C52-886C-1FA8D87B1214}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Services.Settings", "Services\MeetingOrganizer.Services.Settings\MeetingOrganizer.Services.Settings.csproj", "{98A77E1E-52E4-4CB3-8375-DFFDB2EA4FFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Context.Entities", "Data\MeetingOrganizer.Context.Entities\MeetingOrganizer.Context.Entities.csproj", "{E2453AA7-9064-4DD4-A917-79FD34C0F792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Context", "Data\MeetingOrganizer.Context\MeetingOrganizer.Context.csproj", "{B14D2D1A-0858-4E02-B3AB-5860F4773439}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Context.MigrationsPostgreSQL", "Data\MeetingOrganizer.Context.MigrationsPostgreSQL\MeetingOrganizer.Context.MigrationsPostgreSQL.csproj", "{9507D640-5F0A-492F-A1EA-0968D032A7E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E74AF201-20C7-4571-B435-942F104E347E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E74AF201-20C7-4571-B435-942F104E347E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E74AF201-20C7-4571-B435-942F104E347E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E74AF201-20C7-4571-B435-942F104E347E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCB3CA7F-0341-4883-BC98-B090D5B9BA16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB3CA7F-0341-4883-BC98-B090D5B9BA16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCB3CA7F-0341-4883-BC98-B090D5B9BA16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCB3CA7F-0341-4883-BC98-B090D5B9BA16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{539E9690-5CD6-4C52-886C-1FA8D87B1214}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{539E9690-5CD6-4C52-886C-1FA8D87B1214}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{539E9690-5CD6-4C52-886C-1FA8D87B1214}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{539E9690-5CD6-4C52-886C-1FA8D87B1214}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98A77E1E-52E4-4CB3-8375-DFFDB2EA4FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98A77E1E-52E4-4CB3-8375-DFFDB2EA4FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98A77E1E-52E4-4CB3-8375-DFFDB2EA4FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98A77E1E-52E4-4CB3-8375-DFFDB2EA4FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2453AA7-9064-4DD4-A917-79FD34C0F792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2453AA7-9064-4DD4-A917-79FD34C0F792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2453AA7-9064-4DD4-A917-79FD34C0F792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2453AA7-9064-4DD4-A917-79FD34C0F792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B14D2D1A-0858-4E02-B3AB-5860F4773439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B14D2D1A-0858-4E02-B3AB-5860F4773439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B14D2D1A-0858-4E02-B3AB-5860F4773439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B14D2D1A-0858-4E02-B3AB-5860F4773439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9507D640-5F0A-492F-A1EA-0968D032A7E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9507D640-5F0A-492F-A1EA-0968D032A7E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9507D640-5F0A-492F-A1EA-0968D032A7E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9507D640-5F0A-492F-A1EA-0968D032A7E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C49F534E-40C5-4467-A250-3F31D0BCC091} = {C58D84F9-1B9B-407C-8B03-04ACB468ABAD}
+		{E74AF201-20C7-4571-B435-942F104E347E} = {C49F534E-40C5-4467-A250-3F31D0BCC091}
+		{FCB3CA7F-0341-4883-BC98-B090D5B9BA16} = {DC6DBD5B-5AE0-40D7-A958-FE1B18F52F88}
+		{539E9690-5CD6-4C52-886C-1FA8D87B1214} = {DC6DBD5B-5AE0-40D7-A958-FE1B18F52F88}
+		{98A77E1E-52E4-4CB3-8375-DFFDB2EA4FFA} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
+		{E2453AA7-9064-4DD4-A917-79FD34C0F792} = {AABE65E7-2909-4C2C-96E8-D0D3F2464EC9}
+		{B14D2D1A-0858-4E02-B3AB-5860F4773439} = {AABE65E7-2909-4C2C-96E8-D0D3F2464EC9}
+		{9507D640-5F0A-492F-A1EA-0968D032A7E4} = {AABE65E7-2909-4C2C-96E8-D0D3F2464EC9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3223470B-A10F-4123-B5D5-A1358692F51C}
+	EndGlobalSection
+EndGlobal
