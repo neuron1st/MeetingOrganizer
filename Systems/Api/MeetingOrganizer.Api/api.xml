@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Api</name>
+    </assembly>
+    <members>
+        <member name="T:MeetingOrganizer.Api.Bootstrapper">
+            <summary>
+            API services bootstrapper
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Bootstrapper.RegisterAppServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Main to register app services
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Configuration.CorsConfiguration">
+            <summary>
+            CORS configuration
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.CorsConfiguration.AddAppCors(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add CORS
+            </summary>
+            <param name="services">Services collection</param>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.CorsConfiguration.UseAppCors(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            Use service
+            </summary>
+            <param name="app">Application</param>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Configuration.LoggerConfiguration">
+            <summary>
+            Logger Configuration
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.LoggerConfiguration.AddAppLogger(Microsoft.AspNetCore.Builder.WebApplicationBuilder,MeetingOrganizer.Services.Settings.Settings.MainSettings,MeetingOrganizer.Services.Settings.Settings.LogSettings)">
+            <summary>
+            Add logger
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Configuration.SwaggerConfiguration">
+            <summary>
+            Swagger configuration
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.SwaggerConfiguration.AddAppSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,MeetingOrganizer.Services.Settings.Settings.MainSettings,MeetingOrganizer.Services.Settings.Settings.SwaggerSettings)">
+            <summary>
+            Add OpenAPI to API
+            </summary>
+            <param name="services">Services collection</param>
+            <param name="mainSettings"></param>
+            <param name="swaggerSettings"></param>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.SwaggerConfiguration.UseAppSwagger(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            Start OpenAPI UI
+            </summary>
+            <param name="app">Web application</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  meetingorganizer.api:
+    image: ${DOCKER_REGISTRY-}meetingorganizerapi
+    build:
+      context: .
+      dockerfile: Systems/Api/MeetingOrganizer.Api/Dockerfile
