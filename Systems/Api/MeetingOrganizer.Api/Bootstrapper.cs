@@ -22,7 +22,7 @@ public static class Bootstrapper
             .AddLogSettings()
             .AddSwaggerSettings()
             .AddIdentitySettings()
-            //.AddAppLogger()
+            .AddAppLogger()
             .AddDbSeeder()
             .AddUserAccountService();
 
