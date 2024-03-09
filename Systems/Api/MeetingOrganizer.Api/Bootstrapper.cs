@@ -24,7 +24,8 @@ public static class Bootstrapper
             .AddIdentitySettings()
             .AddAppLogger()
             .AddDbSeeder()
-            .AddUserAccountService();
+            //.AddUserAccountService()
+            ;
 
         return services;
     }

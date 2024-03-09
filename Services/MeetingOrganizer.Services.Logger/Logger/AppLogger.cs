@@ -6,7 +6,7 @@ public class AppLogger : IAppLogger
 {
     private readonly Serilog.ILogger logger;
 
-    private string _systemName = "NetSchool";
+    private string _systemName = "MeetingOrganizer";
 
     public AppLogger(Serilog.ILogger logger)
     {

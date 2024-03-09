@@ -3,7 +3,7 @@
 using AutoMapper;
 using MeetingOrganizer.Common.Exceptions;
 using MeetingOrganizer.Common.Validator;
-using MeetingOrganizer.Context.Entities.User;
+using MeetingOrganizer.Context.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

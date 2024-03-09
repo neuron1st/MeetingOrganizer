@@ -1,4 +1,4 @@
-﻿namespace MeetingOrganizer.Context.Entities.User;
+﻿namespace MeetingOrganizer.Context.Entities;
 
 /// <summary>
 /// User status for IS4

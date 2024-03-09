@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MeetingOrganizer.Context.Entities.User;
+using MeetingOrganizer.Context.Entities;
 
 namespace MeetingOrganizer.Services.UserAccount;
 

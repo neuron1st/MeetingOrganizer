@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeetingOrganizer.Context.Entities.User;
+namespace MeetingOrganizer.Context.Entities;
 
 /// <summary>
 /// <inheritdoc/>

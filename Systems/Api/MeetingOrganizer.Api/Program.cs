@@ -5,6 +5,7 @@ using MeetingOrganizer.Services.Settings.Settings;
 using MeetingOrganizer.Settings;
 using MeetingOrganizer.Api;
 using MeetingOrganizer.Context.Seeder.Seeds;
+using MeetingOrganizer.Services.Logger;
 
 var mainSettings = Settings.Load<MainSettings>("Main");
 var logSettings = Settings.Load<LogSettings>("Log");
@@ -13,7 +14,7 @@ var identitySettings = Settings.Load<IdentitySettings>("Identity");
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.AddAppLogger();
+builder.AddAppLogger(mainSettings, logSettings);
 
 var services = builder.Services;
 
@@ -37,6 +38,7 @@ services.AddAppControllerAndViews();
 
 services.RegisterAppServices();
 
+
 var app = builder.Build();
 
 app.UseAppCors();
@@ -44,6 +46,8 @@ app.UseAppCors();
 app.UseAppHealthChecks();
 
 app.UseAppSwagger();
+
+app.UseSwaggerUI();
 
 app.UseAppControllerAndViews();
 

@@ -13,7 +13,7 @@ namespace MeetingOrganizer.Api.Configuration;
 /// </summary>
 public static class SwaggerConfiguration
 {
-    private static string AppTitle = "DSR NetSchool API";
+    private static string AppTitle = "Meeting Organizer";
 
     /// <summary>
     /// Add OpenAPI to API

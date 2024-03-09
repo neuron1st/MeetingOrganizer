@@ -1,5 +1,5 @@
 ﻿using MeetingOrganizer.Context.Context.Configuration;
-using MeetingOrganizer.Context.Entities.User;
+using MeetingOrganizer.Context.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +7,14 @@ namespace MeetingOrganizer.Context.Context;
 
 public class MeetingOrganizerDbContext : IdentityDbContext<User, UserRole, Guid>
 {
+    public DbSet<Comment> Comments { get; set; }
+    public DbSet<CommentLike> CommentsLikes { get; set; }
+    public DbSet<MeetingLike> MeetingLikes { get; set; }
+    public DbSet<Meeting> Meetings { get; set; }
+    public DbSet<Participant> Participants { get; set; }
+    public DbSet<Photo> Photos { get; set; }
+    public DbSet<Role> ParticipantRoles {  get; set; }
+
     public MeetingOrganizerDbContext(DbContextOptions<MeetingOrganizerDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -14,5 +22,12 @@ public class MeetingOrganizerDbContext : IdentityDbContext<User, UserRole, Guid>
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ConfigureUsers();
+        modelBuilder.ConfigureComments();
+        modelBuilder.ConfigureCommentLikes();
+        modelBuilder.ConfigureMeetingLikes();
+        modelBuilder.ConfigureMeetings();
+        modelBuilder.ConfigureParticipants();
+        modelBuilder.ConfigurePhotos();
+        modelBuilder.ConfigureRoles();
     }
 }

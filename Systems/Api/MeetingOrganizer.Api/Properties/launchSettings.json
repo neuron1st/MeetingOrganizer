@@ -7,6 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
+      "launchUrl": "docs",
       "applicationUrl": "http://localhost:5247"
     },
     "IIS Express": {

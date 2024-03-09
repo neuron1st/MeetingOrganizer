@@ -1,4 +1,4 @@
-﻿using MeetingOrganizer.Context.Entities.User;
+﻿using MeetingOrganizer.Context.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,5 +15,29 @@ public static class UsersContextConfiguration
         modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("user_role_claims");
         modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("user_logins");
         modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("user_claims");
+
+        modelBuilder.Entity<User>()
+            .HasMany(x=>x.Participants)
+            .WithOne(x=>x.User)
+            .HasForeignKey(x=>x.UserId)
+            .HasPrincipalKey(x=>x.EntryId);
+
+        modelBuilder.Entity<User>()
+            .HasMany(x => x.Comments)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId)
+            .HasPrincipalKey(x => x.EntryId);
+
+        modelBuilder.Entity<User>()
+            .HasMany(x => x.CommentLikes)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId)
+            .HasPrincipalKey(x => x.EntryId);
+
+        modelBuilder.Entity<User>()
+            .HasMany(x => x.MeetingLikes)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId)
+            .HasPrincipalKey(x => x.EntryId);
     }
 }
