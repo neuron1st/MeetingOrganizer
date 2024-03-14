@@ -15,6 +15,7 @@ public abstract class BaseEntity
 
     [Required]
     public virtual Guid Uid { get; set; } = Guid.NewGuid();
-    public DateTime ModificationTime { get; set; }
-    public DateTime CreationTime { get; set; }
+
+    [Required]
+    public DateTime CreationTime { get; set; } = DateTime.UtcNow;
 }

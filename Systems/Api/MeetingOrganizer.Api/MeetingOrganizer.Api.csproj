@@ -38,13 +38,10 @@
 		<ProjectReference Include="..\..\..\Data\MeetingOrganizer.Context.Seeder\MeetingOrganizer.Context.Seeder.csproj" />
 		<ProjectReference Include="..\..\..\Data\MeetingOrganizer.Context\MeetingOrganizer.Context.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Logger\MeetingOrganizer.Services.Logger.csproj" />
+		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Meetings\MeetingOrganizer.Services.Meetings.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Settings\MeetingOrganizer.Services.Settings.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.UserAccount\MeetingOrganizer.Services.UserAccount.csproj" />
 		<ProjectReference Include="..\..\..\Shared\MeetingOrganizer.Common\MeetingOrganizer.Common.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Controllers\" />
 	</ItemGroup>
 
 </Project>

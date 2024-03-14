@@ -4,6 +4,7 @@ using MeetingOrganizer.Services.Settings;
 using MeetingOrganizer.Services.Logger;
 using MeetingOrganizer.Services.UserAccount;
 using MeetingOrganizer.Context.Seeder;
+using MeetingOrganizer.Services.Meetings;
 
 /// <summary>
 /// API services bootstrapper
@@ -24,6 +25,7 @@ public static class Bootstrapper
             .AddIdentitySettings()
             .AddAppLogger()
             .AddDbSeeder()
+            .AddMeetingService()
             //.AddUserAccountService()
             ;
 

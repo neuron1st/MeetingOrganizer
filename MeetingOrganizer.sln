@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Context.Seeder", "Data\MeetingOrganizer.Context.Seeder\MeetingOrganizer.Context.Seeder.csproj", "{AC1FB4DC-2554-46C1-822F-42DD406617CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Services.Logger", "Services\MeetingOrganizer.Services.Logger\MeetingOrganizer.Services.Logger.csproj", "{0B481274-34A2-4721-B1AC-4182C148CDFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.Logger", "Services\MeetingOrganizer.Services.Logger\MeetingOrganizer.Services.Logger.csproj", "{0B481274-34A2-4721-B1AC-4182C148CDFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.Meetings", "Services\MeetingOrganizer.Services.Meetings\MeetingOrganizer.Services.Meetings.csproj", "{B7B85118-E39A-4BEE-9D3F-0ECFB7CF5A10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{0B481274-34A2-4721-B1AC-4182C148CDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B481274-34A2-4721-B1AC-4182C148CDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B481274-34A2-4721-B1AC-4182C148CDFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7B85118-E39A-4BEE-9D3F-0ECFB7CF5A10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7B85118-E39A-4BEE-9D3F-0ECFB7CF5A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7B85118-E39A-4BEE-9D3F-0ECFB7CF5A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7B85118-E39A-4BEE-9D3F-0ECFB7CF5A10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{27A48FCA-4C9A-4C6E-9402-BDE07531A6A6} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
 		{AC1FB4DC-2554-46C1-822F-42DD406617CA} = {AABE65E7-2909-4C2C-96E8-D0D3F2464EC9}
 		{0B481274-34A2-4721-B1AC-4182C148CDFC} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
+		{B7B85118-E39A-4BEE-9D3F-0ECFB7CF5A10} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3223470B-A10F-4123-B5D5-A1358692F51C}
