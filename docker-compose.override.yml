@@ -1,14 +1,29 @@
 version: '3.4'
 
 services:
-  meetingorganizer.api:
+
+  meetingorganizer_postgresql:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Passw0rd
     ports:
-      - "8080"
-      - "8081"
+      - "45432:5432"
+    networks:
+      - shared_meetingorganizer_net
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ~/.docker-conf/postgresql/data:/lib/postgresql/data
+
+  meetingorganizer.api:
+    ports:
+      - "10000:8080"
+    networks:
+      - shared_meetingorganizer_net
+    env_file:
+      - env.api
+
+
+networks:
+  shared_meetingorganizer_net:
+    name: meetingorganizer
+    driver: bridge

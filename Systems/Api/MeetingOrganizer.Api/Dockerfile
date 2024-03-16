@@ -4,7 +4,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -14,8 +13,12 @@ COPY ["Data/MeetingOrganizer.Context.MigrationsPostgreSQL/MeetingOrganizer.Conte
 COPY ["Data/MeetingOrganizer.Context.Entities/MeetingOrganizer.Context.Entities.csproj", "Data/MeetingOrganizer.Context.Entities/"]
 COPY ["Data/MeetingOrganizer.Context/MeetingOrganizer.Context.csproj", "Data/MeetingOrganizer.Context/"]
 COPY ["Shared/MeetingOrganizer.Settings/MeetingOrganizer.Settings.csproj", "Shared/MeetingOrganizer.Settings/"]
-COPY ["Services/MeetingOrganizer.Services.Settings/MeetingOrganizer.Services.Settings.csproj", "Services/MeetingOrganizer.Services.Settings/"]
+COPY ["Data/MeetingOrganizer.Context.Seeder/MeetingOrganizer.Context.Seeder.csproj", "Data/MeetingOrganizer.Context.Seeder/"]
+COPY ["Services/MeetingOrganizer.Services.Logger/MeetingOrganizer.Services.Logger.csproj", "Services/MeetingOrganizer.Services.Logger/"]
+COPY ["Services/MeetingOrganizer.Services.Meetings/MeetingOrganizer.Services.Meetings.csproj", "Services/MeetingOrganizer.Services.Meetings/"]
 COPY ["Shared/MeetingOrganizer.Common/MeetingOrganizer.Common.csproj", "Shared/MeetingOrganizer.Common/"]
+COPY ["Services/MeetingOrganizer.Services.Settings/MeetingOrganizer.Services.Settings.csproj", "Services/MeetingOrganizer.Services.Settings/"]
+COPY ["Services/MeetingOrganizer.Services.UserAccount/MeetingOrganizer.Services.UserAccount.csproj", "Services/MeetingOrganizer.Services.UserAccount/"]
 RUN dotnet restore "./Systems/Api/MeetingOrganizer.Api/./MeetingOrganizer.Api.csproj"
 COPY . .
 WORKDIR "/src/Systems/Api/MeetingOrganizer.Api"

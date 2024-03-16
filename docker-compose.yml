@@ -1,8 +1,14 @@
 version: '3.4'
 
 services:
+
+  meetingorganizer_postgresql:
+    image: postgres:14.1
+
   meetingorganizer.api:
     image: ${DOCKER_REGISTRY-}meetingorganizerapi
     build:
       context: .
       dockerfile: Systems/Api/MeetingOrganizer.Api/Dockerfile
+    depends_on:
+      - meetingorganizer_postgresql
