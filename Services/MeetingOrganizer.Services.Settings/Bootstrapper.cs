@@ -1,5 +1,4 @@
-﻿using MeetingOrganizer.Services.Settings.Settings;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MeetingOrganizer.Services.Settings;
@@ -16,7 +15,7 @@ public static class Bootstrapper
 
     public static IServiceCollection AddIdentitySettings(this IServiceCollection services, IConfiguration? configuration = null)
     {
-        var settings = MeetingOrganizer.Settings.Settings.Load<MainSettings>("Main", configuration);
+        var settings = MeetingOrganizer.Settings.Settings.Load<IdentitySettings>("Identity", configuration);
         services.AddSingleton(settings);
 
         return services;

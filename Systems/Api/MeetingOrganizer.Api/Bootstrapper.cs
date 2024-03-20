@@ -26,7 +26,7 @@ public static class Bootstrapper
             .AddAppLogger()
             .AddDbSeeder()
             .AddMeetingService()
-            //.AddUserAccountService()
+            .AddUserAccountService()
             ;
 
         return services;

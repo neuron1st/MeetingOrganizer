@@ -1,4 +1,4 @@
-﻿namespace MeetingOrganizer.Services.Settings.Settings;
+﻿namespace MeetingOrganizer.Services.Settings;
 
 public class SwaggerSettings
 {

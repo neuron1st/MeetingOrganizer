@@ -1,11 +1,12 @@
 ﻿using MeetingOrganizer.Context.Context.Configuration;
 using MeetingOrganizer.Context.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Context.Context;
 
-public class MeetingOrganizerDbContext : IdentityDbContext<User, UserRole, Guid>
+public class MeetingOrganizerDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     public DbSet<Comment> Comments { get; set; }
     public DbSet<CommentLike> CommentsLikes { get; set; }

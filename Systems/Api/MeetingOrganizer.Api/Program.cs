@@ -1,7 +1,7 @@
 using MeetingOrganizer.Api.Configuration;
 using MeetingOrganizer.Context.Setup;
 using MeetingOrganizer.Context;
-using MeetingOrganizer.Services.Settings.Settings;
+using MeetingOrganizer.Services.Settings;
 using MeetingOrganizer.Settings;
 using MeetingOrganizer.Api;
 using MeetingOrganizer.Context.Seeder.Seeds;
@@ -28,11 +28,13 @@ services.AddAppHealthChecks();
 
 services.AddAppVersioning();
 
-services.AddAppSwagger(mainSettings, swaggerSettings);
+services.AddAppSwagger(mainSettings, swaggerSettings, identitySettings);
 
 services.AddAppAutoMappers();
 
 services.AddAppValidator();
+
+services.AddAppAuth(identitySettings);
 
 services.AddAppControllerAndViews();
 

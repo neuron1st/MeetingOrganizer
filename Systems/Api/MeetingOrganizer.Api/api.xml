@@ -38,7 +38,7 @@
             Logger Configuration
             </summary>
         </member>
-        <member name="M:MeetingOrganizer.Api.Configuration.LoggerConfiguration.AddAppLogger(Microsoft.AspNetCore.Builder.WebApplicationBuilder,MeetingOrganizer.Services.Settings.Settings.MainSettings,MeetingOrganizer.Services.Settings.Settings.LogSettings)">
+        <member name="M:MeetingOrganizer.Api.Configuration.LoggerConfiguration.AddAppLogger(Microsoft.AspNetCore.Builder.WebApplicationBuilder,MeetingOrganizer.Services.Settings.MainSettings,MeetingOrganizer.Services.Settings.LogSettings)">
             <summary>
             Add logger
             </summary>
@@ -48,13 +48,14 @@
             Swagger configuration
             </summary>
         </member>
-        <member name="M:MeetingOrganizer.Api.Configuration.SwaggerConfiguration.AddAppSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,MeetingOrganizer.Services.Settings.Settings.MainSettings,MeetingOrganizer.Services.Settings.Settings.SwaggerSettings)">
+        <member name="M:MeetingOrganizer.Api.Configuration.SwaggerConfiguration.AddAppSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,MeetingOrganizer.Services.Settings.MainSettings,MeetingOrganizer.Services.Settings.SwaggerSettings,MeetingOrganizer.Services.Settings.IdentitySettings)">
             <summary>
             Add OpenAPI to API
             </summary>
             <param name="services">Services collection</param>
             <param name="mainSettings"></param>
             <param name="swaggerSettings"></param>
+            <param name="identitySettings"></param>
         </member>
         <member name="M:MeetingOrganizer.Api.Configuration.SwaggerConfiguration.UseAppSwagger(Microsoft.AspNetCore.Builder.WebApplication)">
             <summary>

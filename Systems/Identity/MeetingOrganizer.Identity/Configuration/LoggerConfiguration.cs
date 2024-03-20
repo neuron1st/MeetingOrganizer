@@ -1,4 +1,4 @@
-﻿namespace MeetingOrganizer.Api.Configuration;
+﻿namespace MeetingOrganizer.Identity.Configuration;
 
 using MeetingOrganizer.Services.Settings;
 using Serilog;
@@ -12,8 +12,7 @@ public static class LoggerConfiguration
     /// <summary>
     /// Add logger
     /// </summary>
-    public static void AddAppLogger(this WebApplicationBuilder builder, MainSettings mainSettings,
-        LogSettings logSettings)
+    public static void AddAppLogger(this WebApplicationBuilder builder, LogSettings logSettings)
     {
         var loggerConfiguration = new Serilog.LoggerConfiguration();
 

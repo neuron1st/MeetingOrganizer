@@ -51,7 +51,6 @@ public class UserAccountService : IUserAccountService
         if (!result.Succeeded)
             throw new ProcessException("401", $"Creating user account is wrong. {string.Join(", ", result.Errors.Select(s => s.Description))}");
 
-
         // Returning the created user
         return _mapper.Map<UserAccountModel>(user);
     }

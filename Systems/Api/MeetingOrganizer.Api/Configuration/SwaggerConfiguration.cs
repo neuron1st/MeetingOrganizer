@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning.ApiExplorer;
-using MeetingOrganizer.Services.Settings.Settings;
+using MeetingOrganizer.Common.Security;
+using MeetingOrganizer.Services.Settings;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -21,7 +22,11 @@ public static class SwaggerConfiguration
     /// <param name="services">Services collection</param>
     /// <param name="mainSettings"></param>
     /// <param name="swaggerSettings"></param>
-    public static IServiceCollection AddAppSwagger(this IServiceCollection services, MainSettings mainSettings, SwaggerSettings swaggerSettings)
+    /// <param name="identitySettings"></param>
+    public static IServiceCollection AddAppSwagger(this IServiceCollection services,
+        MainSettings mainSettings,
+        SwaggerSettings swaggerSettings,
+        IdentitySettings identitySettings)
     {
         if (!swaggerSettings.Enabled)
             return services;
@@ -41,13 +46,19 @@ public static class SwaggerConfiguration
         services.AddSwaggerGen(options =>
         {
             options.SupportNonNullableReferenceTypes();
+
             options.UseInlineDefinitionsForEnums();
+
             options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+
             options.DescribeAllParametersInCamelCase();
+
             options.CustomSchemaIds(x => x.FullName);
+
             var xmlPath = Path.Combine(AppContext.BaseDirectory, "api.xml");
             if (File.Exists(xmlPath))
                 options.IncludeXmlComments(xmlPath);
+
             options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
             {
                 Name = "Bearer",
@@ -57,14 +68,24 @@ public static class SwaggerConfiguration
                 In = ParameterLocation.Header,
                 Flows = new OpenApiOAuthFlows
                 {
+                    ClientCredentials = new OpenApiOAuthFlow
+                    {
+                        TokenUrl = new Uri($"{identitySettings.Url}/connect/token"),
+                        Scopes = new Dictionary<string, string>
+                        {
+                            { AppScopes.MeetingsRead, "Meetings Read" },
+                            { AppScopes.MeetingsWrite, "Meetings Write" },
+                        }
+                    },
+
                     Password = new OpenApiOAuthFlow
                     {
-                        TokenUrl = new Uri($"{mainSettings.PublicUrl}/connect/token"),
-                        //Scopes = new Dictionary<string, string>
-                        //{
-                        //    { "Admin", "Admin scope" },
-                        //    { "User", "User scope" }
-                        //}
+                        TokenUrl = new Uri($"{identitySettings.Url}/connect/token"),
+                        Scopes = new Dictionary<string, string>
+                        {
+                            { AppScopes.MeetingsRead, "Meetings Read" },
+                            { AppScopes.MeetingsWrite, "Meetings Write" }
+                        }
                     }
                 }
             });
@@ -84,11 +105,14 @@ public static class SwaggerConfiguration
             });
             options.UseOneOfForPolymorphism();
             options.EnableAnnotations(true, true);
+
             options.UseAllOfForInheritance();
             options.UseOneOfForPolymorphism();
+
             options.SelectSubTypesUsing(baseType =>
                 typeof(Program).Assembly.GetTypes().Where(type => type.IsSubclassOf(baseType))
             );
+
             options.ExampleFilters();
         });
 
@@ -129,6 +153,7 @@ public static class SwaggerConfiguration
                 options.DocExpansion(DocExpansion.List);
                 options.DefaultModelsExpandDepth(-1);
                 options.OAuthAppName(AppTitle);
+
                 options.OAuthClientId(swaggerSettings?.OAuthClientId ?? "");
                 options.OAuthClientSecret(swaggerSettings?.OAuthClientSecret ?? "");
             }

@@ -1,10 +1,8 @@
-﻿using MeetingOrganizer.Services.Settings;
+﻿using Duende.IdentityServer.Services;
+using MeetingOrganizer.Services.Settings;
 
-namespace MeetingOrganizer.Api.Configuration;
+namespace MeetingOrganizer.Identity.Configuration;
 
-/// <summary>
-/// CORS configuration
-/// </summary>
 public static class CorsConfiguration
 {
     /// <summary>
@@ -13,7 +11,15 @@ public static class CorsConfiguration
     /// <param name="services">Services collection</param>
     public static IServiceCollection AddAppCors(this IServiceCollection services)
     {
-        services.AddCors();
+        services.AddSingleton<ICorsPolicyService>((container) =>
+        {
+            var logger = container.GetRequiredService<ILogger<DefaultCorsPolicyService>>();
+
+            return new DefaultCorsPolicyService(logger)
+            {
+                AllowAll = true
+            };
+        });
 
         return services;
     }

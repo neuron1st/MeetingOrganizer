@@ -14,7 +14,7 @@ public class ModelValidator<T> : IModelValidator<T> where T : class
     public void Check(T model)
     {
         var result = _validator.Validate(model);
-        if (result.IsValid)
+        if (!result.IsValid)
             throw new ValidationException(result.Errors);
     }
 
