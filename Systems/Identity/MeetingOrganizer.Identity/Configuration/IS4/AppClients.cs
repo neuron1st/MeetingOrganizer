@@ -11,10 +11,10 @@ public static class AppClients
         {
             new Client
             {
-                ClientId = "client",
+                ClientId = "swagger",
                 ClientSecrets =
                 {
-                    new Secret("A3F0811F2E934C4F1114CB693F7D785E".ToSha256())
+                    new Secret("A3F0811F2E934C4FB054CB693F7D785E".ToSha256())
                 },
 
                 AllowedGrantTypes = GrantTypes.ClientCredentials,

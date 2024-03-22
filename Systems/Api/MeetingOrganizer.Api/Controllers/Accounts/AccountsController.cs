@@ -9,7 +9,7 @@ namespace MeetingOrganizer.Api.Controllers.Accounts;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/accounts")]
-public class AccountsController
+public class AccountsController : ControllerBase
 {
     private readonly IMapper _mapper;
     private readonly ILogger<AccountsController> _logger;

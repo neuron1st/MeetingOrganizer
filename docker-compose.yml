@@ -5,6 +5,9 @@ services:
   meetingorganizer_postgresql:
     image: postgres:14.1
 
+  meetingorganizer_redis:
+    image: redis
+
   meetingorganizer_api:
     image: ${DOCKER_REGISTRY-}meetingorganizerapi
     build:
@@ -12,6 +15,7 @@ services:
       dockerfile: Systems/Api/MeetingOrganizer.Api/Dockerfile
     depends_on:
       - meetingorganizer_postgresql
+      - meetingorganizer_redis
 
   meetingorganizer_identity:
     image: ${DOCKER_REGISTRY-}meetingorganizeridentity
@@ -20,4 +24,5 @@ services:
       dockerfile: Systems/Identity/MeetingOrganizer.Identity/Dockerfile
     depends_on:
       - meetingorganizer_postgresql
+      - meetingorganizer_redis
       - meetingorganizer_api

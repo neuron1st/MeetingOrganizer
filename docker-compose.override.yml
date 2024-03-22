@@ -14,6 +14,15 @@ services:
     volumes:
       - ~/.docker-conf/postgresql/data:/lib/postgresql/data
 
+  meetingorganizer_redis:
+    ports:
+      - '6379:6379'
+    networks:
+      - shared_meetingorganizer_net
+    volumes:
+      - ~/.docker-conf/redis/data:/data
+
+
   meetingorganizer_api:
     ports:
       - "10000:8080"

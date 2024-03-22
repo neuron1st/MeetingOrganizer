@@ -38,6 +38,7 @@
 		<ProjectReference Include="..\..\..\Data\MeetingOrganizer.Context.MigrationsPostgreSQL\MeetingOrganizer.Context.MigrationsPostgreSQL.csproj" />
 		<ProjectReference Include="..\..\..\Data\MeetingOrganizer.Context.Seeder\MeetingOrganizer.Context.Seeder.csproj" />
 		<ProjectReference Include="..\..\..\Data\MeetingOrganizer.Context\MeetingOrganizer.Context.csproj" />
+		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Cache\MeetingOrganizer.Services.Cache.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Logger\MeetingOrganizer.Services.Logger.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Meetings\MeetingOrganizer.Services.Meetings.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Settings\MeetingOrganizer.Services.Settings.csproj" />

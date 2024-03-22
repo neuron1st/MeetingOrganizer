@@ -51,6 +51,8 @@ app.UseAppSwagger();
 
 app.UseSwaggerUI();
 
+app.UseAppAuth();
+
 app.UseAppControllerAndViews();
 
 DbInitializer.Execute(app.Services);

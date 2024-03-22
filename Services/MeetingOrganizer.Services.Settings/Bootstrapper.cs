@@ -36,4 +36,12 @@ public static class Bootstrapper
 
         return services;
     }
+
+    public static IServiceCollection AddCacheSettings(this IServiceCollection services, IConfiguration? configuration = null)
+    {
+        var settings = MeetingOrganizer.Settings.Settings.Load<CacheSettings>("Cache", configuration);
+        services.AddSingleton(settings);
+
+        return services;
+    }
 }
