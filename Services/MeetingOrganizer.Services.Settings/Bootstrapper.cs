@@ -21,7 +21,7 @@ public static class Bootstrapper
         return services;
     }
 
-    public static IServiceCollection AddLogSettings(this IServiceCollection services, IConfiguration configuration = null)
+    public static IServiceCollection AddLogSettings(this IServiceCollection services, IConfiguration? configuration = null)
     {
         var settings = MeetingOrganizer.Settings.Settings.Load<LogSettings>("Log", configuration);
         services.AddSingleton(settings);
@@ -40,6 +40,22 @@ public static class Bootstrapper
     public static IServiceCollection AddCacheSettings(this IServiceCollection services, IConfiguration? configuration = null)
     {
         var settings = MeetingOrganizer.Settings.Settings.Load<CacheSettings>("Cache", configuration);
+        services.AddSingleton(settings);
+
+        return services;
+    }
+
+    public static IServiceCollection AddRabbitMqSettings(this IServiceCollection services, IConfiguration? configuration = null)
+    {
+        var settings = MeetingOrganizer.Settings.Settings.Load<RabbitMqSettings>("RabbitMq", configuration);
+        services.AddSingleton(settings);
+
+        return services;
+    }
+
+    public static IServiceCollection AddEmailSenderSettings(this IServiceCollection services, IConfiguration? configuration = null)
+    {
+        var settings = MeetingOrganizer.Settings.Settings.Load<EmailSenderSettings>("EmailSender", configuration);
         services.AddSingleton(settings);
 
         return services;

@@ -11,8 +11,7 @@ namespace MeetingOrganizer.Api.Controllers.Meetings;
 [ApiController]
 [Authorize]
 [ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/meetings")]
-[Produces("application/json")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class MeetingController : ControllerBase
 {
     private readonly IMapper _mapper;

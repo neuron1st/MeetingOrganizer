@@ -4,6 +4,9 @@ using MeetingOrganizer.Services.UserAccount;
 using MeetingOrganizer.Context.Seeder;
 using MeetingOrganizer.Services.Meetings;
 using MeetingOrganizer.Services.Cache;
+using MeetingOrganizer.Services.RabbitMq;
+using MeetingOrganizer.Services.EmailSender;
+using MeetingOrganizer.Services.Actions;
 
 namespace MeetingOrganizer.Api;
 
@@ -25,8 +28,11 @@ public static class Bootstrapper
             .AddSwaggerSettings()
             .AddIdentitySettings()
             .AddCacheSettings()
+            .AddRabbitMqSettings()
             .AddAppLogger()
             .AddCache()
+            .AddRabbitMq()
+            .AddActions()
             .AddDbSeeder()
             .AddMeetingService()
             .AddUserAccountService()

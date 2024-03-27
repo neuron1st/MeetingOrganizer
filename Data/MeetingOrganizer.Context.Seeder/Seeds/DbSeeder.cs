@@ -25,6 +25,7 @@ public static class DbSeeder
         Task.Run(async () =>
         {
             await AddDemoData(serviceProvider);
+            await AddAdministrator(serviceProvider);
         })
             .GetAwaiter()
             .GetResult();

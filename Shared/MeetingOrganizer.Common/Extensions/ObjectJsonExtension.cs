@@ -1,7 +1,5 @@
-﻿using MeetingOrganizer.Common.JsonConverters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Converters;
 
 namespace MeetingOrganizer.Common.Extensions;
 

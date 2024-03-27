@@ -8,6 +8,9 @@ services:
   meetingorganizer_redis:
     image: redis
 
+  meetingorganizer_rabbitmq:
+    image: rabbitmq:management
+
   meetingorganizer_api:
     image: ${DOCKER_REGISTRY-}meetingorganizerapi
     build:
@@ -26,3 +29,14 @@ services:
       - meetingorganizer_postgresql
       - meetingorganizer_redis
       - meetingorganizer_api
+
+  meetingorganizer_worker:
+    image: ${DOCKER_REGISTRY-}meetingorganizerworker
+    build:
+      context: .
+      dockerfile: Systems/Worker/MeetingOrganizer.Worker/Dockerfile
+    depends_on:
+      - meetingorganizer_api
+      - meetingorganizer_postgresql
+      - meetingorganizer_rabbitmq
+      - meetingorganizer_redis

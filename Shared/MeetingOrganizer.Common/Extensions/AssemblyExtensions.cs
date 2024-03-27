@@ -6,7 +6,7 @@ public static class AssemblyExtensions
 {
     public static string? GetAssemblyDescription(this Assembly assembly)
     {
-        return assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description;
+        return assembly.GetAssemblyAttribute<AssemblyDescriptionAttribute>()?.Description;
     }
 
     public static string? GetAssemblyVersion(this Assembly assembly)

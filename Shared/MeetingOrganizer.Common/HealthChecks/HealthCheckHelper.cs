@@ -19,10 +19,10 @@ public static class HealthCheckHelper
                 Component = x.Key,
                 Description = x.Value.Description ?? "",
                 Duration = x.Value.Duration.TotalSeconds.ToString("0:0.00")
-            }),
-
+            })
         };
 
-        await context.Response.WriteAsync(text: JsonSerializer.Serialize(response, new JsonSerializerOptions { WriteIndented = true }));
+        await context.Response.WriteAsync(JsonSerializer.Serialize(response,
+            new JsonSerializerOptions { WriteIndented = true }));
     }
 }

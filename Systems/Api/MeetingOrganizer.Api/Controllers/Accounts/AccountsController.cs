@@ -3,12 +3,14 @@ using AutoMapper;
 using MeetingOrganizer.Api.Controllers.Accounts.Models;
 using MeetingOrganizer.Services.UserAccount;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.Ocsp;
+using static StackExchange.Redis.Role;
 
 namespace MeetingOrganizer.Api.Controllers.Accounts;
 
 [ApiController]
 [ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/accounts")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class AccountsController : ControllerBase
 {
     private readonly IMapper _mapper;
@@ -32,5 +34,18 @@ public class AccountsController : ControllerBase
         var response = _mapper.Map<UserAccountResponse>(user);
 
         return response;
+    }
+
+    [HttpPost("confirmation-email")]
+    public async Task<IActionResult> SendEmailConfirmationLink([FromQuery] string email)
+    {
+        await _userAccountService.SendConfirmationLinkAsync(email);
+        return Ok();
+    }
+
+    [HttpPut("confirm-email")]
+    public async Task ConfirmEmail([FromQuery] string token, [FromQuery] string email)
+    {
+        await _userAccountService.ConfirmEmail(token, email);
     }
 }

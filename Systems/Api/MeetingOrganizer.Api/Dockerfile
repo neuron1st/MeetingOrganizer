@@ -16,8 +16,12 @@ COPY ["Shared/MeetingOrganizer.Settings/MeetingOrganizer.Settings.csproj", "Shar
 COPY ["Data/MeetingOrganizer.Context.Seeder/MeetingOrganizer.Context.Seeder.csproj", "Data/MeetingOrganizer.Context.Seeder/"]
 COPY ["Services/MeetingOrganizer.Services.UserAccount/MeetingOrganizer.Services.UserAccount.csproj", "Services/MeetingOrganizer.Services.UserAccount/"]
 COPY ["Shared/MeetingOrganizer.Common/MeetingOrganizer.Common.csproj", "Shared/MeetingOrganizer.Common/"]
-COPY ["Services/MeetingOrganizer.Services.Cache/MeetingOrganizer.Services.Cache.csproj", "Services/MeetingOrganizer.Services.Cache/"]
+COPY ["Services/MeetingOrganizer.Services.Actions/MeetingOrganizer.Services.Actions.csproj", "Services/MeetingOrganizer.Services.Actions/"]
+COPY ["Shared/MeetingOrganizer.Consts/MeetingOrganizer.Consts.csproj", "Shared/MeetingOrganizer.Consts/"]
+COPY ["Services/MeetingOrganizer.Services.EmailSender/MeetingOrganizer.Services.EmailSender.csproj", "Services/MeetingOrganizer.Services.EmailSender/"]
 COPY ["Services/MeetingOrganizer.Services.Settings/MeetingOrganizer.Services.Settings.csproj", "Services/MeetingOrganizer.Services.Settings/"]
+COPY ["Services/MeetingOrganizer.Services.RabbitMq/MeetingOrganizer.Services.RabbitMq.csproj", "Services/MeetingOrganizer.Services.RabbitMq/"]
+COPY ["Services/MeetingOrganizer.Services.Cache/MeetingOrganizer.Services.Cache.csproj", "Services/MeetingOrganizer.Services.Cache/"]
 COPY ["Services/MeetingOrganizer.Services.Logger/MeetingOrganizer.Services.Logger.csproj", "Services/MeetingOrganizer.Services.Logger/"]
 COPY ["Services/MeetingOrganizer.Services.Meetings/MeetingOrganizer.Services.Meetings.csproj", "Services/MeetingOrganizer.Services.Meetings/"]
 RUN dotnet restore "./Systems/Api/MeetingOrganizer.Api/./MeetingOrganizer.Api.csproj"

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..\..</DockerfileContext>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
+		<PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+		<PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
+		<PackageReference Include="Serilog.Expressions" Version="4.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Data\MeetingOrganizer.Context\MeetingOrganizer.Context.csproj" />
+	  <ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.EmailSender\MeetingOrganizer.Services.EmailSender.csproj" />
+	  <ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.RabbitMq\MeetingOrganizer.Services.RabbitMq.csproj" />
+	  <ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Settings\MeetingOrganizer.Services.Settings.csproj" />
+	  <ProjectReference Include="..\..\..\Shared\MeetingOrganizer.Common\MeetingOrganizer.Common.csproj" />
+	  <ProjectReference Include="..\..\..\Shared\MeetingOrganizer.Consts\MeetingOrganizer.Consts.csproj" />
+	</ItemGroup>
+
+</Project>

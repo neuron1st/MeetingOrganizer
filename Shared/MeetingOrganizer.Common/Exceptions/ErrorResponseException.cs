@@ -1,6 +1,8 @@
-﻿using MeetingOrganizer.Common.Responses;
+﻿namespace MeetingOrganizer.Common.Exceptions;
 
-namespace MeetingOrganizer.Common.Exceptions;
+using Responses;
+using System;
+
 
 /// <summary>
 /// Exception for catch structured errors

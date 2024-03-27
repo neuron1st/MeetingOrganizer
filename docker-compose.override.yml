@@ -22,6 +22,15 @@ services:
     volumes:
       - ~/.docker-conf/redis/data:/data
 
+  meetingorganizer_rabbitmq:
+    ports:
+      - "5672:5672"
+      - "5673:5673"
+      - "15672:15672" 
+    networks:
+      - shared_meetingorganizer_net
+    volumes:      
+      - ~/.docker-conf/rabbitmq:/var/lib/rabbitmq
 
   meetingorganizer_api:
     ports:
@@ -38,6 +47,12 @@ services:
       - shared_meetingorganizer_net
     env_file:
       - env.identity
+
+  meetingorganizer_worker:
+    networks:
+      - shared_meetingorganizer_net
+    env_file:
+      - env.worker
 
 networks:
   shared_meetingorganizer_net:

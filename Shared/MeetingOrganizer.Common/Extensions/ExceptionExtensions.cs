@@ -1,9 +1,9 @@
 ﻿namespace MeetingOrganizer.Common.Extensions;
 
+using Exceptions;
+using Responses;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using MeetingOrganizer.Common.Exceptions;
-using MeetingOrganizer.Common.Responses;
 
 public static class ErrorResponseExtensions
 {

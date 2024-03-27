@@ -1,5 +1,7 @@
 ﻿namespace MeetingOrganizer.Common.Exceptions;
 
+using System;
+
 /// <summary>
 /// Exception for catch forbidden access
 /// </summary>
