@@ -11,12 +11,6 @@ public static class CommentsContextConfigure
         modelBuilder.Entity<Comment>().Property(x => x.Text).IsRequired();
         modelBuilder.Entity<Comment>().Property(x => x.Text).HasMaxLength(500);
 
-        //modelBuilder.Entity<Comment>()
-        //    .HasOne(x => x.User)
-        //    .WithMany(x => x.Comments)
-        //    .HasForeignKey(x => x.UserId)
-        //    .HasPrincipalKey(x => x.EntryId);
-
         modelBuilder.Entity<Comment>()
             .HasOne(x => x.Meeting)
             .WithMany(x => x.Comments)

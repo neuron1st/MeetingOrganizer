@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MeetingOrganizer.Context.Context;
+namespace MeetingOrganizer.Context;
 
 public class MeetingOrganizerDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
@@ -14,7 +14,7 @@ public class MeetingOrganizerDbContext : IdentityDbContext<User, IdentityRole<Gu
     public DbSet<Meeting> Meetings { get; set; }
     public DbSet<Participant> Participants { get; set; }
     public DbSet<Photo> Photos { get; set; }
-    public DbSet<Role> ParticipantRoles {  get; set; }
+
 
     public MeetingOrganizerDbContext(DbContextOptions<MeetingOrganizerDbContext> options) : base(options) { }
 
@@ -29,6 +29,5 @@ public class MeetingOrganizerDbContext : IdentityDbContext<User, IdentityRole<Gu
         modelBuilder.ConfigureMeetings();
         modelBuilder.ConfigureParticipants();
         modelBuilder.ConfigurePhotos();
-        modelBuilder.ConfigureRoles();
     }
 }

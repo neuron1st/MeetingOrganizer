@@ -3,6 +3,7 @@ using System;
 using MeetingOrganizer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MeetingOrganizer.Context.MigrationsPostgreSQL.Migrations
 {
     [DbContext(typeof(MeetingOrganizerDbContext))]
-    partial class MeetingOrganizerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240409121436_ChangeRoleToEnum")]
+    partial class ChangeRoleToEnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,13 +183,12 @@ namespace MeetingOrganizer.Context.MigrationsPostgreSQL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MeetingId");
+
                     b.HasIndex("Uid")
                         .IsUnique();
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("MeetingId", "UserId")
-                        .IsUnique();
 
                     b.ToTable("participants", (string)null);
                 });

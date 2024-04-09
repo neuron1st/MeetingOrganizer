@@ -1,6 +1,6 @@
 ﻿using Serilog.Events;
 
-namespace MeetingOrganizer.Services.Logger.Logger;
+namespace MeetingOrganizer.Services.Logger;
 
 public class AppLogger : IAppLogger
 {

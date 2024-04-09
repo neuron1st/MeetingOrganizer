@@ -9,12 +9,6 @@ public static class CommentLikesContextConfiguration
     {
         modelBuilder.Entity<CommentLike>().ToTable("comment_likes");
 
-        //modelBuilder.Entity<CommentLike>()
-        //    .HasOne(x => x.User)
-        //    .WithMany(x => x.CommentLikes)
-        //    .HasForeignKey(x => x.UserId)
-        //    .HasPrincipalKey(x => x.EntryId);
-
         modelBuilder.Entity<CommentLike>()
             .HasOne(x => x.Comment)
             .WithMany(x => x.Likes)

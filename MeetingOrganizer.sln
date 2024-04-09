@@ -43,17 +43,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Identity",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.Cache", "Services\MeetingOrganizer.Services.Cache\MeetingOrganizer.Services.Cache.csproj", "{99FFF996-02EF-4556-B430-2437DD68AF10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Services.Actions", "Services\MeetingOrganizer.Services.Actions\MeetingOrganizer.Services.Actions.csproj", "{C126208C-8B0C-4BA4-A13B-47CCEE99B5BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.Actions", "Services\MeetingOrganizer.Services.Actions\MeetingOrganizer.Services.Actions.csproj", "{C126208C-8B0C-4BA4-A13B-47CCEE99B5BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Consts", "Shared\MeetingOrganizer.Consts\MeetingOrganizer.Consts.csproj", "{EB2B76F9-5035-4522-9DEA-F146D9B45719}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Consts", "Shared\MeetingOrganizer.Consts\MeetingOrganizer.Consts.csproj", "{EB2B76F9-5035-4522-9DEA-F146D9B45719}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Services.RabbitMq", "Services\MeetingOrganizer.Services.RabbitMq\MeetingOrganizer.Services.RabbitMq.csproj", "{E3F20879-5C43-483B-9742-3954F4C6D58D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.RabbitMq", "Services\MeetingOrganizer.Services.RabbitMq\MeetingOrganizer.Services.RabbitMq.csproj", "{E3F20879-5C43-483B-9742-3954F4C6D58D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Services.EmailSender", "Services\MeetingOrganizer.Services.EmailSender\MeetingOrganizer.Services.EmailSender.csproj", "{14009B2E-F7F8-4207-9DAB-E34C5D76565C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.EmailSender", "Services\MeetingOrganizer.Services.EmailSender\MeetingOrganizer.Services.EmailSender.csproj", "{14009B2E-F7F8-4207-9DAB-E34C5D76565C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Worker", "Worker", "{B2DC07C2-2E99-42A3-9639-4612D3C28773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Worker", "Systems\Worker\MeetingOrganizer.Worker\MeetingOrganizer.Worker.csproj", "{3FF99754-0050-4013-8D7E-DC1CFD50FEDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Worker", "Systems\Worker\MeetingOrganizer.Worker\MeetingOrganizer.Worker.csproj", "{3FF99754-0050-4013-8D7E-DC1CFD50FEDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Services.Participants", "Services\MeetingOrganizer.Services.Participants\MeetingOrganizer.Services.Participants.csproj", "{8EFEC3A5-A0E6-4341-9BB8-4A1D0DC81951}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,6 +139,10 @@ Global
 		{3FF99754-0050-4013-8D7E-DC1CFD50FEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FF99754-0050-4013-8D7E-DC1CFD50FEDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FF99754-0050-4013-8D7E-DC1CFD50FEDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EFEC3A5-A0E6-4341-9BB8-4A1D0DC81951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EFEC3A5-A0E6-4341-9BB8-4A1D0DC81951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EFEC3A5-A0E6-4341-9BB8-4A1D0DC81951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EFEC3A5-A0E6-4341-9BB8-4A1D0DC81951}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,6 +169,7 @@ Global
 		{14009B2E-F7F8-4207-9DAB-E34C5D76565C} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
 		{B2DC07C2-2E99-42A3-9639-4612D3C28773} = {C58D84F9-1B9B-407C-8B03-04ACB468ABAD}
 		{3FF99754-0050-4013-8D7E-DC1CFD50FEDC} = {B2DC07C2-2E99-42A3-9639-4612D3C28773}
+		{8EFEC3A5-A0E6-4341-9BB8-4A1D0DC81951} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3223470B-A10F-4123-B5D5-A1358692F51C}

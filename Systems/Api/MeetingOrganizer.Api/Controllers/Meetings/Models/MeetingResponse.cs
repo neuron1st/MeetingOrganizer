@@ -9,12 +9,15 @@ public class MeetingResponse
 
     public string Title { get; set; }
     public string Description { get; set; }
+    public int ParticipantsNumber { get; set; }
+    public int LikesNumber { get; set; }
+    public int CommentsNumber { get; set; }
 }
 
 public class MeetingResponseProfile : Profile
 {
     public MeetingResponseProfile()
     {
-        CreateMap<MeetingModel, MeetingResponse>().ReverseMap();
+        CreateMap<MeetingModel, MeetingResponse>();
     }
 }

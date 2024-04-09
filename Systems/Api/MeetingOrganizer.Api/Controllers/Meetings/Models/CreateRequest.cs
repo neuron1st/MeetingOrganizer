@@ -13,6 +13,6 @@ public class CreateRequestProfile : Profile
 {
     public CreateRequestProfile()
     {
-        CreateMap<CreateRequest, CreateModel>().ReverseMap();
+        CreateMap<CreateRequest, CreateModel>();
     }
 }

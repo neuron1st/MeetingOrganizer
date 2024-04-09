@@ -6,6 +6,7 @@ using MeetingOrganizer.Services.Meetings;
 using MeetingOrganizer.Services.Cache;
 using MeetingOrganizer.Services.RabbitMq;
 using MeetingOrganizer.Services.EmailSender;
+using MeetingOrganizer.Services.Participants;
 using MeetingOrganizer.Services.Actions;
 
 namespace MeetingOrganizer.Api;
@@ -35,6 +36,7 @@ public static class Bootstrapper
             .AddActions()
             .AddDbSeeder()
             .AddMeetingService()
+            .AddParticipantService()
             .AddUserAccountService()
             ;
 

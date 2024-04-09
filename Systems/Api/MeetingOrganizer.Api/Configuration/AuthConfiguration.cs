@@ -1,5 +1,5 @@
 ﻿using MeetingOrganizer.Common.Security;
-using MeetingOrganizer.Context.Context;
+using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
 using MeetingOrganizer.Services.Settings;
 using IdentityServer4.AccessTokenValidation;

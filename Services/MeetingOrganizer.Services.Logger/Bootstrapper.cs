@@ -1,4 +1,4 @@
-﻿using MeetingOrganizer.Services.Logger.Logger;
+﻿using MeetingOrganizer.Services.Logger;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MeetingOrganizer.Services.Logger;

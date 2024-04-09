@@ -1,10 +1,15 @@
-﻿using MeetingOrganizer.Context.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MeetingOrganizer.Context.Entities;
 
-public class Role : BaseEntity
+public enum Role
 {
-    public string Name { get; set; }
+    [Display(Name = "Admin")]
+    Admin,
 
-    public virtual ICollection<Participant> Participants { get; set; }
+    [Display(Name = "Moderator")]
+    Moderator,
+
+    [Display(Name = "Participant")]
+    Participant
 }

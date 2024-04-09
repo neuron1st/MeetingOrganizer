@@ -43,6 +43,7 @@
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.EmailSender\MeetingOrganizer.Services.EmailSender.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Logger\MeetingOrganizer.Services.Logger.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Meetings\MeetingOrganizer.Services.Meetings.csproj" />
+		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Participants\MeetingOrganizer.Services.Participants.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.RabbitMq\MeetingOrganizer.Services.RabbitMq.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Settings\MeetingOrganizer.Services.Settings.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.UserAccount\MeetingOrganizer.Services.UserAccount.csproj" />

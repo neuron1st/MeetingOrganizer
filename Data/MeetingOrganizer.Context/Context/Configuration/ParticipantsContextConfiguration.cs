@@ -10,15 +10,18 @@ public static class ParticipantsContextConfiguration
         modelBuilder.Entity<Participant>().ToTable("participants");
 
         modelBuilder.Entity<Participant>()
-            .HasOne(x => x.Meeting)
-            .WithMany(x => x.Participants)
-            .HasForeignKey(x => x.MeetingId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .Property(x => x.Role)
+            .HasConversion(
+                v => v.ToString(),
+                v => (Role)Enum.Parse(typeof(Role), v));
 
         modelBuilder.Entity<Participant>()
-            .HasOne(x => x.Role)
+            .HasIndex(p => new { p.MeetingId, p.UserId })
+            .IsUnique();
+
+        modelBuilder.Entity<Participant>()
+            .HasOne(x => x.Meeting)
             .WithMany(x => x.Participants)
-            .HasForeignKey(x => x.RoleId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasForeignKey(x => x.MeetingId);
     }
 }

@@ -10,6 +10,5 @@ public class Participant : BaseEntity
     public int MeetingId {  get; set; }
     public virtual Meeting Meeting { get; set; }
 
-    public int RoleId {  get; set; }
-    public virtual Role Role { get; set; }
+    public Role Role { get; set; }
 }

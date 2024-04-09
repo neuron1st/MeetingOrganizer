@@ -6,7 +6,7 @@ using MeetingOrganizer.Settings;
 using MeetingOrganizer.Api;
 using MeetingOrganizer.Context.Seeder.Seeds;
 using MeetingOrganizer.Services.Logger;
-using MeetingOrganizer.Services.Logger.Logger;
+using MeetingOrganizer.Services.Logger;
 
 var mainSettings = Settings.Load<MainSettings>("Main");
 var logSettings = Settings.Load<LogSettings>("Log");

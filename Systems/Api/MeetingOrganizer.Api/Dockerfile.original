@@ -24,7 +24,6 @@ COPY ["Services/MeetingOrganizer.Services.RabbitMq/MeetingOrganizer.Services.Rab
 COPY ["Services/MeetingOrganizer.Services.Cache/MeetingOrganizer.Services.Cache.csproj", "Services/MeetingOrganizer.Services.Cache/"]
 COPY ["Services/MeetingOrganizer.Services.Logger/MeetingOrganizer.Services.Logger.csproj", "Services/MeetingOrganizer.Services.Logger/"]
 COPY ["Services/MeetingOrganizer.Services.Meetings/MeetingOrganizer.Services.Meetings.csproj", "Services/MeetingOrganizer.Services.Meetings/"]
-COPY ["Services/MeetingOrganizer.Services.Participants/MeetingOrganizer.Services.Participants.csproj", "Services/MeetingOrganizer.Services.Participants/"]
 RUN dotnet restore "./Systems/Api/MeetingOrganizer.Api/./MeetingOrganizer.Api.csproj"
 COPY . .
 WORKDIR "/src/Systems/Api/MeetingOrganizer.Api"

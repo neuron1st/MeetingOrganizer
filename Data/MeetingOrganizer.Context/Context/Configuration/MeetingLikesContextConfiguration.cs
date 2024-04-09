@@ -9,12 +9,6 @@ public static class MeetingLikesContextConfiguration
     {
         modelBuilder.Entity<MeetingLike>().ToTable("meeting_likes");
 
-        //modelBuilder.Entity<MeetingLike>()
-        //    .HasOne(x => x.User)
-        //    .WithMany(x => x.MeetingLikes)
-        //    .HasForeignKey(x => x.UserId)
-        //    .HasPrincipalKey(x => x.EntryId);
-
         modelBuilder.Entity<MeetingLike>()
             .HasOne(x => x.Meeting)
             .WithMany(x => x.Likes)

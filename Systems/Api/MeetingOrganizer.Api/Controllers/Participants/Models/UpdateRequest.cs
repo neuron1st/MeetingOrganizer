@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using MeetingOrganizer.Services.Meetings;
+using MeetingOrganizer.Services.Participants;
 
-namespace MeetingOrganizer.Api.Controllers.Meetings;
+namespace MeetingOrganizer.Api.Controllers.Participants;
 
 public class UpdateRequest
 {
-    public string Title { get; set; }
-    public string Description { get; set; }
+    public string Role { get; set; }
 }
 
 public class UpdateRequestProfile : Profile

@@ -1,4 +1,4 @@
-﻿using MeetingOrganizer.Context.Context;
+﻿using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
 using Microsoft.AspNetCore.Identity;
 

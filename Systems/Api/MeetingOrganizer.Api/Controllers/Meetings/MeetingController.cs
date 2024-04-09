@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
 using MeetingOrganizer.Common.Security;
-using MeetingOrganizer.Services.Logger.Logger;
+using MeetingOrganizer.Services.Logger;
 using MeetingOrganizer.Services.Meetings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MeetingOrganizer.Common.Exceptions;
 using MeetingOrganizer.Common.Validator;
-using MeetingOrganizer.Context.Context;
+using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
 using MeetingOrganizer.Services.Cache;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +42,9 @@ public class MeetingService : IMeetingService
 
         var meetings = context
             .Meetings
+            .Include(m => m.Participants)
+            .Include(m => m.Likes)
+            .Include(m => m.Comments)
             .AsQueryable()
             .Skip(Math.Max(offset, 0))
             .Take(Math.Max(0, Math.Min(limit, 1000)));
@@ -58,6 +61,9 @@ public class MeetingService : IMeetingService
 
         var meeting = await context
             .Meetings
+            .Include(m => m.Participants)
+            .Include(m => m.Likes)
+            .Include(m => m.Comments)
             .FirstOrDefaultAsync(x => x.Uid.Equals(id));
 
         var result = _mapper.Map<MeetingModel>(meeting);
