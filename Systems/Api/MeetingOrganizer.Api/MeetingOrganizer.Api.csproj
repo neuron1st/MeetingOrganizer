@@ -40,6 +40,7 @@
 		<ProjectReference Include="..\..\..\Data\MeetingOrganizer.Context\MeetingOrganizer.Context.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Actions\MeetingOrganizer.Services.Actions.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Cache\MeetingOrganizer.Services.Cache.csproj" />
+		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Comments\MeetingOrganizer.Services.Comments.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.EmailSender\MeetingOrganizer.Services.EmailSender.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Logger\MeetingOrganizer.Services.Logger.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Meetings\MeetingOrganizer.Services.Meetings.csproj" />
