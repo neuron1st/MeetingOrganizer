@@ -45,7 +45,6 @@ public class MeetingService : IMeetingService
             .Include(m => m.Participants)
             .Include(m => m.Likes)
             .Include(m => m.Comments)
-            .AsQueryable()
             .Skip(Math.Max(offset, 0))
             .Take(Math.Max(0, Math.Min(limit, 1000)));
 
@@ -80,6 +79,10 @@ public class MeetingService : IMeetingService
         var meeting = _mapper.Map<Meeting>(model);
         await context.Meetings.AddAsync(meeting);
         await context.SaveChangesAsync();
+
+        await context.Entry(meeting).Reference(x => x.Participants).LoadAsync();
+        await context.Entry(meeting).Reference(x => x.Likes).LoadAsync();
+        await context.Entry(meeting).Reference(x => x.Comments).LoadAsync();
 
         return _mapper.Map<MeetingModel>(meeting);
     }

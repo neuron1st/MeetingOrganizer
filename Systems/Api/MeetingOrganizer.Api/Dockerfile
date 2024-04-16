@@ -22,6 +22,7 @@ COPY ["Services/MeetingOrganizer.Services.EmailSender/MeetingOrganizer.Services.
 COPY ["Services/MeetingOrganizer.Services.Settings/MeetingOrganizer.Services.Settings.csproj", "Services/MeetingOrganizer.Services.Settings/"]
 COPY ["Services/MeetingOrganizer.Services.RabbitMq/MeetingOrganizer.Services.RabbitMq.csproj", "Services/MeetingOrganizer.Services.RabbitMq/"]
 COPY ["Services/MeetingOrganizer.Services.Cache/MeetingOrganizer.Services.Cache.csproj", "Services/MeetingOrganizer.Services.Cache/"]
+COPY ["Services/MeetingOrganizer.Services.CommentLikes/MeetingOrganizer.Services.CommentLikes.csproj", "Services/MeetingOrganizer.Services.CommentLikes/"]
 COPY ["Services/MeetingOrganizer.Services.Comments/MeetingOrganizer.Services.Comments.csproj", "Services/MeetingOrganizer.Services.Comments/"]
 COPY ["Services/MeetingOrganizer.Services.Logger/MeetingOrganizer.Services.Logger.csproj", "Services/MeetingOrganizer.Services.Logger/"]
 COPY ["Services/MeetingOrganizer.Services.Meetings/MeetingOrganizer.Services.Meetings.csproj", "Services/MeetingOrganizer.Services.Meetings/"]

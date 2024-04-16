@@ -9,7 +9,7 @@ public class CommentResponse
 
     public string Text { get; set; }
 
-    public int Likes { get; set; }
+    public int LikesNumber { get; set; }
 
     public Guid UserId { get; set; }
 

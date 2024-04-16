@@ -52,8 +52,28 @@ public class CreateModelProfile : Profile
 
 public class CreateModelValidator : AbstractValidator<CreateModel>
 {
-    public CreateModelValidator()
+    public CreateModelValidator(IDbContextFactory<MeetingOrganizerDbContext> contextFactory)
     {
-        RuleFor(x => x.Role).Must(EnumValidatorHelper.IsValidEnum<Role>).WithMessage("Invalid role.");
+        RuleFor(x => x.Role)
+            .Must(EnumValidatorHelper.IsValidEnum<Role>)
+            .WithMessage("Invalid role.");
+
+        RuleFor(x => x.UserId)
+            .NotEmpty().WithMessage("User is required")
+            .Must(id =>
+            {
+                using var context = contextFactory.CreateDbContext();
+                var found = context.Users.Any(a => a.Id == id);
+                return found;
+            }).WithMessage("User not found");
+
+        RuleFor(x => x.MeetingId)
+            .NotEmpty().WithMessage("Meeting is required")
+            .Must(id =>
+            {
+                using var context = contextFactory.CreateDbContext();
+                var found = context.Meetings.Any(a => a.Uid == id);
+                return found;
+            }).WithMessage("Meeting not found");
     }
 }

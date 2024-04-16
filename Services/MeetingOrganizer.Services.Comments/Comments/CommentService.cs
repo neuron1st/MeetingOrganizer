@@ -34,7 +34,7 @@ public class CommentService : ICommentService
             .Comments
             .Include(x => x.Meeting)
             .Include(x => x.User)
-            .AsQueryable()
+            .Include(x => x.Likes)
             .Where(x => x.Meeting.Uid == meetingId)
             .Skip(Math.Max(offset, 0))
             .Take(Math.Max(0, Math.Min(limit, 1000)));
@@ -52,7 +52,7 @@ public class CommentService : ICommentService
             .Comments
             .Include(x => x.Meeting)
             .Include(x => x.User)
-            .AsQueryable()
+            .Include(x => x.Likes)
             .Where(x => x.User.Id == userId)
             .Skip(Math.Max(offset, 0))
             .Take(Math.Max(0, Math.Min(limit, 1000)));
@@ -70,6 +70,7 @@ public class CommentService : ICommentService
             .Comments
             .Include(x => x.Meeting)
             .Include(x => x.User)
+            .Include(x => x.Likes)
             .FirstOrDefaultAsync(x => x.Uid.Equals(id));
 
         var result = _mapper.Map<CommentModel>(comment);
@@ -89,6 +90,7 @@ public class CommentService : ICommentService
 
         await context.Entry(comment).Reference(x => x.Meeting).LoadAsync();
         await context.Entry(comment).Reference(x => x.User).LoadAsync();
+        await context.Entry(comment).Reference(x => x.Likes).LoadAsync();
 
         return _mapper.Map<CommentModel>(comment);
     }

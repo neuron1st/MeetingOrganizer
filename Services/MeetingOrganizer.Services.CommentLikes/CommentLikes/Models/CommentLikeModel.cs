@@ -4,28 +4,25 @@ using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace MeetingOrganizer.Services.Comments;
+namespace MeetingOrganizer.Services.CommentLikes;
 
-public class CreateModel
+public class CommentLikeModel
 {
-    public string Text { get; set; }
-
     public Guid UserId { get; set; }
-
-    public Guid MeetingId { get; set; }
+    public Guid CommentId { get; set; }
 }
 
-public class CreateModelProfile : Profile
+public class CommentLikeModelProfile : Profile
 {
-    public CreateModelProfile()
+    public CommentLikeModelProfile()
     {
-        CreateMap<CreateModel, Comment>()
+        CreateMap<CommentLikeModel, CommentLike>()
             .ForMember(dest => dest.UserId, opt => opt.Ignore())
-            .ForMember(dest => dest.MeetingId, opt => opt.Ignore())
+            .ForMember(dest => dest.CommentId, opt => opt.Ignore())
             .AfterMap<CreateModelActions>();
     }
 
-    public class CreateModelActions : IMappingAction<CreateModel, Comment>
+    public class CreateModelActions : IMappingAction<CommentLikeModel, CommentLike>
     {
         private readonly IDbContextFactory<MeetingOrganizerDbContext> contextFactory;
 
@@ -34,30 +31,25 @@ public class CreateModelProfile : Profile
             this.contextFactory = contextFactory;
         }
 
-        public void Process(CreateModel source, Comment destination, ResolutionContext context)
+        public void Process(CommentLikeModel source, CommentLike destination, ResolutionContext context)
         {
             using var db = contextFactory.CreateDbContext();
 
             var user = db.Users.FirstOrDefault(x => x.Id == source.UserId);
 
-            var meeting = db.Meetings.FirstOrDefault(x => x.Uid == source.MeetingId);
+            var comment = db.Comments.FirstOrDefault(x => x.Uid == source.CommentId);
 
             destination.UserId = user.EntryId;
 
-            destination.MeetingId = meeting.Id;
+            destination.CommentId = comment.Id;
         }
     }
 }
 
-
-public class CreateModelValidator : AbstractValidator<CreateModel>
+public class CommentLikeModelValidator : AbstractValidator<CommentLikeModel>
 {
-    public CreateModelValidator(IDbContextFactory<MeetingOrganizerDbContext> contextFactory)
+    public CommentLikeModelValidator(IDbContextFactory<MeetingOrganizerDbContext> contextFactory)
     {
-        RuleFor(x => x.Text)
-            .NotEmpty().WithMessage("Comment text is required")
-            .MaximumLength(500).WithMessage("Text is too long");
-
         RuleFor(x => x.UserId)
             .NotEmpty().WithMessage("User is required")
             .Must(id =>
@@ -67,13 +59,13 @@ public class CreateModelValidator : AbstractValidator<CreateModel>
                 return found;
             }).WithMessage("User not found");
 
-        RuleFor(x => x.MeetingId)
-            .NotEmpty().WithMessage("Meeting is required")
+        RuleFor(x => x.CommentId)
+            .NotEmpty().WithMessage("Comment is required")
             .Must(id =>
             {
                 using var context = contextFactory.CreateDbContext();
-                var found = context.Meetings.Any(a => a.Uid == id);
+                var found = context.Comments.Any(a => a.Uid == id);
                 return found;
-            }).WithMessage("Meeting not found");
+            }).WithMessage("Comment not found");
     }
 }

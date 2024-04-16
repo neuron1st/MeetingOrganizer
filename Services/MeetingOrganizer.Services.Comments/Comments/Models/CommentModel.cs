@@ -9,7 +9,7 @@ public class CommentModel
 
     public string Text { get; set; }
 
-    public int Likes { get; set; }
+    public int LikesNumber { get; set; }
 
     public Guid UserId { get; set; }
 
@@ -22,7 +22,7 @@ public class CommentModelProfile : Profile
     {
         CreateMap<Comment, CommentModel>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Uid))
-            .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.Likes.Count))
+            .ForMember(dest => dest.LikesNumber, opt => opt.MapFrom(src => src.Likes.Count))
             .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.User.Id))
             .ForMember(dest => dest.MeetingId, opt => opt.MapFrom(src => src.Meeting.Uid));
     }

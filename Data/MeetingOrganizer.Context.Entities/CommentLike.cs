@@ -1,10 +1,8 @@
-﻿using MeetingOrganizer.Context.Entities.Common;
+﻿namespace MeetingOrganizer.Context.Entities;
 
-namespace MeetingOrganizer.Context.Entities;
-
-public class CommentLike : BaseEntity
+public class CommentLike
 {
-    public int? UserId { get; set; }
+    public int UserId { get; set; }
     public virtual User User { get; set; }
 
     public int CommentId { get; set; }

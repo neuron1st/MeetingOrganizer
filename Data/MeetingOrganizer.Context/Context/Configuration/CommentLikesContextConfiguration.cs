@@ -10,6 +10,12 @@ public static class CommentLikesContextConfiguration
         modelBuilder.Entity<CommentLike>().ToTable("comment_likes");
 
         modelBuilder.Entity<CommentLike>()
+            .HasKey(x => new { x.UserId, x.CommentId });
+
+        modelBuilder.Entity<CommentLike>()
+            .HasIndex(x => new { x.UserId, x.CommentId });
+
+        modelBuilder.Entity<CommentLike>()
             .HasOne(x => x.Comment)
             .WithMany(x => x.Likes)
             .HasForeignKey(x => x.CommentId);

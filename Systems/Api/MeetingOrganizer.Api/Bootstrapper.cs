@@ -8,6 +8,7 @@ using MeetingOrganizer.Services.RabbitMq;
 using MeetingOrganizer.Services.EmailSender;
 using MeetingOrganizer.Services.Participants;
 using MeetingOrganizer.Services.Comments;
+using MeetingOrganizer.Services.CommentLikes;
 using MeetingOrganizer.Services.Actions;
 
 namespace MeetingOrganizer.Api;
@@ -40,6 +41,7 @@ public static class Bootstrapper
             .AddParticipantService()
             .AddUserAccountService()
             .AddCommentService()
+            .AddCommentLikeService()
             ;
 
         return services;

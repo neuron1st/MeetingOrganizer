@@ -9,7 +9,7 @@ namespace MeetingOrganizer.Context;
 public class MeetingOrganizerDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     public DbSet<Comment> Comments { get; set; }
-    public DbSet<CommentLike> CommentsLikes { get; set; }
+    public DbSet<CommentLike> CommentLikes { get; set; }
     public DbSet<MeetingLike> MeetingLikes { get; set; }
     public DbSet<Meeting> Meetings { get; set; }
     public DbSet<Participant> Participants { get; set; }

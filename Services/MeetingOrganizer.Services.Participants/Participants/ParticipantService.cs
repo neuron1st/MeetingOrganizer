@@ -34,7 +34,6 @@ public class ParticipantService : IParticipantService
             .Participants
             .Include(x => x.Meeting)
             .Include(x => x.User)
-            .AsQueryable()
             .Where(x => x.Meeting.Uid == meetingId)
             .Skip(Math.Max(offset, 0))
             .Take(Math.Max(0, Math.Min(limit, 1000)));
@@ -52,7 +51,6 @@ public class ParticipantService : IParticipantService
             .Participants
             .Include(x => x.Meeting)
             .Include(x => x.User)
-            .AsQueryable()
             .Where(x => x.User.Id == userId)
             .Skip(Math.Max(offset, 0))
             .Take(Math.Max(0, Math.Min(limit, 1000)));

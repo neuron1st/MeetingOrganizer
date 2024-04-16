@@ -2,7 +2,7 @@
 
 namespace MeetingOrganizer.Context.Entities;
 
-public class MeetingLike : BaseEntity
+public class MeetingLike
 {
     public int UserId { get; set; }
     public virtual User User { get; set; }
