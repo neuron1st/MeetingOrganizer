@@ -25,6 +25,7 @@ COPY ["Services/MeetingOrganizer.Services.Cache/MeetingOrganizer.Services.Cache.
 COPY ["Services/MeetingOrganizer.Services.CommentLikes/MeetingOrganizer.Services.CommentLikes.csproj", "Services/MeetingOrganizer.Services.CommentLikes/"]
 COPY ["Services/MeetingOrganizer.Services.Comments/MeetingOrganizer.Services.Comments.csproj", "Services/MeetingOrganizer.Services.Comments/"]
 COPY ["Services/MeetingOrganizer.Services.Logger/MeetingOrganizer.Services.Logger.csproj", "Services/MeetingOrganizer.Services.Logger/"]
+COPY ["Services/MeetingOrganizer.Services.MeetingLikes/MeetingOrganizer.Services.MeetingLikes.csproj", "Services/MeetingOrganizer.Services.MeetingLikes/"]
 COPY ["Services/MeetingOrganizer.Services.Meetings/MeetingOrganizer.Services.Meetings.csproj", "Services/MeetingOrganizer.Services.Meetings/"]
 COPY ["Services/MeetingOrganizer.Services.Participants/MeetingOrganizer.Services.Participants.csproj", "Services/MeetingOrganizer.Services.Participants/"]
 RUN dotnet restore "./Systems/Api/MeetingOrganizer.Api/./MeetingOrganizer.Api.csproj"

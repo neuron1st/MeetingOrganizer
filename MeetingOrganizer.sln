@@ -59,7 +59,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.Comments", "Services\MeetingOrganizer.Services.Comments\MeetingOrganizer.Services.Comments.csproj", "{E85F316A-76D6-4094-98EF-F41709BB713C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Services.CommentLikes", "Services\MeetingOrganizer.Services.CommentLikes\MeetingOrganizer.Services.CommentLikes.csproj", "{FA9796F1-917C-4BAB-84E7-474DF52CCC17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.CommentLikes", "Services\MeetingOrganizer.Services.CommentLikes\MeetingOrganizer.Services.CommentLikes.csproj", "{FA9796F1-917C-4BAB-84E7-474DF52CCC17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Services.MeetingLikes", "Services\MeetingOrganizer.Services.MeetingLikes\MeetingOrganizer.Services.MeetingLikes.csproj", "{5B91BE54-1837-4637-86D2-2C40A8E8B138}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,6 +157,10 @@ Global
 		{FA9796F1-917C-4BAB-84E7-474DF52CCC17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA9796F1-917C-4BAB-84E7-474DF52CCC17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA9796F1-917C-4BAB-84E7-474DF52CCC17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B91BE54-1837-4637-86D2-2C40A8E8B138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B91BE54-1837-4637-86D2-2C40A8E8B138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B91BE54-1837-4637-86D2-2C40A8E8B138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B91BE54-1837-4637-86D2-2C40A8E8B138}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -184,6 +190,7 @@ Global
 		{8EFEC3A5-A0E6-4341-9BB8-4A1D0DC81951} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
 		{E85F316A-76D6-4094-98EF-F41709BB713C} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
 		{FA9796F1-917C-4BAB-84E7-474DF52CCC17} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
+		{5B91BE54-1837-4637-86D2-2C40A8E8B138} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3223470B-A10F-4123-B5D5-A1358692F51C}

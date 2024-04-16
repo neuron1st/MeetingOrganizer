@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
+using MeetingOrganizer.Api.Controllers.Comments;
 using MeetingOrganizer.Common.Security;
 using MeetingOrganizer.Services.Logger;
 using MeetingOrganizer.Services.Meetings;
@@ -40,10 +41,12 @@ public class MeetingController : ControllerBase
     [Authorize(AppScopes.MeetingsRead)]
     public async Task<IActionResult> Get([FromRoute] Guid id)
     {
-        var result = await _meetingService.GetById(id);
+        var meeting = await _meetingService.GetById(id);
 
-        if (result == null)
+        if (meeting == null)
             return NotFound();
+
+        var result = _mapper.Map<MeetingResponse>(meeting);
 
         return Ok(result);
     }

@@ -9,6 +9,7 @@ using MeetingOrganizer.Services.EmailSender;
 using MeetingOrganizer.Services.Participants;
 using MeetingOrganizer.Services.Comments;
 using MeetingOrganizer.Services.CommentLikes;
+using MeetingOrganizer.Services.MeetingLikes;
 using MeetingOrganizer.Services.Actions;
 
 namespace MeetingOrganizer.Api;
@@ -42,6 +43,7 @@ public static class Bootstrapper
             .AddUserAccountService()
             .AddCommentService()
             .AddCommentLikeService()
+            .AddMeetingLikeService()
             ;
 
         return services;

@@ -48,10 +48,12 @@ public class CommentController : ControllerBase
     [HttpGet("{id:Guid}")]
     public async Task<IActionResult> Get([FromRoute] Guid id)
     {
-        var result = await _commentService.GetById(id);
+        var comment = await _commentService.GetById(id);
 
-        if (result == null)
+        if (comment == null)
             return NotFound();
+
+        var result = _mapper.Map<CommentResponse>(comment);
 
         return Ok(result);
     }
