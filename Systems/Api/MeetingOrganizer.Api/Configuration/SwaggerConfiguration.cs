@@ -75,6 +75,10 @@ public static class SwaggerConfiguration
                         {
                             { AppScopes.MeetingsRead, "Meetings Read" },
                             { AppScopes.MeetingsWrite, "Meetings Write" },
+                            { AppScopes.CommentsRead, "Comments Read" },
+                            { AppScopes.CommentsWrite, "Comments Write" },
+                            { AppScopes.ParticipantsRead, "Participants Read" },
+                            { AppScopes.ParticipantsWrite, "Participants Write" },
                         }
                     },
 
@@ -84,7 +88,11 @@ public static class SwaggerConfiguration
                         Scopes = new Dictionary<string, string>
                         {
                             { AppScopes.MeetingsRead, "Meetings Read" },
-                            { AppScopes.MeetingsWrite, "Meetings Write" }
+                            { AppScopes.MeetingsWrite, "Meetings Write" },
+                            { AppScopes.CommentsRead, "Comments Read" },
+                            { AppScopes.CommentsWrite, "Comments Write" },
+                            { AppScopes.ParticipantsRead, "Participants Read" },
+                            { AppScopes.ParticipantsWrite, "Participants Write" },
                         }
                     }
                 }
@@ -138,16 +146,16 @@ public static class SwaggerConfiguration
 
         var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
-        app.UseSwagger(options => { options.RouteTemplate = "docs/{documentname}/api.yaml"; });
+        app.UseSwagger(options => { options.RouteTemplate = "{documentname}/api.yaml"; });
 
         app.UseSwaggerUI(
             options =>
             {
-                options.RoutePrefix = "docs";
+                options.RoutePrefix = "";
                 provider.ApiVersionDescriptions.ToList().ForEach(
                     description =>
                         options.SwaggerEndpoint(
-                            mainSettings.PublicUrl + $"/docs/{description.GroupName}/api.yaml",
+                            mainSettings.PublicUrl + $"/{description.GroupName}/api.yaml",
                             description.GroupName.ToUpperInvariant())
                 );
                 options.DocExpansion(DocExpansion.List);

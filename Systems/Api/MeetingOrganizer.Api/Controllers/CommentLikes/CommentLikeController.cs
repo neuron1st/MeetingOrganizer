@@ -22,8 +22,8 @@ public class CommentLikeController : ControllerBase
         _commentLikeService = commentLikeService;
     }
 
-    [HttpPost("user")]
-    public async Task<IActionResult> LikeComment(Guid commentId)
+    [HttpPost("{commentId:Guid}/like")]
+    public async Task<IActionResult> LikeComment([FromRoute] Guid commentId)
     {
         if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId))
         {
@@ -35,8 +35,8 @@ public class CommentLikeController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("user")]
-    public async Task<IActionResult> UnlikeComment(Guid commentId)
+    [HttpDelete("{commentId:Guid}/unlike")]
+    public async Task<IActionResult> UnlikeComment([FromRoute] Guid commentId)
     {
         if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId))
         {

@@ -61,7 +61,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.CommentLikes", "Services\MeetingOrganizer.Services.CommentLikes\MeetingOrganizer.Services.CommentLikes.csproj", "{FA9796F1-917C-4BAB-84E7-474DF52CCC17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Services.MeetingLikes", "Services\MeetingOrganizer.Services.MeetingLikes\MeetingOrganizer.Services.MeetingLikes.csproj", "{5B91BE54-1837-4637-86D2-2C40A8E8B138}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Services.MeetingLikes", "Services\MeetingOrganizer.Services.MeetingLikes\MeetingOrganizer.Services.MeetingLikes.csproj", "{5B91BE54-1837-4637-86D2-2C40A8E8B138}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

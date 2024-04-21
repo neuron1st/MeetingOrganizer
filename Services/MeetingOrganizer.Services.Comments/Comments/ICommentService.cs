@@ -7,5 +7,5 @@ public interface ICommentService
     Task<CommentModel> GetById(Guid id);
     Task<CommentModel> Create(CreateModel model);
     Task Update(Guid id, UpdateModel model);
-    Task Delete(Guid id);
+    Task Delete(Guid id, Guid userId);
 }

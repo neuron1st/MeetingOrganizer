@@ -3,6 +3,8 @@ using MeetingOrganizer.Common.Exceptions;
 using MeetingOrganizer.Common.Validator;
 using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
+using MeetingOrganizer.Services.Actions;
+using MeetingOrganizer.Services.EmailSender;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.Participants;
@@ -13,6 +15,7 @@ public class ParticipantService : IParticipantService
     private readonly IMapper _mapper;
     private readonly IModelValidator<CreateModel> _createModelValidator;
     private readonly IModelValidator<UpdateModel> _updateModelValidator;
+    private readonly IAction _action;
 
     public ParticipantService(
         IDbContextFactory<MeetingOrganizerDbContext> dbContextFactory,
@@ -60,6 +63,21 @@ public class ParticipantService : IParticipantService
         return result;
     }
 
+    public async Task<ParticipantModel> GetByUserAndMeetingId(Guid userId, Guid meetingId)
+    {
+        using var context = await _dbContextFactory.CreateDbContextAsync();
+
+        var participant = await context
+            .Participants
+            .Include(x => x.Meeting)
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.User.Id == userId && x.Meeting.Uid == meetingId);
+
+        var result = _mapper.Map<ParticipantModel>(participant);
+
+        return result;
+    }
+
     public async Task<ParticipantModel> GetById(Guid id)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -99,6 +117,18 @@ public class ParticipantService : IParticipantService
 
         var participant = await context.Participants.Where(x => x.Uid == id).FirstOrDefaultAsync();
 
+        if (participant == null)
+            throw new ProcessException($"Participant (ID = {id}) not found.");
+
+        var user = await context
+            .Participants
+            .Include(x => x.Meeting)
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.User.Id == model.userId && x.Meeting.Uid == participant.Meeting.Uid);
+
+        if (participant == null || (user.Role != Role.Admin && user.User.Id != participant.User.Id))
+            throw new ProcessException($"User (ID = {model.userId}) is not allowed to update this participant.");
+
         participant = _mapper.Map(model, participant);
 
         context.Participants.Update(participant);
@@ -118,5 +148,30 @@ public class ParticipantService : IParticipantService
         context.Participants.Remove(participant);
 
         await context.SaveChangesAsync();
+    }
+
+    public async Task NotifyAllParticipants(Guid meetingId, string message)
+    {
+        using var context = await _dbContextFactory.CreateDbContextAsync();
+
+        var participants = await context
+            .Participants
+            .Where(x => x.Meeting.Uid == meetingId)
+            .ToListAsync();
+
+        if (!participants.Any())
+            return;
+
+        foreach (var email in participants
+            .Select(p => new EmailModel
+            {
+                Email = p.User.Email,
+                Subject = $"{p.Meeting.Title} notification",
+                Message = message
+
+            }))
+        {
+            await _action.SendEmailAsync(email);
+        }
     }
 }

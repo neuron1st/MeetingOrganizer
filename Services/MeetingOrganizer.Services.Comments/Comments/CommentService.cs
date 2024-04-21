@@ -3,6 +3,7 @@ using MeetingOrganizer.Common.Exceptions;
 using MeetingOrganizer.Common.Validator;
 using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
+using MeetingOrganizer.Services.Participants;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.Comments;
@@ -13,17 +14,20 @@ public class CommentService : ICommentService
     private readonly IMapper _mapper;
     private readonly IModelValidator<CreateModel> _createModelValidator;
     private readonly IModelValidator<UpdateModel> _updateModelValidator;
+    private readonly IParticipantService _participantService;
 
     public CommentService(
         IDbContextFactory<MeetingOrganizerDbContext> dbContextFactory,
         IMapper mapper,
         IModelValidator<CreateModel> createModelValidator,
-        IModelValidator<UpdateModel> updateModelValidator)
+        IModelValidator<UpdateModel> updateModelValidator,
+        IParticipantService participantService)
     {
         _dbContextFactory = dbContextFactory;
         _mapper = mapper;
         _createModelValidator = createModelValidator;
         _updateModelValidator = updateModelValidator;
+        _participantService = participantService;
     }
 
     public async Task<IEnumerable<CommentModel>> GetAllByMeetingId(Guid meetingId, int offset = 0, int limit = 10)
@@ -90,7 +94,7 @@ public class CommentService : ICommentService
 
         await context.Entry(comment).Reference(x => x.Meeting).LoadAsync();
         await context.Entry(comment).Reference(x => x.User).LoadAsync();
-        await context.Entry(comment).Reference(x => x.Likes).LoadAsync();
+        await context.Entry(comment).Collection(x => x.Likes).LoadAsync();
 
         return _mapper.Map<CommentModel>(comment);
     }
@@ -110,7 +114,7 @@ public class CommentService : ICommentService
         await context.SaveChangesAsync();
     }
 
-    public async Task Delete(Guid id)
+    public async Task Delete(Guid id, Guid userId)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
 
@@ -118,6 +122,11 @@ public class CommentService : ICommentService
 
         if (comment == null)
             throw new ProcessException($"Comment (ID = {id}) not found.");
+
+        var participant = await _participantService.GetByUserAndMeetingId(userId, comment.Meeting.Uid);
+
+        if (participant == null || (participant.Role == "Participant" && participant.UserId != comment.User.Id))
+            throw new ProcessException($"User (ID = {userId}) is not allowed to delete this comment.");
 
         context.Comments.Remove(comment);
 

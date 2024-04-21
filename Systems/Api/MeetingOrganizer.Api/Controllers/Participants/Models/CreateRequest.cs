@@ -5,7 +5,6 @@ namespace MeetingOrganizer.Api.Controllers.Participants;
 
 public class CreateRequest
 {
-    public Guid UserId { get; set; }
     public Guid MeetingId { get; set; }
     public string Role { get; set; }
 }

@@ -6,6 +6,7 @@ public class Meeting : BaseEntity
 {
     public string Title { get; set; }
     public string? Description { get; set; }
+    public DateTime? Date {  get; set; }
 
     public virtual ICollection<Participant> Participants { get; set; }
     public virtual ICollection<Photo> Photos { get; set; }

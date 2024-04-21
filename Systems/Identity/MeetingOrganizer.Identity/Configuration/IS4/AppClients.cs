@@ -24,6 +24,10 @@ public static class AppClients
                 AllowedScopes = {
                     AppScopes.MeetingsRead,
                     AppScopes.MeetingsWrite,
+                    AppScopes.CommentsRead,
+                    AppScopes.CommentsWrite,
+                    AppScopes.ParticipantsRead,
+                    AppScopes.ParticipantsWrite,
                 }
             }
             ,
@@ -50,6 +54,10 @@ public static class AppClients
                 AllowedScopes = {
                     AppScopes.MeetingsRead,
                     AppScopes.MeetingsWrite,
+                    AppScopes.CommentsRead,
+                    AppScopes.CommentsWrite,
+                    AppScopes.ParticipantsRead,
+                    AppScopes.ParticipantsWrite,
                 }
             }
         };

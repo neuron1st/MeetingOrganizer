@@ -1,11 +1,11 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
-using MeetingOrganizer.Api.Controllers.Comments;
 using MeetingOrganizer.Common.Security;
 using MeetingOrganizer.Services.Logger;
 using MeetingOrganizer.Services.Meetings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace MeetingOrganizer.Api.Controllers.Meetings;
 
@@ -27,7 +27,7 @@ public class MeetingController : ControllerBase
     }
 
     [HttpGet("")]
-    [Authorize(AppScopes.MeetingsRead)]
+    [Authorize(Policy = AppScopes.MeetingsRead)]
     public async Task<IEnumerable<MeetingResponse>> GetAll([FromQuery] int offset = 0, [FromQuery] int limit = 10)
     {
         var meetings = await _meetingService.GetAll(offset, limit);
@@ -38,7 +38,7 @@ public class MeetingController : ControllerBase
     }
 
     [HttpGet("{id:Guid}")]
-    [Authorize(AppScopes.MeetingsRead)]
+    [Authorize(Policy = AppScopes.MeetingsRead)]
     public async Task<IActionResult> Get([FromRoute] Guid id)
     {
         var meeting = await _meetingService.GetById(id);
@@ -52,10 +52,14 @@ public class MeetingController : ControllerBase
     }
 
     [HttpPost("")]
-    [Authorize(AppScopes.MeetingsWrite)]
+    [Authorize(Policy = AppScopes.MeetingsWrite)]
     public async Task<MeetingResponse> Create(CreateRequest request)
     {
+        Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
+
         var model = _mapper.Map<CreateModel>(request);
+
+        model.UserId = userId;
 
         var meeting = await _meetingService.Create(model);
 
@@ -65,10 +69,13 @@ public class MeetingController : ControllerBase
     }
 
     [HttpPut("{id:Guid}")]
-    [Authorize(AppScopes.MeetingsWrite)]
+    [Authorize(Policy = AppScopes.MeetingsWrite)]
     public async Task<IActionResult> Update([FromRoute] Guid id, UpdateModel request)
     {
+        Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
+
         var model = _mapper.Map<UpdateModel>(request);
+        model.UserId = userId;
 
         await _meetingService.Update(id, model);
 
@@ -76,10 +83,12 @@ public class MeetingController : ControllerBase
     }
 
     [HttpDelete("{id:Guid}")]
-    [Authorize(AppScopes.MeetingsWrite)]
+    [Authorize(Policy = AppScopes.MeetingsWrite)]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
-        await _meetingService.Delete(id);
+        Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
+
+        await _meetingService.Delete(id, userId);
 
         return Ok();
     }

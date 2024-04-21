@@ -4,6 +4,8 @@ public interface IUserAccountService
 {
     Task<bool> IsEmpty();
 
+    Task<UserAccountModel> GetById(Guid id);
+
     Task<UserAccountModel> Create(RegisterUserAccountModel model);
 
     Task SendConfirmationLinkAsync(string email);

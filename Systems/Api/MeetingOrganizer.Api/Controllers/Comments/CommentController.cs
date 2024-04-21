@@ -1,9 +1,11 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
+using MeetingOrganizer.Common.Security;
 using MeetingOrganizer.Services.Comments;
 using MeetingOrganizer.Services.Logger;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace MeetingOrganizer.Api.Controllers.Comments;
 
@@ -25,7 +27,8 @@ public class CommentController : ControllerBase
         _commentService = commentService;
     }
 
-    [HttpGet("meeting/{meetingId:Guid}")]
+    [HttpGet("meeting/{meetingId:Guid}/comments")]
+    [Authorize(Policy = AppScopes.CommentsRead)]
     public async Task<IEnumerable<CommentResponse>> GetAllByMeetingId([FromRoute] Guid meetingId, [FromQuery] int offset = 0, [FromQuery] int limit = 10)
     {
         var comments = await _commentService.GetAllByMeetingId(meetingId, offset, limit);
@@ -35,7 +38,8 @@ public class CommentController : ControllerBase
         return result;
     }
 
-    [HttpGet("user/{userId:Guid}")]
+    [HttpGet("user/{userId:Guid}/comments")]
+    [Authorize(Policy = AppScopes.CommentsRead)]
     public async Task<IEnumerable<CommentResponse>> GetAllByUserId([FromRoute] Guid userId, [FromQuery] int offset = 0, [FromQuery] int limit = 10)
     {
         var comments = await _commentService.GetAllByUserId(userId, offset, limit);
@@ -46,6 +50,7 @@ public class CommentController : ControllerBase
     }
 
     [HttpGet("{id:Guid}")]
+    [Authorize(Policy = AppScopes.CommentsRead)]
     public async Task<IActionResult> Get([FromRoute] Guid id)
     {
         var comment = await _commentService.GetById(id);
@@ -59,9 +64,13 @@ public class CommentController : ControllerBase
     }
 
     [HttpPost("")]
+    [Authorize(Policy = AppScopes.CommentsWrite)]
     public async Task<CommentResponse> Create(CreateRequest request)
     {
+        Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
+
         var model = _mapper.Map<CreateModel>(request);
+        model.UserId = userId;
 
         var comment = await _commentService.Create(model);
 
@@ -71,8 +80,19 @@ public class CommentController : ControllerBase
     }
 
     [HttpPut("{id:Guid}")]
+    [Authorize(Policy = AppScopes.CommentsWrite)]
     public async Task<IActionResult> Update([FromRoute] Guid id, UpdateModel request)
     {
+        Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
+
+        var comment = await _commentService.GetById(id);
+
+        if (comment == null)
+            return NotFound();
+
+        if (comment.UserId != userId)
+            return Forbid();
+
         var model = _mapper.Map<UpdateModel>(request);
 
         await _commentService.Update(id, model);
@@ -80,10 +100,14 @@ public class CommentController : ControllerBase
         return Ok();
     }
 
+
     [HttpDelete("{id:Guid}")]
+    [Authorize(Policy = AppScopes.CommentsWrite)]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
-        await _commentService.Delete(id);
+        Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
+
+        await _commentService.Delete(id, userId);
 
         return Ok();
     }

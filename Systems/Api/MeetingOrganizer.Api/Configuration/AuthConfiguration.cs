@@ -55,6 +55,10 @@ public static class AuthConfiguration
         {
             options.AddPolicy(AppScopes.MeetingsRead, policy => policy.RequireClaim("scope", AppScopes.MeetingsRead));
             options.AddPolicy(AppScopes.MeetingsWrite, policy => policy.RequireClaim("scope", AppScopes.MeetingsWrite));
+            options.AddPolicy(AppScopes.CommentsRead, policy => policy.RequireClaim("scope", AppScopes.CommentsRead));
+            options.AddPolicy(AppScopes.CommentsWrite, policy => policy.RequireClaim("scope", AppScopes.CommentsWrite));
+            options.AddPolicy(AppScopes.ParticipantsRead, policy => policy.RequireClaim("scope", AppScopes.ParticipantsRead));
+            options.AddPolicy(AppScopes.ParticipantsWrite, policy => policy.RequireClaim("scope", AppScopes.ParticipantsWrite));
         });
 
         return services;

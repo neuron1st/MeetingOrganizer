@@ -8,6 +8,9 @@ public class CreateModel
 {
     public string Title { get; set; }
     public string Description { get; set; }
+    public DateTime Date { get; set; }
+
+    public Guid UserId { get; set; }
 }
 
 public class CreateModelProfile : Profile
@@ -28,5 +31,8 @@ public class CreateModelValidator : AbstractValidator<CreateModel>
 
         RuleFor(x => x.Description)
             .MaximumLength(2000).WithMessage("Description is too long");
+
+        RuleFor(x => x.UserId)
+            .NotEmpty().WithMessage("User is required");
     }
 }

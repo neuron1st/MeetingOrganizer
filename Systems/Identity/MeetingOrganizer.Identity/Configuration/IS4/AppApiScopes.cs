@@ -10,5 +10,9 @@ public static class AppApiScopes
         {
             new ApiScope(AppScopes.MeetingsRead, "Access to meetings API - Read data"),
             new ApiScope(AppScopes.MeetingsWrite, "Access to meetings API - Write, edit or delete data"),
+            new ApiScope(AppScopes.CommentsRead, "Access to comments API - Read data"),
+            new ApiScope(AppScopes.CommentsWrite, "Access to comments API - Write, edit or delete data"),
+            new ApiScope(AppScopes.ParticipantsRead, "Access to participants API - Read data"),
+            new ApiScope(AppScopes.ParticipantsWrite, "Access to participants API - Write, edit or delete data"),
         };
 }

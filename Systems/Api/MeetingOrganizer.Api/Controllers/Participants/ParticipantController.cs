@@ -1,9 +1,11 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
+using MeetingOrganizer.Common.Security;
 using MeetingOrganizer.Services.Logger;
 using MeetingOrganizer.Services.Participants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace MeetingOrganizer.Api.Controllers.Participants;
 
@@ -24,7 +26,8 @@ public class ParticipantController : ControllerBase
         _participantService = participantService;
     }
 
-    [HttpGet("meeting/{meetingId:Guid}")]
+    [HttpGet("meeting/{meetingId:Guid}/participants")]
+    [Authorize(Policy = AppScopes.ParticipantsRead)]
     public async Task<IEnumerable<ParticipantResponse>> GetAllByMeetingId([FromRoute] Guid meetingId, [FromQuery] int offset = 0, [FromQuery] int limit = 10)
     {
         var participants = await _participantService.GetAllByMeetingId(meetingId, offset, limit);
@@ -34,7 +37,8 @@ public class ParticipantController : ControllerBase
         return result;
     }
 
-    [HttpGet("user/{userId:Guid}")]
+    [HttpGet("user/{userId:Guid}/participants")]
+    [Authorize(Policy = AppScopes.ParticipantsRead)]
     public async Task<IEnumerable<ParticipantResponse>> GetAllByUserId([FromRoute] Guid userId, [FromQuery] int offset = 0, [FromQuery] int limit = 10)
     {
         var participants = await _participantService.GetAllByUserId(userId, offset, limit);
@@ -45,6 +49,7 @@ public class ParticipantController : ControllerBase
     }
 
     [HttpGet("{id:Guid}")]
+    [Authorize(Policy = AppScopes.ParticipantsRead)]
     public async Task<IActionResult> Get([FromRoute] Guid id)
     {
         var result = await _participantService.GetById(id);
@@ -56,9 +61,13 @@ public class ParticipantController : ControllerBase
     }
 
     [HttpPost("")]
+    [Authorize(Policy = AppScopes.ParticipantsWrite)]
     public async Task<ParticipantResponse> Create(CreateRequest request)
     {
+        Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
+
         var model = _mapper.Map<CreateModel>(request);
+        model.UserId = userId;
 
         var participant = await _participantService.Create(model);
 
@@ -68,9 +77,13 @@ public class ParticipantController : ControllerBase
     }
 
     [HttpPut("{id:Guid}")]
+    [Authorize(Policy = AppScopes.ParticipantsWrite)]
     public async Task<IActionResult> Update([FromRoute] Guid id, UpdateModel request)
     {
+        Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
+
         var model = _mapper.Map<UpdateModel>(request);
+        model.userId = userId;
 
         await _participantService.Update(id, model);
 
@@ -78,6 +91,7 @@ public class ParticipantController : ControllerBase
     }
 
     [HttpDelete("{id:Guid}")]
+    [Authorize(Policy = AppScopes.ParticipantsWrite)]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         await _participantService.Delete(id);

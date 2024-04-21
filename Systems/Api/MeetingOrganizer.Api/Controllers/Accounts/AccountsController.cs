@@ -4,6 +4,7 @@ using MeetingOrganizer.Api.Controllers.Accounts.Models;
 using MeetingOrganizer.Services.UserAccount;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Asn1.Ocsp;
+using System.Security.Claims;
 using static StackExchange.Redis.Role;
 
 namespace MeetingOrganizer.Api.Controllers.Accounts;
@@ -47,5 +48,13 @@ public class AccountsController : ControllerBase
     public async Task ConfirmEmail([FromQuery] string token, [FromQuery] string email)
     {
         await _userAccountService.ConfirmEmail(token, email);
+    }
+
+    [HttpGet("user")]
+    public async Task<UserAccountResponse> GetById()
+    {
+        var userId = Guid.Parse((ReadOnlySpan<char>)User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var user = await _userAccountService.GetById(userId);
+        return _mapper.Map<UserAccountResponse>(user);
     }
 }

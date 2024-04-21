@@ -8,6 +8,7 @@ namespace MeetingOrganizer.Services.Participants;
 public class UpdateModel
 {
     public string Role { get; set; }
+    public Guid userId { get; set; }
 }
 
 public class UpdateModelProfile : Profile

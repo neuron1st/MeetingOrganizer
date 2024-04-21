@@ -24,8 +24,8 @@ public class MeetingLikeController : ControllerBase
         _meetingLikeService = meetingLikeService;
     }
 
-    [HttpPost("user")]
-    public async Task<IActionResult> LikeMeeting(Guid meetingId)
+    [HttpPost("{meetingId:Guid}/like")]
+    public async Task<IActionResult> LikeMeeting([FromRoute] Guid meetingId)
     {
         if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId))
         {
@@ -37,8 +37,8 @@ public class MeetingLikeController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("user")]
-    public async Task<IActionResult> UnlikeMeeting(Guid meetingId)
+    [HttpDelete("{meetingId:Guid}/unlike")]
+    public async Task<IActionResult> UnlikeMeeting([FromRoute] Guid meetingId)
     {
         if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId))
         {

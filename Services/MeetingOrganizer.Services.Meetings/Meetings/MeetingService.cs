@@ -4,6 +4,7 @@ using MeetingOrganizer.Common.Validator;
 using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
 using MeetingOrganizer.Services.Cache;
+using MeetingOrganizer.Services.Participants;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.Meetings;
@@ -15,19 +16,22 @@ public class MeetingService : IMeetingService
     private readonly ICacheService _cacheService;
     private readonly IModelValidator<CreateModel> _createModelValidator;
     private readonly IModelValidator<UpdateModel> _updateModelValidator;
+    private readonly IParticipantService _participantService;
 
     public MeetingService(
         IDbContextFactory<MeetingOrganizerDbContext> dbContextFactory,
         IMapper mapper,
         ICacheService cacheService,
         IModelValidator<CreateModel> createModelValidator,
-        IModelValidator<UpdateModel> updateModelValidator)
+        IModelValidator<UpdateModel> updateModelValidator,
+        IParticipantService participantService)
     {
         _dbContextFactory = dbContextFactory;
         _mapper = mapper;
         _cacheService = cacheService;
         _createModelValidator = createModelValidator;
         _updateModelValidator = updateModelValidator;
+        _participantService = participantService;
     }
 
     public async Task<IEnumerable<MeetingModel>> GetAll(int offset = 0, int limit = 10)
@@ -80,9 +84,16 @@ public class MeetingService : IMeetingService
         await context.Meetings.AddAsync(meeting);
         await context.SaveChangesAsync();
 
-        await context.Entry(meeting).Reference(x => x.Participants).LoadAsync();
-        await context.Entry(meeting).Reference(x => x.Likes).LoadAsync();
-        await context.Entry(meeting).Reference(x => x.Comments).LoadAsync();
+        await _participantService.Create(new Participants.CreateModel
+        {
+            MeetingId = meeting.Uid,
+            UserId = model.UserId,
+            Role = "Admin",
+        });
+
+        await context.Entry(meeting).Collection(x => x.Participants).LoadAsync();
+        await context.Entry(meeting).Collection(x => x.Likes).LoadAsync();
+        await context.Entry(meeting).Collection(x => x.Comments).LoadAsync();
 
         return _mapper.Map<MeetingModel>(meeting);
     }
@@ -95,6 +106,22 @@ public class MeetingService : IMeetingService
 
         var meeting = await context.Meetings.Where(x => x.Uid == id).FirstOrDefaultAsync();
 
+        if (meeting == null)
+            throw new ProcessException($"Meeting (ID = {id}) not found.");
+
+        var participant = await _participantService.GetByUserAndMeetingId(model.UserId, meeting.Uid);
+
+        if (participant == null || participant.Role != "Admin")
+            throw new ProcessException($"User (ID = {model.UserId}) is not allowed to delete this meeting.");
+
+        if (meeting.Date != model.Date)
+        {
+            if (meeting.Date == null)
+                await _participantService.NotifyAllParticipants(meeting.Uid, $"The date of the meeting has been set to {model.Date}");
+            else
+                await _participantService.NotifyAllParticipants(meeting.Uid, $"The date of the meeting has been changed to {model.Date}");
+        }
+
         meeting = _mapper.Map(model, meeting);
         
         context.Meetings.Update(meeting);
@@ -102,7 +129,7 @@ public class MeetingService : IMeetingService
         await context.SaveChangesAsync();
     }
 
-    public async Task Delete(Guid id)
+    public async Task Delete(Guid id, Guid userId)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
 
@@ -110,6 +137,11 @@ public class MeetingService : IMeetingService
 
         if (meeting == null)
             throw new ProcessException($"Meeting (ID = {id}) not found.");
+
+        var participant = await _participantService.GetByUserAndMeetingId(userId, meeting.Uid);
+
+        if (participant == null || participant.Role != "Admin")
+            throw new ProcessException($"User (ID = {userId}) is not allowed to delete this meeting.");
 
         context.Meetings.Remove(meeting);
 
