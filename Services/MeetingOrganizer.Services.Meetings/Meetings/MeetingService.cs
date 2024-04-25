@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using MeetingOrganizer.Common.Exceptions;
+using MeetingOrganizer.Common.Extensions;
 using MeetingOrganizer.Common.Validator;
 using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
 using MeetingOrganizer.Services.Cache;
 using MeetingOrganizer.Services.Participants;
+using MeetingOrganizer.Services.Settings;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.Meetings;
@@ -17,6 +19,7 @@ public class MeetingService : IMeetingService
     private readonly IModelValidator<CreateModel> _createModelValidator;
     private readonly IModelValidator<UpdateModel> _updateModelValidator;
     private readonly IParticipantService _participantService;
+    private readonly MainSettings _mainSettings;
 
     public MeetingService(
         IDbContextFactory<MeetingOrganizerDbContext> dbContextFactory,
@@ -24,7 +27,8 @@ public class MeetingService : IMeetingService
         ICacheService cacheService,
         IModelValidator<CreateModel> createModelValidator,
         IModelValidator<UpdateModel> updateModelValidator,
-        IParticipantService participantService)
+        IParticipantService participantService,
+        MainSettings mainSettings)
     {
         _dbContextFactory = dbContextFactory;
         _mapper = mapper;
@@ -32,6 +36,7 @@ public class MeetingService : IMeetingService
         _createModelValidator = createModelValidator;
         _updateModelValidator = updateModelValidator;
         _participantService = participantService;
+        _mainSettings = mainSettings;
     }
 
     public async Task<IEnumerable<MeetingModel>> GetAll(int offset = 0, int limit = 10)
@@ -81,6 +86,10 @@ public class MeetingService : IMeetingService
         using var context = await _dbContextFactory.CreateDbContextAsync();
 
         var meeting = _mapper.Map<Meeting>(model);
+
+        var fileName = await model.Image.SaveToFile(Path.Combine(_mainSettings.RootDirectory, _mainSettings.FileDirectory));
+        meeting.Image = fileName;
+
         await context.Meetings.AddAsync(meeting);
         await context.SaveChangesAsync();
 
@@ -122,8 +131,20 @@ public class MeetingService : IMeetingService
                 await _participantService.NotifyAllParticipants(meeting.Uid, $"The date of the meeting has been changed to {model.Date}");
         }
 
+        var oldImage = meeting.Image;
+
         meeting = _mapper.Map(model, meeting);
-        
+
+        if (model.Image != null)
+        {
+            var fileName = await model.Image.SaveToFile(Path.Combine(_mainSettings.RootDirectory, _mainSettings.FileDirectory));
+            meeting.Image = fileName;
+        }
+        else
+        {
+            meeting.Image = oldImage;
+        }
+
         context.Meetings.Update(meeting);
 
         await context.SaveChangesAsync();

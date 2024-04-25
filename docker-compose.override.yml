@@ -37,6 +37,8 @@ services:
       - "10000:8080"
     networks:
       - shared_meetingorganizer_net
+    volumes:      
+      - .docker/api/wwwroot/images:/app/wwwroot/images
     env_file:
       - env.api
 

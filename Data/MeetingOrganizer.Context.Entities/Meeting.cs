@@ -8,6 +8,8 @@ public class Meeting : BaseEntity
     public string? Description { get; set; }
     public DateTime? Date {  get; set; }
 
+    public string Image {  get; set; }
+
     public virtual ICollection<Participant> Participants { get; set; }
     public virtual ICollection<Photo> Photos { get; set; }
     public virtual ICollection<Comment> Comments { get; set; }

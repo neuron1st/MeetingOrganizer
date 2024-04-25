@@ -53,4 +53,8 @@
 		<ProjectReference Include="..\..\..\Shared\MeetingOrganizer.Common\MeetingOrganizer.Common.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\images\" />
+	</ItemGroup>
+
 </Project>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using MeetingOrganizer.Common.Files;
 using MeetingOrganizer.Context.Entities;
 
 namespace MeetingOrganizer.Services.Meetings;
@@ -9,6 +10,7 @@ public class CreateModel
     public string Title { get; set; }
     public string Description { get; set; }
     public DateTime Date { get; set; }
+    public FileData? Image { get; set; }
 
     public Guid UserId { get; set; }
 }
