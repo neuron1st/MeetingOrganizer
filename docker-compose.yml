@@ -40,3 +40,14 @@ services:
       - meetingorganizer_postgresql
       - meetingorganizer_rabbitmq
       - meetingorganizer_redis
+
+  meetingorganizer_web:
+    image: ${DOCKER_REGISTRY-}meetingorganizerweb
+    build:
+      context: .
+      dockerfile: Systems/Web/MeetingOrganizer.Web/Dockerfile
+    depends_on:
+      - meetingorganizer_postgresql
+      - meetingorganizer_redis
+      - meetingorganizer_rabbitmq
+      - meetingorganizer_api

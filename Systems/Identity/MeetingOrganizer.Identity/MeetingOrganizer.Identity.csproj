@@ -9,13 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="key\**" />
-		<Content Remove="key\**" />
-		<EmbeddedResource Remove="key\**" />
-		<None Remove="key\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Duende.IdentityServer" Version="7.0.1" />
 		<PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="7.0.1" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />

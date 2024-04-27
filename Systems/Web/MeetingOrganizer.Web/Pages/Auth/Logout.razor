@@ -1,0 +1,18 @@
+﻿@page "/logout"
+
+@using Microsoft.AspNetCore.Authorization
+@using MeetingOrganizer.Web.Pages.Auth
+
+@attribute [Authorize]
+
+@inject IAuthService AuthService
+
+@inject NavigationManager NavigationManager
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await AuthService.Logout();
+        NavigationManager.NavigateTo("/");
+    }
+}

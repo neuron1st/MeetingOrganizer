@@ -26,7 +26,7 @@ public class AccountsController : ControllerBase
     }
 
     [HttpPost("")]
-    public async Task<UserAccountResponse> Register([FromQuery] RegisterUserAccountRequest request)
+    public async Task<UserAccountResponse> Register([FromBody] RegisterUserAccountRequest request)
     {
         var model = _mapper.Map<RegisterUserAccountModel>(request);
 

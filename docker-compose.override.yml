@@ -56,6 +56,12 @@ services:
     env_file:
       - env.worker
 
+  meetingorganizer_web:
+    ports:
+      - "10002:8080"
+    networks:
+      - shared_meetingorganizer_net
+
 networks:
   shared_meetingorganizer_net:
     name: meetingorganizer
