@@ -118,18 +118,31 @@ public class CommentService : ICommentService
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
 
-        var comment = await context.Comments.Where(x => x.Uid == id).FirstOrDefaultAsync();
+        var comment = await context
+            .Comments
+            .Include(x => x.Meeting)
+            .Include(x => x.User)
+            .Include(x => x.Likes)
+            .Where(x => x.Uid == id)
+            .FirstOrDefaultAsync();
 
         if (comment == null)
             throw new ProcessException($"Comment (ID = {id}) not found.");
 
-        var participant = await _participantService.GetByUserAndMeetingId(userId, comment.Meeting.Uid);
+        if (userId == comment.User.Id)
+        {
+            context.Comments.Remove(comment);
+            await context.SaveChangesAsync();
+        }
+        else
+        {
+            var participant = await _participantService.GetByUserAndMeetingId(userId, comment.Meeting.Uid);
 
-        if (participant == null || (participant.Role == "Participant" && participant.UserId != comment.User.Id))
-            throw new ProcessException($"User (ID = {userId}) is not allowed to delete this comment.");
+            if (participant == null || participant.Role == "Participant")
+                throw new ProcessException($"User (ID = {userId}) is not allowed to delete this comment.");
 
-        context.Comments.Remove(comment);
-
-        await context.SaveChangesAsync();
+            context.Comments.Remove(comment);
+            await context.SaveChangesAsync();
+        }
     }
 }

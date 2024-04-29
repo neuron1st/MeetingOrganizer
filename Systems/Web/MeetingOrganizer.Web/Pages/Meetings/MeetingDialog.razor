@@ -1,0 +1,101 @@
+﻿@using MeetingOrganizer.Web.Pages.Meetings
+
+@inherits MudComponentBase
+
+@inject IMeetingService MeetingService
+
+
+<MudDialog>
+    <DialogContent>
+        <MudForm Model="Model" @ref="form">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudTextField Label="Title" @bind-Value="Model.Title"
+                                  For="@(()=>Model.Title)"
+                                  Required="true"
+                                  RequiredError="Title is required">
+                    </MudTextField>
+                    <MudTextField Label="Description" @bind-Value="Model.Description"
+                                  For="@(()=>Model.Description)">
+                    </MudTextField>
+                    <MudDatePicker Label="Date" @bind-Date="Model.Date"
+                                   For="@(()=>Model.Date)">
+                    </MudDatePicker>
+                    <MudFileUpload T="IBrowserFile" FilesChanged="HandleFileUploaded">
+                        <ButtonTemplate>
+                            <MudButton HtmlTag="label"
+                                       Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       for="@context.Id">
+                                Image
+                            </MudButton>
+                        </ButtonTemplate>
+                        <SelectedTemplate>
+                            @if (context != null)
+                            {
+                                <MudText>@context.Name</MudText>
+                            }
+                            else
+                            {
+                                <MudText>No File</MudText>
+                            }
+                        </SelectedTemplate>
+                    </MudFileUpload>
+                </MudItem>
+                
+            </MudGrid>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="MudBlazor.Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] 
+    MudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter]
+    public Guid? MeetingId { get; set; }
+
+    [Parameter]
+    public MeetingModel Model { get; set; } = new();
+
+    [Parameter]
+    public IBrowserFile File { get; set; }
+
+    private MudForm form = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(MeetingId != null)
+        {
+            var model = await MeetingService.GetMeeting(MeetingId.Value);
+
+            Model.Id = model.Id;
+            Model.Title = model.Title;
+            Model.Description = model.Description;
+            Model.Date = model.Date;
+            Model.ParticipantsNumber = model.ParticipantsNumber;
+            Model.LikesNumber = model.LikesNumber;
+            Model.CommentsNumber = model.CommentsNumber;
+        }
+    }
+
+    async Task Submit()
+    {
+        await form.Validate();
+        if(form.IsValid)
+        {
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+
+    private void HandleFileUploaded(IBrowserFile file)
+    {
+        this.File = file;
+    }
+}

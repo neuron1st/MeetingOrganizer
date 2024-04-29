@@ -11,6 +11,12 @@ public class CommentResponse
 
     public int LikesNumber { get; set; }
 
+    public DateTime CreatedDate { get; set; }
+
+    public string UserName { get; set; }
+
+    public bool IsLiked { get; set; }
+
     public Guid UserId { get; set; }
 
     public Guid MeetingId { get; set; }

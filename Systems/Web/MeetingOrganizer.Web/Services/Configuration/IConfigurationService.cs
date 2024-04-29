@@ -1,4 +1,4 @@
-﻿namespace MeetingOrganizer.Web.Services;
+﻿namespace MeetingOrganizer.Web.Services.Configuration;
 
 
 public interface IConfigurationService

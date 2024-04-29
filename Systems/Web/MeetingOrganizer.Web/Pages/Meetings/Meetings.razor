@@ -1,0 +1,128 @@
+﻿@page "/meetings"
+@using Microsoft.AspNetCore.Authorization
+@using MeetingOrganizer.Web.Pages.Meetings
+@using MeetingOrganizer.Web.Components
+
+@inject IMeetingService MeetingService
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+
+@attribute [Authorize]
+@layout MainLayout
+
+<PageTitle>Meetings</PageTitle>
+
+<MudContainer>
+    <MudText Typo="Typo.h4" Class="ma-8">Meetings</MudText>
+    <MudButton Color="Color.Primary" Variant="Variant.Filled" @onclick="CreateMeeting">Create Meeting</MudButton>
+    <MudGrid>
+        <MudItem xs="12">
+            <MudTextField Label="Search" @bind-Value="searchString" Class="ma-4" />
+            <MudButton Color="Color.Primary" Variant="Variant.Text" Class="ma-4">Search</MudButton>
+        </MudItem>
+        @if (meetings.Count() != 0)
+        {
+            @foreach (var meeting in meetings)
+            {
+                <MudItem xs="12" sm="6" md="3">
+                    <MudNavLink Href="@($"/meetings/{meeting.Id}")" Class="center-link">
+                        <MudCard>
+                            @if (!string.IsNullOrEmpty(meeting.Image))
+                            {
+                                <MudImage Src="@($"app/wwwroot/images/{meeting.Image}")" Height="200" Width="300" ObjectFit="ObjectFit.Cover" />
+                            }
+                            <MudCardContent>
+                                <MudText Typo="Typo.h5">@meeting.Title</MudText>
+                                    <MudText Typo="Typo.body2">@meeting.Description</MudText>
+                                    @if (meeting.Date != null && meeting.Date != DateTime.MinValue)
+                                    {
+                                        <MudText Typo="Typo.body2">Date: @meeting.Date</MudText>
+                                    }
+                                    else
+                                    {
+                                        <MudText Typo="Typo.body2">Date: Soon</MudText>
+                                    }
+                                    <MudText Typo="Typo.body2">Participants: @meeting.ParticipantsNumber</MudText>
+                                <MudText Typo="Typo.body2">Likes: @meeting.LikesNumber</MudText>
+                                <MudText Typo="Typo.body2">Comments: @meeting.CommentsNumber</MudText>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudNavLink>
+                </MudItem>
+            }
+        }
+        else
+        {
+            <MudItem xs="12">
+                <MudText Typo="Typo.body1">No meetings found.</MudText>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>
+
+
+@code {
+    private IEnumerable<MeetingModel> meetings = new List<MeetingModel>();
+    private string searchString = string.Empty;
+
+    private async Task ReloadData()
+    {
+        meetings = await MeetingService.GetMeetings();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await ReloadData();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+
+    }
+
+    private async Task CreateMeeting()
+    {
+        var parameters = new DialogParameters { };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true };
+
+        var dialog = await DialogService.ShowAsync<MeetingDialog>("Add meeting", parameters, options);
+        var result = await dialog.Result;
+
+        if(result.Canceled)
+        {
+            return;
+        }
+
+        try
+        {
+            var model = ((MeetingDialog)dialog.Dialog).Model;
+
+            var file = ((MeetingDialog)dialog.Dialog).File;
+            var buffer = new byte[file.Size];
+
+            await file.OpenReadStream(int.MaxValue).ReadAsync(buffer);
+            var content = Convert.ToBase64String(buffer);
+
+            var createModel = new CreateModel()
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Date = model.Date,
+                Image = new Common.FilePayload()
+                {
+                    FileName = file.Name,
+                    Content = content
+                }
+            };
+            await MeetingService.AddMeeting(createModel);
+            await ReloadData();
+        }
+        catch(Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+    }
+}

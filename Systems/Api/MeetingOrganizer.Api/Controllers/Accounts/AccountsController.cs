@@ -50,8 +50,8 @@ public class AccountsController : ControllerBase
         await _userAccountService.ConfirmEmail(token, email);
     }
 
-    [HttpGet("user")]
-    public async Task<UserAccountResponse> GetById()
+    [HttpGet("")]
+    public async Task<UserAccountResponse> Get()
     {
         var userId = Guid.Parse((ReadOnlySpan<char>)User.FindFirstValue(ClaimTypes.NameIdentifier));
         var user = await _userAccountService.GetById(userId);

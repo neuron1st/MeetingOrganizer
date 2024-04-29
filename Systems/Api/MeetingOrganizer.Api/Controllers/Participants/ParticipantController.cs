@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
+using MeetingOrganizer.Api.Controllers.Meetings;
 using MeetingOrganizer.Common.Security;
 using MeetingOrganizer.Services.Logger;
 using MeetingOrganizer.Services.Participants;
@@ -26,7 +27,7 @@ public class ParticipantController : ControllerBase
         _participantService = participantService;
     }
 
-    [HttpGet("meeting/{meetingId:Guid}/participants")]
+    [HttpGet("meeting/{meetingId:Guid}")]
     [Authorize(Policy = AppScopes.ParticipantsRead)]
     public async Task<IEnumerable<ParticipantResponse>> GetAllByMeetingId([FromRoute] Guid meetingId, [FromQuery] int offset = 0, [FromQuery] int limit = 10)
     {
@@ -37,7 +38,7 @@ public class ParticipantController : ControllerBase
         return result;
     }
 
-    [HttpGet("user/{userId:Guid}/participants")]
+    [HttpGet("user/{userId:Guid}")]
     [Authorize(Policy = AppScopes.ParticipantsRead)]
     public async Task<IEnumerable<ParticipantResponse>> GetAllByUserId([FromRoute] Guid userId, [FromQuery] int offset = 0, [FromQuery] int limit = 10)
     {
@@ -48,14 +49,30 @@ public class ParticipantController : ControllerBase
         return result;
     }
 
+    [HttpGet("{userId:Guid}/{meetingId:Guid}")]
+    [Authorize(Policy = AppScopes.ParticipantsRead)]
+    public async Task<IActionResult> GetByUserAndMeetingId([FromRoute] Guid userId, [FromRoute] Guid meetingId)
+    {
+        var participant = await _participantService.GetByUserAndMeetingId(userId, meetingId);
+
+        if (participant == null)
+            return NotFound();
+
+        var result = _mapper.Map<ParticipantResponse>(participant);
+
+        return Ok(result);
+    }
+
     [HttpGet("{id:Guid}")]
     [Authorize(Policy = AppScopes.ParticipantsRead)]
     public async Task<IActionResult> Get([FromRoute] Guid id)
     {
-        var result = await _participantService.GetById(id);
+        var participant = await _participantService.GetById(id);
 
-        if (result == null)
+        if (participant == null)
             return NotFound();
+
+        var result = _mapper.Map<ParticipantResponse>(participant);
 
         return Ok(result);
     }

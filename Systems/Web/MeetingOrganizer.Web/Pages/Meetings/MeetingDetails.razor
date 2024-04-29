@@ -1,0 +1,287 @@
+﻿@page "/meetings/{Id}"
+@using MeetingOrganizer.Web.Common
+@using MeetingOrganizer.Web.Components
+@using MeetingOrganizer.Web.Pages.Comments
+@using MeetingOrganizer.Web.Pages.Participants
+@using MeetingOrganizer.Web.Pages.Users
+@using MeetingOrganizer.Web.Services.CommentLike
+@using MeetingOrganizer.Web.Services.MeetingLike
+@using Microsoft.AspNetCore.Authorization
+
+@inject IMeetingService MeetingService
+@inject ICommentService CommentService
+@inject ICommentLikeService CommentLikeService
+@inject IMeetingLikeService MeetingLikeService
+@inject IUserService UserService
+@inject IParticipantService ParticipantService
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+@inject NavigationManager navigationManeger
+
+@attribute [Authorize]
+@layout MainLayout
+
+<PageTitle>@meetingModel.Title</PageTitle>
+
+<MudContainer>
+    <MudGrid>
+        <MudItem xs="12" sm="6" md="6" lg="6" xl="6">
+            <MudButton Icon="Icons.Material.Filled.ArrowBack" Color="Color.Secondary" @onclick="GoBack">Back</MudButton>
+        </MudItem>
+        <MudItem>
+            <MudText Typo="Typo.h5">@meetingModel.Title</MudText>
+            @if (isAdmin)
+            {
+                <MudButton Icon="Icons.Material.Filled.Edit" Color="Color.Primary" @onclick="EditMeeting">Edit</MudButton>
+                <MudButton Icon="Icons.Material.Filled.Delete" Color="Color.Error" @onclick="DeleteMeeting">Delete</MudButton>
+            }
+        </MudItem>
+    </MudGrid>
+    <MudCard Elevation="2" Outlined="true">
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="6" lg="6" xl="6">
+                    @if (!string.IsNullOrEmpty(meetingModel.Image))
+                    {
+                        <MudImage Src="@($"app/wwwroot/images/{meetingModel.Image}")" Height="400" Width="600" ObjectFit="ObjectFit.Cover" />
+                    }
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6" lg="6" xl="6">
+                    <MudText Typo="Typo.subtitle1">Description:</MudText>
+                    <MudText>@meetingModel.Description</MudText>
+                    @if (meetingModel.Date != null && meetingModel.Date != DateTime.MinValue)
+                    {
+                        <MudText Typo="Typo.subtitle1">Date: @meetingModel.Date</MudText>
+                    }
+                    else
+                    {
+                        <MudText Typo="Typo.subtitle1">Date: Soon</MudText>
+                    }
+                    <MudText Typo="Typo.subtitle1">Participants:</MudText>
+                    <MudText>@meetingModel.ParticipantsNumber</MudText>
+                    <MudText Typo="Typo.subtitle1">Likes:</MudText>
+                    <MudText>@meetingModel.LikesNumber</MudText>
+                    <MudButton Icon="Icons.Material.Filled.ThumbUp" Color="Color.Primary" @onclick="AddLike">Like</MudButton>
+                    <MudButton Icon="Icons.Material.Filled.ThumbDown" Color="Color.Error" @onclick="RemoveLike">Unlike</MudButton>
+                </MudItem>
+            </MudGrid>
+            <MudText Typo="Typo.subtitle1">Comments: (@meetingModel.CommentsNumber)</MudText>
+            <MudTextField Label="Comment" @bind-Value="newCommentText"></MudTextField>
+            <MudButton Color="Color.Primary" @onclick="AddComment">Add Comment</MudButton>
+            @if (comments.Any())
+            {
+                @foreach (var comment in comments)
+                {
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <MudText>@comment.Text</MudText>
+                                <MudText Typo="Typo.caption">By: @comment.UserName</MudText>
+                                <MudText Typo="Typo.caption">Likes: @comment.LikesNumber</MudText>
+                            </div>
+                            @if (isModerator || comment.UserId == currentUserId)
+                            {
+                                <div>
+                                    <MudButton Icon="Icons.Material.Filled.Delete" Color="Color.Error" @onclick="() => DeleteComment(comment.Id)">Delete</MudButton>
+                                </div>
+                            }
+                            <div>
+                                <MudButton Icon="@(comment.IsLiked ? Icons.Material.Filled.Favorite : Icons.Material.Outlined.FavoriteBorder)" Color="Color.Primary" @onclick="() => ToggleCommentLike(comment.Id)">Like</MudButton>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </MudCardContent>
+    </MudCard>
+</MudContainer>
+
+@code {
+    private MeetingModel meetingModel;
+    private IEnumerable<CommentModel> comments = new List<CommentModel>();
+    private string newCommentText = "";
+
+    private Guid currentUserId;
+    private bool isAdmin;
+    private bool isModerator;
+
+    [Parameter]
+    public string Id { get; set; }
+
+    private async Task ReloadData()
+    {
+        var user = await UserService.Get();
+        currentUserId = user.Id;
+
+        var meetingId = Guid.Parse(Id);
+        meetingModel = await MeetingService.GetMeeting(meetingId);
+
+        comments = await CommentService.GetAllByMeeting(meetingId);
+        comments.OrderByDescending(c => c.CreatedDate);
+
+        CheckAuthority();
+        StateHasChanged();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await ReloadData();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+    }
+
+    private async void CheckAuthority()
+    {
+        var meetingId = Guid.Parse(Id);
+
+        var participant = await ParticipantService.GetByUserAndMeeting(currentUserId, meetingId);
+
+        if (participant != null)
+        {
+            isAdmin = participant.Role == "Admin";
+            isModerator = isAdmin || participant.Role == "Moderator";
+        }
+        else
+        {
+            isAdmin = false;
+            isModerator = false;
+        }
+    }
+
+    private async Task EditMeeting()
+    {
+        var meetingId = Guid.Parse(Id);
+
+        var parameters = new DialogParameters();
+        parameters.Add("MeetingId", meetingId);
+
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true };
+        var dialog = DialogService.Show<MeetingDialog>("EditMeeting", parameters, options);
+        var result = await dialog.Result;
+
+        FilePayload image = null;
+
+        if (((MeetingDialog)dialog.Dialog).File != null)
+        {
+            var file = ((MeetingDialog)dialog.Dialog).File;
+            var buffer = new byte[file.Size];
+
+            await file.OpenReadStream(int.MaxValue).ReadAsync(buffer);
+            var content = Convert.ToBase64String(buffer);
+
+            image = new FilePayload()
+                {
+                    FileName = file.Name,
+                    Content = content
+                };
+        }
+
+        var model = ((MeetingDialog)dialog.Dialog).Model;
+        var updateModel = new UpdateModel()
+        {
+            Title = model.Title,
+            Description = model.Description,
+            Date = model.Date,
+            Image = image
+        };
+
+        await MeetingService.EditMeeting(meetingId, updateModel);
+        await ReloadData();
+    }
+
+    private async Task DeleteMeeting()
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you really want to delete this meeting? This process cannot be undone.");
+        parameters.Add("ButtonText", "Delete");
+        parameters.Add("Color", Color.Error);
+
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+
+        var dialog = await DialogService.ShowAsync<ConfirmationDialog>("Delete meeting", parameters, options);
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+            return;
+
+        await MeetingService.DeleteMeeting(Guid.Parse(Id));
+        await ReloadData();
+    }
+
+    private async Task AddLike()
+    {
+        var meetingId = Guid.Parse(Id);
+        await MeetingLikeService.AddLike(meetingId);
+        await ReloadData();
+    }
+
+    private async Task RemoveLike()
+    {
+        var meetingId = Guid.Parse(Id);
+        await MeetingLikeService.DeleteLike(meetingId);
+        await ReloadData();
+    }
+
+    private async Task AddComment()
+    {
+        if (!string.IsNullOrWhiteSpace(newCommentText))
+        {
+            var meetingId = Guid.Parse(Id);
+            await CommentService.AddComment(new Comments.CreateModel
+            {
+                MeetingId = meetingId,
+                Text = newCommentText
+            });
+            newCommentText = "";
+            await ReloadData();
+        }
+    }
+
+    private async Task DeleteComment(Guid commentId)
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you really want to delete this comment? This process cannot be undone.");
+        parameters.Add("ButtonText", "Delete");
+        parameters.Add("Color", Color.Error);
+
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+
+        var dialog = await DialogService.ShowAsync<ConfirmationDialog>("Delete comment", parameters, options);
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+            return;
+
+        await CommentService.DeleteComment(commentId);
+        await ReloadData();
+    }
+
+    private async Task ToggleCommentLike(Guid commentId)
+    {
+        var comment = comments.FirstOrDefault(c => c.Id == commentId);
+        if (comment != null)
+        {
+            comment.IsLiked = !comment.IsLiked;
+            if (comment.IsLiked)
+            {
+                await CommentLikeService.AddLike(commentId);
+            }
+            else
+            {
+                await CommentLikeService.DeleteLike(commentId);
+            }
+
+            await ReloadData();
+        }
+    }
+
+    private void GoBack()
+    {
+        navigationManeger.NavigateTo("/meetings");
+    }
+}

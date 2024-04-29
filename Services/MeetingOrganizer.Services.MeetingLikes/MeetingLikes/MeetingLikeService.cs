@@ -5,6 +5,7 @@ using MeetingOrganizer.Context.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,5 +47,17 @@ public class MeetingLikeService : IMeetingLikeService
         context.MeetingLikes.Remove(meeting);
 
         await context.SaveChangesAsync();
+    }
+
+    public async Task<bool> CheckLike(Guid meetingId, Guid userId)
+    {
+        using var context = await _dbContextFactory.CreateDbContextAsync();
+
+        var meetingLike = await context
+            .MeetingLikes
+            .Where(x => x.User.Id == userId && x.Meeting.Uid == meetingId)
+            .FirstOrDefaultAsync();
+
+        return meetingLike != null;
     }
 }

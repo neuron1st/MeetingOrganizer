@@ -30,17 +30,28 @@ internal class CommentLikeService : ICommentLikeService
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
 
-        var comment = await context
+        var commentLike = await context
             .CommentLikes
             .Where(x => x.User.Id == model.UserId && x.Comment.Uid == model.CommentId)
             .FirstOrDefaultAsync();
 
-        if (comment == null)
+        if (commentLike == null)
             throw new ProcessException($"Comment like not found.");
 
-        context.CommentLikes.Remove(comment);
+        context.CommentLikes.Remove(commentLike);
 
         await context.SaveChangesAsync();
+    }
 
+    public async Task<bool> CheckLike(Guid commentId, Guid userId)
+    {
+        using var context = await _dbContextFactory.CreateDbContextAsync();
+
+        var commentLike = await context
+            .CommentLikes
+            .Where(x => x.User.Id == userId && x.Comment.Uid == commentId)
+            .FirstOrDefaultAsync();
+
+        return commentLike != null;
     }
 }

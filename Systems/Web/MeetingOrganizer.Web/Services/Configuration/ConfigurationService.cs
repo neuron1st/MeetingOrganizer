@@ -1,6 +1,6 @@
 ﻿using Blazored.LocalStorage;
 
-namespace MeetingOrganizer.Web.Services;
+namespace MeetingOrganizer.Web.Services.Configuration;
 
 public class ConfigurationService(ILocalStorageService localStorage) : IConfigurationService
 {

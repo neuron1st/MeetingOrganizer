@@ -19,7 +19,8 @@ public class CreateModelProfile : Profile
 {
     public CreateModelProfile()
     {
-        CreateMap<CreateModel, Meeting>();
+        CreateMap<CreateModel, Meeting>()
+            .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToUniversalTime()));
     }
 }
 

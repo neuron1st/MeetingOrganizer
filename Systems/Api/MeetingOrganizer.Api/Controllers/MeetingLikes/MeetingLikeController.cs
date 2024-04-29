@@ -31,8 +31,9 @@ public class MeetingLikeController : ControllerBase
         {
             return BadRequest("Invalid user ID format");
         }
-
-        await _meetingLikeService.AddLike(new MeetingLikeModel { MeetingId = meetingId, UserId = userId });
+        
+        if(!await _meetingLikeService.CheckLike(meetingId, userId))
+            await _meetingLikeService.AddLike(new MeetingLikeModel { MeetingId = meetingId, UserId = userId });
 
         return Ok();
     }
@@ -45,7 +46,8 @@ public class MeetingLikeController : ControllerBase
             return BadRequest("Invalid user ID format");
         }
 
-        await _meetingLikeService.RemoveLike(new MeetingLikeModel { MeetingId = meetingId, UserId = userId });
+        if (await _meetingLikeService.CheckLike(meetingId, userId))
+            await _meetingLikeService.RemoveLike(new MeetingLikeModel { MeetingId = meetingId, UserId = userId });
 
         return Ok();
     }

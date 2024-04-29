@@ -4,4 +4,5 @@ public interface IMeetingLikeService
 {
     Task AddLike(MeetingLikeModel model);
     Task RemoveLike(MeetingLikeModel model);
+    Task<bool> CheckLike(Guid meetingId, Guid userId);
 }
