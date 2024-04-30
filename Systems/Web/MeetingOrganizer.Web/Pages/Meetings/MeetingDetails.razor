@@ -16,7 +16,7 @@
 @inject IParticipantService ParticipantService
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
-@inject NavigationManager navigationManeger
+@inject NavigationManager navigationManager
 
 @attribute [Authorize]
 @layout MainLayout
@@ -342,6 +342,6 @@
 
     private void GoBack()
     {
-        navigationManeger.NavigateTo("/meetings");
+        navigationManager.NavigateTo("/meetings");
     }
 }

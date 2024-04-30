@@ -1,9 +1,31 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.Authorization
-@layout MainLayout
+@layout SimpleLayout
+@inject NavigationManager navigationManager
+<PageTitle>Meeting Organizer</PageTitle>
 
-<PageTitle>Home</PageTitle>
+<MudContainer>
+    <MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center" Class="h-100">
+        <MudItem>
+            <MudText Typo="Typo.h1" Class="mb-4">Welcome to Meeting Organizer App!</MudText>
+        </MudItem>
+        <MudItem>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" @onclick="NavigateToRegister">Go to Register</MudButton>
+        </MudItem>
+        <MudItem>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" @onclick="NavigateToLogin">Go to Login</MudButton>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
 
-<h1>Hello, world!</h1>
+@code {
+    private void NavigateToRegister()
+    {
+        navigationManager.NavigateTo("/register");
+    }
 
-Welcome to your new app.
+    private void NavigateToLogin()
+    {
+        navigationManager.NavigateTo("/login");
+    }
+}
