@@ -9,6 +9,9 @@ using MeetingOrganizer.Services.EmailSender;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+/// <summary>
+/// Service for managing user accounts.
+/// </summary>
 public class UserAccountService : IUserAccountService
 {
     private readonly IMapper _mapper;
@@ -28,11 +31,17 @@ public class UserAccountService : IUserAccountService
         _action = action;
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task<bool> IsEmpty()
     {
         return !(await _userManager.Users.AnyAsync());
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task<UserAccountModel> GetById(Guid id)
     {
         var user = await _userManager.FindByIdAsync(id.ToString());
@@ -43,6 +52,9 @@ public class UserAccountService : IUserAccountService
         return _mapper.Map<UserAccountModel>(user);
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task<UserAccountModel> Create(RegisterUserAccountModel model)
     {
         _registerUserAccountModelValidator.Check(model);
@@ -71,6 +83,9 @@ public class UserAccountService : IUserAccountService
         return _mapper.Map<UserAccountModel>(user);
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task SendConfirmationLinkAsync(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
@@ -90,6 +105,9 @@ public class UserAccountService : IUserAccountService
         await _action.SendEmailAsync(emailModel);
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task ConfirmEmail(string token, string email)
     {
         var user = await _userManager.FindByEmailAsync(email);

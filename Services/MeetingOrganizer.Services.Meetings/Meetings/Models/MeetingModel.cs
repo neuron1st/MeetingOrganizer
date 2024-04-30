@@ -6,20 +6,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.Meetings;
 
+/// <summary>
+/// Model for a meeting with additional computed properties.
+/// </summary>
 public class MeetingModel
 {
     public Guid Id { get; set; }
 
     public string Title { get; set; }
     public string Description { get; set; }
-    public DateTime Date {  get; set; }
-    public string Image {  get; set; }
+    public DateTime Date { get; set; }
+    public string Image { get; set; }
 
     public int ParticipantsNumber { get; set; }
     public int LikesNumber { get; set; }
     public int CommentsNumber { get; set; }
 }
 
+/// <summary>
+/// AutoMapper profile for mapping Meeting entity to MeetingModel.
+/// </summary>
 public class MeetingModelProfile : Profile
 {
     public MeetingModelProfile()
@@ -33,9 +39,12 @@ public class MeetingModelProfile : Profile
             .AfterMap<MeetingModelActions>();
     }
 
+    /// <summary>
+    /// Mapping actions for additional processing after mapping Meeting to MeetingModel.
+    /// </summary>
     public class MeetingModelActions : IMappingAction<Meeting, MeetingModel>
     {
-        public readonly IDbContextFactory<MeetingOrganizerDbContext> dbContextFactory;
+        private readonly IDbContextFactory<MeetingOrganizerDbContext> dbContextFactory;
         private readonly MainSettings mainSettings;
 
         public MeetingModelActions(IDbContextFactory<MeetingOrganizerDbContext> dbContextFactory, MainSettings mainSettings)
@@ -50,7 +59,7 @@ public class MeetingModelProfile : Profile
 
             var model = db.Meetings.FirstOrDefault(x => x.Id == source.Id);
 
-            if(!string.IsNullOrEmpty(source.Image))
+            if (!string.IsNullOrEmpty(source.Image))
                 destination.Image = Path.Combine(mainSettings.FileDirectory, source.Image);
         }
     }

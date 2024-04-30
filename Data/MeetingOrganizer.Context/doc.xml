@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Context</name>
+    </assembly>
+    <members>
+        <member name="T:MeetingOrganizer.Context.Bootstrapper">
+            <summary>
+            Class for bootstrapping the application's database context.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Bootstrapper.AddAppDbContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds the application's database context to the services collection.
+            </summary>
+            <param name="services">The service collection to add the context to.</param>
+            <param name="configuration">The optional configuration to use for loading settings.</param>
+            <returns>The modified service collection.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Context.Configuration.CommentLikesContextConfiguration">
+            <summary>
+            Contains configuration for the CommentLikes entity in the database context.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Context.Configuration.CommentLikesContextConfiguration.ConfigureCommentLikes(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configures the CommentLikes entity in the database context.
+            </summary>
+            <param name="modelBuilder">The model builder used to construct the database context.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Context.Configuration.CommentsContextConfigure">
+            <summary>
+            Contains configuration for the Comment entity in the database context.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Context.Configuration.CommentsContextConfigure.ConfigureComments(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configures the Comments entity in the database context.
+            </summary>
+            <param name="modelBuilder">The model builder used to construct the database context.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Context.Configuration.MeetingLikesContextConfiguration">
+            <summary>
+            Contains configuration for the MeetingLikes entity in the database context.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Context.Configuration.MeetingLikesContextConfiguration.ConfigureMeetingLikes(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configures the MeeringLikes entity in the database context.
+            </summary>
+            <param name="modelBuilder">The model builder used to construct the database context.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Context.Configuration.MeetingsContextConfiguration">
+            <summary>
+            Contains configuration for the Meetings entity in the database context.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Context.Configuration.MeetingsContextConfiguration.ConfigureMeetings(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configures the CommentLikes entity in the database context.
+            </summary>
+            <param name="modelBuilder">The model builder used to construct the database context.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Context.Configuration.ParticipantsContextConfiguration">
+            <summary>
+            Contains configuration for the Participants entity in the database context.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Context.Configuration.ParticipantsContextConfiguration.ConfigureParticipants(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configures the Participants entity in the database context.
+            </summary>
+            <param name="modelBuilder">The model builder used to construct the database context.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Context.Configuration.PhotosContextConfiguration">
+            <summary>
+            Contains configuration for the Photos entity in the database context.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Context.Configuration.PhotosContextConfiguration.ConfigurePhotos(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configures the Photos entity in the database context.
+            </summary>
+            <param name="modelBuilder">The model builder used to construct the database context.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Context.Configuration.UsersContextConfiguration">
+            <summary>
+            Contains configuration for the Users entity in the database context.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Context.Configuration.UsersContextConfiguration.ConfigureUsers(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configures the Users entity in the database context.
+            </summary>
+            <param name="modelBuilder">The model builder used to construct the database context.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Context.MeetingOrganizerDbContext">
+            <summary>
+            Represents the database context for the MeetingOrganizer application.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.MeetingOrganizerDbContext.Comments">
+            <summary>
+            Gets or sets the DbSet of comments.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.MeetingOrganizerDbContext.CommentLikes">
+            <summary>
+            Gets or sets the DbSet of comment likes.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.MeetingOrganizerDbContext.MeetingLikes">
+            <summary>
+            Gets or sets the DbSet of meeting likes.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.MeetingOrganizerDbContext.Meetings">
+            <summary>
+            Gets or sets the DbSet of meetings.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.MeetingOrganizerDbContext.Participants">
+            <summary>
+            Gets or sets the DbSet of participants.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.MeetingOrganizerDbContext.Photos">
+            <summary>
+            Gets or sets the DbSet of photos.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.MeetingOrganizerDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{MeetingOrganizer.Context.MeetingOrganizerDbContext})">
+            <summary>
+            Initializes a new instance of the MeetingOrganizerDbContext class.
+            </summary>
+            <param name="options">The DbContextOptions to be used by the context.</param>
+        </member>
+        <member name="M:MeetingOrganizer.Context.MeetingOrganizerDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configures the database schema for the model.
+            </summary>
+            <param name="modelBuilder">The model builder to be used for configuration.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Factories.DbContextFactory">
+            <summary>
+            Factory class for creating instances of MeetingOrganizerDbContext
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Factories.DbContextFactory.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{MeetingOrganizer.Context.MeetingOrganizerDbContext})">
+            <summary>
+            Initializes a new instance of the DbContextFactory class with the specified DbContextOptions
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Factories.DbContextFactory.Create">
+            <summary>
+            Creates a new instance of MeetingOrganizerDbContext using the DbContextOptions provided in the constructor
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Factories.DbContextOptionsFactory">
+            <summary>
+            Factory class for creating and configuring DbContextOptions for a PostgreSQL database.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Factories.DbContextOptionsFactory.Create(System.String)">
+            <summary>
+            Creates DbContextOptions for configuring a DbContext to use a PostgreSQL database
+            </summary>
+            <param name="connectionString"></param>
+            <returns>DbContextOptions for configuring a DbContext</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Factories.DbContextOptionsFactory.Configure(System.String)">
+            <summary>
+            Configures the DbContextOptionsBuilder to use a PostgreSQL database
+            </summary>
+            <param name="connectionString"></param>
+            <returns>An action to configure the DbContextOptionsBuilder</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Factories.DesignTimeDbContextFactory">
+            <summary>
+            Factory for creating instances of the MeetingOrganizerDbContext for design-time scenarios.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Factories.DesignTimeDbContextFactory.CreateDbContext(System.String[])">
+            <summary>
+            Creates a new instance of MeetingOrganizerDbContext for design-time scenarios.
+            </summary>
+            <param name="args">Arguments passed to the factory method.</param>
+            <returns>A new instance of MeetingOrganizerDbContext.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Settings.DbInitSettings">
+            <summary>
+            Settings for initializing the database.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Settings.DbInitSettings.AddDemoData">
+            <summary>
+            Gets a value indicating whether demo data should be added to the database.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Settings.DbInitSettings.AddAdministrator">
+            <summary>
+            Gets a value indicating whether an administrator account should be added to the database.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Settings.DbInitSettings.Administrator">
+            <summary>
+            Gets the credentials for the administrator account.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Settings.UserCredentials">
+            <summary>
+            Represents user credentials.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Settings.UserCredentials.Name">
+            <summary>
+            Gets the name of the user.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Settings.UserCredentials.Email">
+            <summary>
+            Gets the email address of the user.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Settings.UserCredentials.Password">
+            <summary>
+            Gets the password of the user.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Settings.DbSettings">
+            <summary>
+            Represents the settings for the database connection.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Settings.DbSettings.ConnectionString">
+            <summary>
+            Gets or sets the connection string for the database.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Settings.DbSettings.Init">
+            <summary>
+            Gets or sets the initialization settings for the database.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Setup.DbInitializer">
+            <summary>
+            Class for initializing the database.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Context.Setup.DbInitializer.Execute(System.IServiceProvider)">
+            <summary>
+            Executes the database initialization.
+            </summary>
+            <param name="serviceProvider">The service provider used to access required services.</param>
+        </member>
+    </members>
+</doc>

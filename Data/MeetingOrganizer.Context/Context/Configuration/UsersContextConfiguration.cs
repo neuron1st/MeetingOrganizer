@@ -4,8 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Context.Context.Configuration;
 
+/// <summary>
+/// Contains configuration for the Users entity in the database context.
+/// </summary>
 public static class UsersContextConfiguration
 {
+    /// <summary>
+    /// Configures the Users entity in the database context.
+    /// </summary>
+    /// <param name="modelBuilder">The model builder used to construct the database context.</param>
     public static void ConfigureUsers(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>().ToTable("users");

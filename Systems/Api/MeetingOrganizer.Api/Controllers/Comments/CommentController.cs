@@ -10,7 +10,9 @@ using System.Security.Claims;
 
 namespace MeetingOrganizer.Api.Controllers.Comments;
 
-
+/// <summary>
+/// API controller for managing comments.
+/// </summary>
 [ApiController]
 [Authorize]
 [ApiVersion("1.0")]
@@ -30,6 +32,9 @@ public class CommentController : ControllerBase
         _commentLikeService = commentLikeService;
     }
 
+    /// <summary>
+    /// Gets all comments for a meeting.
+    /// </summary>
     [HttpGet("meeting/{meetingId:Guid}")]
     [Authorize(Policy = AppScopes.CommentsRead)]
     public async Task<IEnumerable<CommentResponse>> GetAllByMeetingId([FromRoute] Guid meetingId, [FromQuery] int offset = 0, [FromQuery] int limit = 10)
@@ -49,7 +54,9 @@ public class CommentController : ControllerBase
         return commentResponses;
     }
 
-
+    /// <summary>
+    /// Gets all comments by a user.
+    /// </summary>
     [HttpGet("user/{userId:Guid}")]
     [Authorize(Policy = AppScopes.CommentsRead)]
     public async Task<IEnumerable<CommentResponse>> GetAllByUserId([FromRoute] Guid userId, [FromQuery] int offset = 0, [FromQuery] int limit = 10)
@@ -69,6 +76,9 @@ public class CommentController : ControllerBase
         return commentResponses;
     }
 
+    /// <summary>
+    /// Gets a comment by its ID.
+    /// </summary>
     [HttpGet("{id:Guid}")]
     [Authorize(Policy = AppScopes.CommentsRead)]
     public async Task<IActionResult> Get([FromRoute] Guid id)
@@ -86,6 +96,9 @@ public class CommentController : ControllerBase
         return Ok(commentResponse);
     }
 
+    /// <summary>
+    /// Creates a new comment.
+    /// </summary>
     [HttpPost("")]
     [Authorize(Policy = AppScopes.CommentsWrite)]
     public async Task<CommentResponse> Create(CreateRequest request)
@@ -102,6 +115,9 @@ public class CommentController : ControllerBase
         return result;
     }
 
+    /// <summary>
+    /// Updates an existing comment.
+    /// </summary>
     [HttpPut("{id:Guid}")]
     [Authorize(Policy = AppScopes.CommentsWrite)]
     public async Task<IActionResult> Update([FromRoute] Guid id, UpdateModel request)
@@ -123,7 +139,9 @@ public class CommentController : ControllerBase
         return Ok();
     }
 
-
+    /// <summary>
+    /// Deletes a comment.
+    /// </summary>
     [HttpDelete("{id:Guid}")]
     [Authorize(Policy = AppScopes.CommentsWrite)]
     public async Task<IActionResult> Delete([FromRoute] Guid id)

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Services.RabbitMq</name>
+    </assembly>
+    <members>
+        <member name="T:MeetingOrganizer.Services.RabbitMq.Bootstrapper">
+            <summary>
+            Bootstrapper for configuring RabbitMQ related services.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.RabbitMq.Bootstrapper.AddRabbitMq(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the RabbitMQ service to the service collection as a singleton.
+            </summary>
+            <param name="services">The service collection to add the service to.</param>
+            <returns>The modified service collection.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Services.RabbitMq.OnDataReceiveEvent`1">
+            <summary>
+            Represents a RabbitMQ service for interacting with RabbitMQ messaging.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.RabbitMq.IRabbitMq">
+            <summary>
+            Interface for interacting with RabbitMQ messaging.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.RabbitMq.IRabbitMq.Subscribe``1(System.String,MeetingOrganizer.Services.RabbitMq.OnDataReceiveEvent{``0})">
+            <summary>
+            Subscribes to a RabbitMQ queue for receiving messages of type T.
+            </summary>
+            <typeparam name="T">The type of data to receive.</typeparam>
+            <param name="queueName">The name of the queue to subscribe to.</param>
+            <param name="onReceive">The callback to execute when a message is received.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.RabbitMq.IRabbitMq.PushAsync``1(System.String,``0)">
+            <summary>
+            Pushes data of type T to a RabbitMQ queue.
+            </summary>
+            <typeparam name="T">The type of data to push.</typeparam>
+            <param name="queueName">The name of the queue to push data to.</param>
+            <param name="data">The data to push to the queue.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Services.RabbitMq.RabbitMq">
+            <summary>
+            Represents a RabbitMQ service for interacting with RabbitMQ messaging.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.RabbitMq.RabbitMq.Subscribe``1(System.String,MeetingOrganizer.Services.RabbitMq.OnDataReceiveEvent{``0})">
+            <summary>
+            Subscribes to a RabbitMQ queue for receiving messages of type T.
+            </summary>
+            <typeparam name="T">The type of data to receive.</typeparam>
+            <param name="queueName">The name of the queue to subscribe to.</param>
+            <param name="onReceive">The callback to execute when a message is received.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.RabbitMq.RabbitMq.PushAsync``1(System.String,``0)">
+            <summary>
+            Pushes data of type T to a RabbitMQ queue.
+            </summary>
+            <typeparam name="T">The type of data to push.</typeparam>
+            <param name="queueName">The name of the queue to push data to.</param>
+            <param name="data">The data to push to the queue.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+    </members>
+</doc>

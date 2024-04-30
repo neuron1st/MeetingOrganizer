@@ -4,11 +4,17 @@ using MeetingOrganizer.Context.Entities;
 
 namespace MeetingOrganizer.Services.Comments;
 
+/// <summary>
+/// Represents a model for updating a comment.
+/// </summary>
 public class UpdateModel
 {
     public string Text { get; set; }
 }
 
+/// <summary>
+/// Profile for mapping update model to comment entity.
+/// </summary>
 public class UpdateModelProfile : Profile
 {
     public UpdateModelProfile()
@@ -17,6 +23,9 @@ public class UpdateModelProfile : Profile
     }
 }
 
+/// <summary>
+/// Validator for the update comment model.
+/// </summary>
 public class UpdateModelValidator : AbstractValidator<UpdateModel>
 {
     public UpdateModelValidator()

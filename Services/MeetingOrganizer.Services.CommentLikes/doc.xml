@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Services.CommentLikes</name>
+    </assembly>
+    <members>
+        <member name="T:MeetingOrganizer.Services.CommentLikes.Bootstrapper">
+            <summary>
+            Bootstrapper for adding the comment like service to the DI container.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.CommentLikes.Bootstrapper.AddCommentLikeService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the comment like service to the DI container.
+            </summary>
+            <param name="services">The collection of services.</param>
+            <returns>The modified service collection.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Services.CommentLikes.CommentLikeService">
+            <summary>
+            Service for managing comment likes.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.CommentLikes.CommentLikeService.AddLike(MeetingOrganizer.Services.CommentLikes.CommentLikeModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.CommentLikes.CommentLikeService.RemoveLike(MeetingOrganizer.Services.CommentLikes.CommentLikeModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.CommentLikes.CommentLikeService.CheckLike(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeetingOrganizer.Services.CommentLikes.ICommentLikeService">
+            <summary>
+            Service for managing comment likes.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.CommentLikes.ICommentLikeService.AddLike(MeetingOrganizer.Services.CommentLikes.CommentLikeModel)">
+            <summary>
+            Adds a like for a comment.
+            </summary>
+            <param name="model">The model containing the user and comment information.</param>
+        </member>
+        <member name="M:MeetingOrganizer.Services.CommentLikes.ICommentLikeService.RemoveLike(MeetingOrganizer.Services.CommentLikes.CommentLikeModel)">
+            <summary>
+            Removes a like for a comment.
+            </summary>
+            <param name="model">The model containing the user and comment information.</param>
+        </member>
+        <member name="M:MeetingOrganizer.Services.CommentLikes.ICommentLikeService.CheckLike(System.Guid,System.Guid)">
+            <summary>
+            Checks if a user has liked a comment.
+            </summary>
+            <param name="commentId">The ID of the comment.</param>
+            <param name="userId">The ID of the user.</param>
+            <returns>True if the user has liked the comment; otherwise, false.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Services.CommentLikes.CommentLikeModel">
+            <summary>
+            Represents a model for a comment like.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.CommentLikes.CommentLikeModelProfile">
+            <summary>
+            Profile for mapping <see cref="T:MeetingOrganizer.Services.CommentLikes.CommentLikeModel"/> to <see cref="T:MeetingOrganizer.Context.Entities.CommentLike"/>.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.CommentLikes.CommentLikeModelProfile.CreateModelActions">
+            <summary>
+            Custom action for mapping properties after standard mapping.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.CommentLikes.CommentLikeModelValidator">
+            <summary>
+            Validator for <see cref="T:MeetingOrganizer.Services.CommentLikes.CommentLikeModel"/>.
+            </summary>
+        </member>
+    </members>
+</doc>

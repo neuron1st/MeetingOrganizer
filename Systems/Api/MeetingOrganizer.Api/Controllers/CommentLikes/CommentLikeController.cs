@@ -5,46 +5,56 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace MeetingOrganizer.Api.Controllers.CommentLikes;
-
-[ApiController]
-[Authorize]
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
-public class CommentLikeController : ControllerBase
+namespace MeetingOrganizer.Api.Controllers.CommentLikes
 {
-    private readonly IAppLogger _logger;
-    private readonly ICommentLikeService _commentLikeService;
-
-    public CommentLikeController(IAppLogger logger, ICommentLikeService commentLikeService)
+    /// <summary>
+    /// API controller for managing likes on comments.
+    /// </summary>
+    [ApiController]
+    [Authorize]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    public class CommentLikeController : ControllerBase
     {
-        _logger = logger;
-        _commentLikeService = commentLikeService;
-    }
+        private readonly IAppLogger _logger;
+        private readonly ICommentLikeService _commentLikeService;
 
-    [HttpPost("{commentId:Guid}/like")]
-    public async Task<IActionResult> LikeComment([FromRoute] Guid commentId)
-    {
-        if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId))
+        public CommentLikeController(IAppLogger logger, ICommentLikeService commentLikeService)
         {
-            return BadRequest("Invalid user ID format");
+            _logger = logger;
+            _commentLikeService = commentLikeService;
         }
 
-        await _commentLikeService.AddLike(new CommentLikeModel { CommentId = commentId, UserId = userId });
-
-        return Ok();
-    }
-
-    [HttpDelete("{commentId:Guid}/unlike")]
-    public async Task<IActionResult> UnlikeComment([FromRoute] Guid commentId)
-    {
-        if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId))
+        /// <summary>
+        /// Likes a comment.
+        /// </summary>
+        [HttpPost("{commentId:Guid}/like")]
+        public async Task<IActionResult> LikeComment([FromRoute] Guid commentId)
         {
-            return BadRequest("Invalid user ID format");
+            if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId))
+            {
+                return BadRequest("Invalid user ID format");
+            }
+
+            await _commentLikeService.AddLike(new CommentLikeModel { CommentId = commentId, UserId = userId });
+
+            return Ok();
         }
 
-        await _commentLikeService.RemoveLike(new CommentLikeModel { CommentId = commentId, UserId = userId });
+        /// <summary>
+        /// Unlikes a comment.
+        /// </summary>
+        [HttpDelete("{commentId:Guid}/unlike")]
+        public async Task<IActionResult> UnlikeComment([FromRoute] Guid commentId)
+        {
+            if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId))
+            {
+                return BadRequest("Invalid user ID format");
+            }
 
-        return Ok();
+            await _commentLikeService.RemoveLike(new CommentLikeModel { CommentId = commentId, UserId = userId });
+
+            return Ok();
+        }
     }
 }

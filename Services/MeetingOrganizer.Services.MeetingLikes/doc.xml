@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Services.MeetingLikes</name>
+    </assembly>
+    <members>
+        <member name="T:MeetingOrganizer.Services.MeetingLikes.Bootstrapper">
+            <summary>
+            Class for configuring services related to meeting likes.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.MeetingLikes.Bootstrapper.AddMeetingLikeService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the meeting like service to the service collection.
+            </summary>
+            <param name="services">The service collection to add the service to.</param>
+            <returns>The modified service collection.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Services.MeetingLikes.IMeetingLikeService">
+            <summary>
+            Interface for a service handling meeting likes.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.MeetingLikes.IMeetingLikeService.AddLike(MeetingOrganizer.Services.MeetingLikes.MeetingLikeModel)">
+            <summary>
+            Adds a like for a meeting.
+            </summary>
+            <param name="model">The model containing the UserId and MeetingId of the like.</param>
+        </member>
+        <member name="M:MeetingOrganizer.Services.MeetingLikes.IMeetingLikeService.RemoveLike(MeetingOrganizer.Services.MeetingLikes.MeetingLikeModel)">
+            <summary>
+            Removes a like for a meeting.
+            </summary>
+            <param name="model">The model containing the UserId and MeetingId of the like to remove.</param>
+        </member>
+        <member name="M:MeetingOrganizer.Services.MeetingLikes.IMeetingLikeService.CheckLike(System.Guid,System.Guid)">
+            <summary>
+            Checks if a user has liked a meeting.
+            </summary>
+            <param name="meetingId">The Id of the meeting to check for likes.</param>
+            <param name="userId">The Id of the user to check for likes.</param>
+            <returns>True if the user has liked the meeting, false otherwise.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Services.MeetingLikes.MeetingLikeService">
+            <summary>
+            Service for managing meeting likes.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.MeetingLikes.MeetingLikeService.AddLike(MeetingOrganizer.Services.MeetingLikes.MeetingLikeModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.MeetingLikes.MeetingLikeService.RemoveLike(MeetingOrganizer.Services.MeetingLikes.MeetingLikeModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.MeetingLikes.MeetingLikeService.CheckLike(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeetingOrganizer.Services.MeetingLikes.MeetingLikeModel">
+            <summary>
+            Model for a meeting like.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.MeetingLikes.MeetingLikeModelProfile">
+            <summary>
+            AutoMapper profile for mapping MeetingLikeModel to MeetingLike entity.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.MeetingLikes.MeetingLikeModelProfile.CreateModelActions">
+            <summary>
+            Mapping actions for additional processing after mapping MeetingLikeModel to MeetingLike.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.MeetingLikes.MeetingLikeModelValidator">
+            <summary>
+            FluentValidation validator for MeetingLikeModel.
+            </summary>
+        </member>
+    </members>
+</doc>

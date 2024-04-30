@@ -3,15 +3,12 @@ using MeetingOrganizer.Common.Exceptions;
 using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeetingOrganizer.Services.MeetingLikes;
 
+/// <summary>
+/// Service for managing meeting likes.
+/// </summary>
 public class MeetingLikeService : IMeetingLikeService
 {
     private readonly IDbContextFactory<MeetingOrganizerDbContext> _dbContextFactory;
@@ -23,6 +20,7 @@ public class MeetingLikeService : IMeetingLikeService
         _mapper = mapper;
     }
 
+    /// <inheritdoc/>
     public async Task AddLike(MeetingLikeModel model)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -32,23 +30,25 @@ public class MeetingLikeService : IMeetingLikeService
         await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task RemoveLike(MeetingLikeModel model)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
 
-        var meeting = await context
+        var meetingLike = await context
             .MeetingLikes
             .Where(x => x.User.Id == model.UserId && x.Meeting.Uid == model.MeetingId)
             .FirstOrDefaultAsync();
 
-        if (meeting == null)
-            throw new ProcessException($"Comment like not found.");
+        if (meetingLike == null)
+            throw new ProcessException($"Meeting like not found.");
 
-        context.MeetingLikes.Remove(meeting);
+        context.MeetingLikes.Remove(meetingLike);
 
         await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task<bool> CheckLike(Guid meetingId, Guid userId)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();

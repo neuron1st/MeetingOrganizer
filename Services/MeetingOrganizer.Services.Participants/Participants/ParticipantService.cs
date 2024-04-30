@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.Participants;
 
+/// <summary>
+/// Service for managing participants.
+/// </summary>
 public class ParticipantService : IParticipantService
 {
     private readonly IDbContextFactory<MeetingOrganizerDbContext> _dbContextFactory;
@@ -29,6 +32,7 @@ public class ParticipantService : IParticipantService
         _updateModelValidator = updateModelValidator;
     }
 
+    /// <inheritdoc/>
     public async Task<IEnumerable<ParticipantModel>> GetAllByMeetingId(Guid meetingId, int offset = 0, int limit = 10)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -46,6 +50,7 @@ public class ParticipantService : IParticipantService
         return result;
     }
 
+    /// <inheritdoc/>
     public async Task<IEnumerable<ParticipantModel>> GetAllByUserId(Guid userId, int offset = 0, int limit = 10)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -63,6 +68,7 @@ public class ParticipantService : IParticipantService
         return result;
     }
 
+    /// <inheritdoc/>
     public async Task<ParticipantModel> GetByUserAndMeetingId(Guid userId, Guid meetingId)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -78,6 +84,7 @@ public class ParticipantService : IParticipantService
         return result;
     }
 
+    /// <inheritdoc/>
     public async Task<ParticipantModel> GetById(Guid id)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -93,6 +100,7 @@ public class ParticipantService : IParticipantService
         return result;
     }
 
+    /// <inheritdoc/>
     public async Task<ParticipantModel> Create(CreateModel model)
     {
         await _createModelValidator.CheckAsync(model);
@@ -109,6 +117,7 @@ public class ParticipantService : IParticipantService
         return _mapper.Map<ParticipantModel>(participant);
     }
 
+    /// <inheritdoc/>
     public async Task Update(Guid id, UpdateModel model)
     {
         await _updateModelValidator.CheckAsync(model);
@@ -124,10 +133,10 @@ public class ParticipantService : IParticipantService
             .Participants
             .Include(x => x.Meeting)
             .Include(x => x.User)
-            .FirstOrDefaultAsync(x => x.User.Id == model.userId && x.Meeting.Uid == participant.Meeting.Uid);
+            .FirstOrDefaultAsync(x => x.User.Id == model.UserId && x.Meeting.Uid == participant.Meeting.Uid);
 
         if (participant == null || (user.Role != Role.Admin && user.User.Id != participant.User.Id))
-            throw new ProcessException($"User (ID = {model.userId}) is not allowed to update this participant.");
+            throw new ProcessException($"User (ID = {model.UserId}) is not allowed to update this participant.");
 
         participant = _mapper.Map(model, participant);
 
@@ -136,6 +145,7 @@ public class ParticipantService : IParticipantService
         await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task Delete(Guid id)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -150,6 +160,7 @@ public class ParticipantService : IParticipantService
         await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task NotifyAllParticipants(Guid meetingId, string message)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();

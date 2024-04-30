@@ -6,12 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.MeetingLikes;
 
+/// <summary>
+/// Model for a meeting like.
+/// </summary>
 public class MeetingLikeModel
 {
     public Guid UserId { get; set; }
     public Guid MeetingId { get; set; }
 }
 
+/// <summary>
+/// AutoMapper profile for mapping MeetingLikeModel to MeetingLike entity.
+/// </summary>
 public class MeetingLikeModelProfile : Profile
 {
     public MeetingLikeModelProfile()
@@ -22,6 +28,9 @@ public class MeetingLikeModelProfile : Profile
             .AfterMap<CreateModelActions>();
     }
 
+    /// <summary>
+    /// Mapping actions for additional processing after mapping MeetingLikeModel to MeetingLike.
+    /// </summary>
     public class CreateModelActions : IMappingAction<MeetingLikeModel, MeetingLike>
     {
         public readonly IDbContextFactory<MeetingOrganizerDbContext> contextFactory;
@@ -46,6 +55,9 @@ public class MeetingLikeModelProfile : Profile
     }
 }
 
+/// <summary>
+/// FluentValidation validator for MeetingLikeModel.
+/// </summary>
 public class MeetingLikeModelValidator : AbstractValidator<MeetingLikeModel>
 {
     public MeetingLikeModelValidator(IDbContextFactory<MeetingOrganizerDbContext> contextFactory)

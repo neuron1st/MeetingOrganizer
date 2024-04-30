@@ -2,9 +2,18 @@
 
 using MeetingOrganizer.Common.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Builder;
 
+/// <summary>
+/// Configuration class for controllers and views.
+/// </summary>
 public static class ControllerAndViewsConfiguration
 {
+    /// <summary>
+    /// Configures controllers and views.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> instance.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddAppControllerAndViews(this IServiceCollection services)
     {
         services
@@ -24,6 +33,11 @@ public static class ControllerAndViewsConfiguration
         return services;
     }
 
+    /// <summary>
+    /// Configures controller and view middleware.
+    /// </summary>
+    /// <param name="app">The <see cref="IEndpointRouteBuilder"/> instance.</param>
+    /// <returns>The modified <see cref="IEndpointRouteBuilder"/> instance.</returns>
     public static IEndpointRouteBuilder UseAppControllerAndViews(this IEndpointRouteBuilder app)
     {
         app.MapRazorPages();

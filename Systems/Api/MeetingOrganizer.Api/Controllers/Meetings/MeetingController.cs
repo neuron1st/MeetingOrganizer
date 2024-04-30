@@ -1,6 +1,5 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
-using MeetingOrganizer.Common.Files;
 using MeetingOrganizer.Common.Security;
 using MeetingOrganizer.Services.Logger;
 using MeetingOrganizer.Services.Meetings;
@@ -10,6 +9,9 @@ using System.Security.Claims;
 
 namespace MeetingOrganizer.Api.Controllers.Meetings;
 
+/// <summary>
+/// API controller for managing meetings.
+/// </summary>
 [ApiController]
 [Authorize]
 [ApiVersion("1.0")]
@@ -28,6 +30,9 @@ public class MeetingController : ControllerBase
         _mapper = mapper;
     }
 
+    /// <summary>
+    /// Gets all meetings.
+    /// </summary>
     [HttpGet("")]
     [Authorize(Policy = AppScopes.MeetingsRead)]
     public async Task<IEnumerable<MeetingResponse>> GetAll([FromQuery] int offset = 0, [FromQuery] int limit = 10)
@@ -39,6 +44,9 @@ public class MeetingController : ControllerBase
         return result;
     }
 
+    /// <summary>
+    /// Gets a meeting by its ID.
+    /// </summary>
     [HttpGet("{id:Guid}")]
     [Authorize(Policy = AppScopes.MeetingsRead)]
     public async Task<IActionResult> Get([FromRoute] Guid id)
@@ -53,6 +61,9 @@ public class MeetingController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// Creates a new meeting.
+    /// </summary>
     [HttpPost("")]
     [Authorize(Policy = AppScopes.MeetingsWrite)]
     public async Task<MeetingResponse> Create([FromBody] CreateRequest request/*, [FromQuery] string path*/)
@@ -80,6 +91,9 @@ public class MeetingController : ControllerBase
         return result;
     }
 
+    /// <summary>
+    /// Updates an existing meeting.
+    /// </summary>
     [HttpPut("{id:Guid}")]
     [Authorize(Policy = AppScopes.MeetingsWrite)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateModel request)
@@ -94,6 +108,9 @@ public class MeetingController : ControllerBase
         return Ok();
     }
 
+    /// <summary>
+    /// Deletes a meeting.
+    /// </summary>
     [HttpDelete("{id:Guid}")]
     [Authorize(Policy = AppScopes.MeetingsWrite)]
     public async Task<IActionResult> Delete([FromRoute] Guid id)

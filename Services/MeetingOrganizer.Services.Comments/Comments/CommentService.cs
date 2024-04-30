@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.Comments;
 
+/// <summary>
+/// <inheritdoc/>
+/// </summary>
 public class CommentService : ICommentService
 {
     private readonly IDbContextFactory<MeetingOrganizerDbContext> _dbContextFactory;
@@ -30,6 +33,9 @@ public class CommentService : ICommentService
         _participantService = participantService;
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task<IEnumerable<CommentModel>> GetAllByMeetingId(Guid meetingId, int offset = 0, int limit = 10)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -48,6 +54,9 @@ public class CommentService : ICommentService
         return result;
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task<IEnumerable<CommentModel>> GetAllByUserId(Guid userId, int offset = 0, int limit = 10)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -66,6 +75,9 @@ public class CommentService : ICommentService
         return result;
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task<CommentModel> GetById(Guid id)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -82,6 +94,9 @@ public class CommentService : ICommentService
         return result;
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task<CommentModel> Create(CreateModel model)
     {
         await _createModelValidator.CheckAsync(model);
@@ -99,6 +114,9 @@ public class CommentService : ICommentService
         return _mapper.Map<CommentModel>(comment);
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task Update(Guid id, UpdateModel model)
     {
         await _updateModelValidator.CheckAsync(model);
@@ -114,6 +132,9 @@ public class CommentService : ICommentService
         await context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public async Task Delete(Guid id, Guid userId)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();

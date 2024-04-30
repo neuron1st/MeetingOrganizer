@@ -1,14 +1,15 @@
 ﻿using Asp.Versioning;
 using MeetingOrganizer.Services.Logger;
 using MeetingOrganizer.Services.MeetingLikes;
-using MeetingOrganizer.Services.Meetings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace MeetingOrganizer.Api.Controllers.MeetingLikes;
 
-
+/// <summary>
+/// API controller for managing likes on meetings.
+/// </summary>
 [ApiController]
 [Authorize]
 [ApiVersion("1.0")]
@@ -24,6 +25,9 @@ public class MeetingLikeController : ControllerBase
         _meetingLikeService = meetingLikeService;
     }
 
+    /// <summary>
+    /// Likes a meeting.
+    /// </summary>
     [HttpPost("{meetingId:Guid}/like")]
     public async Task<IActionResult> LikeMeeting([FromRoute] Guid meetingId)
     {
@@ -31,13 +35,16 @@ public class MeetingLikeController : ControllerBase
         {
             return BadRequest("Invalid user ID format");
         }
-        
-        if(!await _meetingLikeService.CheckLike(meetingId, userId))
+
+        if (!await _meetingLikeService.CheckLike(meetingId, userId))
             await _meetingLikeService.AddLike(new MeetingLikeModel { MeetingId = meetingId, UserId = userId });
 
         return Ok();
     }
 
+    /// <summary>
+    /// Unlikes a meeting.
+    /// </summary>
     [HttpDelete("{meetingId:Guid}/unlike")]
     public async Task<IActionResult> UnlikeMeeting([FromRoute] Guid meetingId)
     {

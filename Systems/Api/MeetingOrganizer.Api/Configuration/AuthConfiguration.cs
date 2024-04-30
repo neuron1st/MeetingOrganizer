@@ -9,8 +9,17 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace MeetingOrganizer.Api.Configuration;
 
+/// <summary>
+/// Configuration class for authentication and authorization.
+/// </summary>
 public static class AuthConfiguration
 {
+    /// <summary>
+    /// Configures application authentication and authorization.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> instance.</param>
+    /// <param name="settings">The identity settings.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddAppAuth(this IServiceCollection services, IdentitySettings settings)
     {
         IdentityModelEventSource.ShowPII = true;
@@ -64,6 +73,11 @@ public static class AuthConfiguration
         return services;
     }
 
+    /// <summary>
+    /// Configures application authentication and authorization middleware.
+    /// </summary>
+    /// <param name="app">The <see cref="IApplicationBuilder"/> instance.</param>
+    /// <returns>The modified <see cref="IApplicationBuilder"/> instance.</returns>
     public static IApplicationBuilder UseAppAuth(this IApplicationBuilder app)
     {
         app.UseAuthentication();

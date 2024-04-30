@@ -5,6 +5,9 @@ using MeetingOrganizer.Context.Entities;
 
 namespace MeetingOrganizer.Services.Meetings;
 
+/// <summary>
+/// Model for creating a new meeting.
+/// </summary>
 public class CreateModel
 {
     public string Title { get; set; }
@@ -15,6 +18,9 @@ public class CreateModel
     public Guid UserId { get; set; }
 }
 
+/// <summary>
+/// AutoMapper profile for mapping CreateModel to Meeting entity.
+/// </summary>
 public class CreateModelProfile : Profile
 {
     public CreateModelProfile()
@@ -24,6 +30,9 @@ public class CreateModelProfile : Profile
     }
 }
 
+/// <summary>
+/// FluentValidation validator for CreateModel.
+/// </summary>
 public class CreateModelValidator : AbstractValidator<CreateModel>
 {
     public CreateModelValidator()

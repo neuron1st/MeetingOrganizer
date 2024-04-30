@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Services.Comments</name>
+    </assembly>
+    <members>
+        <member name="T:MeetingOrganizer.Services.Comments.Bootstrapper">
+            <summary>
+            Bootstrapper for adding the comment service to the DI container.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.Bootstrapper.AddCommentService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the comment service to the DI container.
+            </summary>
+            <param name="services">The collection of services.</param>
+            <returns>The modified service collection.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Comments.CommentService">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.CommentService.GetAllByMeetingId(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.CommentService.GetAllByUserId(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.CommentService.GetById(System.Guid)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.CommentService.Create(MeetingOrganizer.Services.Comments.CreateModel)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.CommentService.Update(System.Guid,MeetingOrganizer.Services.Comments.UpdateModel)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.CommentService.Delete(System.Guid,System.Guid)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Comments.ICommentService">
+            <summary>
+            Service for managing comments.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.ICommentService.GetAllByMeetingId(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets all comments for a meeting.
+            </summary>
+            <param name="meetingId">The ID of the meeting.</param>
+            <param name="offset">The offset for pagination.</param>
+            <param name="limit">The maximum number of comments to return.</param>
+            <returns>A collection of comment models.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.ICommentService.GetAllByUserId(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets all comments by a user.
+            </summary>
+            <param name="userId">The ID of the user.</param>
+            <param name="offset">The offset for pagination.</param>
+            <param name="limit">The maximum number of comments to return.</param>
+            <returns>A collection of comment models.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.ICommentService.GetById(System.Guid)">
+            <summary>
+            Gets a comment by its ID.
+            </summary>
+            <param name="id">The ID of the comment.</param>
+            <returns>The comment model.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.ICommentService.Create(MeetingOrganizer.Services.Comments.CreateModel)">
+            <summary>
+            Creates a new comment.
+            </summary>
+            <param name="model">The model containing the comment information.</param>
+            <returns>The created comment model.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.ICommentService.Update(System.Guid,MeetingOrganizer.Services.Comments.UpdateModel)">
+            <summary>
+            Updates an existing comment.
+            </summary>
+            <param name="id">The ID of the comment to update.</param>
+            <param name="model">The updated comment information.</param>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Comments.ICommentService.Delete(System.Guid,System.Guid)">
+            <summary>
+            Deletes a comment.
+            </summary>
+            <param name="id">The ID of the comment to delete.</param>
+            <param name="userId">The ID of the user performing the delete operation.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Comments.CommentModel">
+            <summary>
+            Represents a comment model.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Comments.CommentModelProfile">
+            <summary>
+            Profile for mapping comment entities to comment models.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Comments.CreateModel">
+            <summary>
+            Represents a model for creating a new comment.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Comments.CreateModelProfile">
+            <summary>
+            Profile for mapping create model to comment entity.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Comments.CreateModelValidator">
+            <summary>
+            Validator for the create comment model.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Comments.UpdateModel">
+            <summary>
+            Represents a model for updating a comment.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Comments.UpdateModelProfile">
+            <summary>
+            Profile for mapping update model to comment entity.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Comments.UpdateModelValidator">
+            <summary>
+            Validator for the update comment model.
+            </summary>
+        </member>
+    </members>
+</doc>

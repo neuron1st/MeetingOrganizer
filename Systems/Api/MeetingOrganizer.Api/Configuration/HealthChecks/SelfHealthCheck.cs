@@ -3,8 +3,10 @@ using System.Reflection;
 
 namespace MeetingOrganizer.Api.Configuration.HealthChecks;
 
+/// <inheritdoc/>
 public class SelfHealthCheck : IHealthCheck
 {
+    /// <inheritdoc/>
     public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
     {
         var assembly = Assembly.Load("MeetingOrganizer.Api");

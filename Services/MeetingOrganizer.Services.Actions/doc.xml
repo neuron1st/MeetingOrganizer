@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Services.Actions</name>
+    </assembly>
+    <members>
+        <member name="T:MeetingOrganizer.Services.Actions.Action">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Actions.Action.SendEmailAsync(MeetingOrganizer.Services.EmailSender.EmailModel)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Actions.IAction">
+            <summary>
+            Represents an action that can be performed, such as sending an email.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Actions.IAction.SendEmailAsync(MeetingOrganizer.Services.EmailSender.EmailModel)">
+            <summary>
+            Sends an email asynchronously.
+            </summary>
+            <param name="email">The email model containing the email details.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Actions.Bootstrapper">
+            <summary>
+            Contains extension methods for configuring services related to actions.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Actions.Bootstrapper.AddActions(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the action services to the specified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add the services to.</param>
+            <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> so that additional calls can be chained.</returns>
+        </member>
+    </members>
+</doc>

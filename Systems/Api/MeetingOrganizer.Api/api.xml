@@ -16,6 +16,57 @@
             <param name="services"></param>
             <returns></returns>
         </member>
+        <member name="T:MeetingOrganizer.Api.Configuration.AuthConfiguration">
+            <summary>
+            Configuration class for authentication and authorization.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.AuthConfiguration.AddAppAuth(Microsoft.Extensions.DependencyInjection.IServiceCollection,MeetingOrganizer.Services.Settings.IdentitySettings)">
+            <summary>
+            Configures application authentication and authorization.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</param>
+            <param name="settings">The identity settings.</param>
+            <returns>The modified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.AuthConfiguration.UseAppAuth(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Configures application authentication and authorization middleware.
+            </summary>
+            <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> instance.</param>
+            <returns>The modified <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> instance.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Configuration.AutoMapperConfiguration">
+            <summary>
+            Configuration class for AutoMapper.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.AutoMapperConfiguration.AddAppAutoMappers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures AutoMapper mappings.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</param>
+            <returns>The modified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Configuration.ControllerAndViewsConfiguration">
+            <summary>
+            Configuration class for controllers and views.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.ControllerAndViewsConfiguration.AddAppControllerAndViews(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures controllers and views.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</param>
+            <returns>The modified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.ControllerAndViewsConfiguration.UseAppControllerAndViews(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)">
+            <summary>
+            Configures controller and view middleware.
+            </summary>
+            <param name="app">The <see cref="T:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder"/> instance.</param>
+            <returns>The modified <see cref="T:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder"/> instance.</returns>
+        </member>
         <member name="T:MeetingOrganizer.Api.Configuration.CorsConfiguration">
             <summary>
             CORS configuration
@@ -32,6 +83,30 @@
             Use service
             </summary>
             <param name="app">Application</param>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Configuration.HealthCheckConfiguration">
+            <summary>
+            Configuration class for health checks.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.HealthCheckConfiguration.AddAppHealthChecks(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures application health checks.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</param>
+            <returns>The modified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.HealthCheckConfiguration.UseAppHealthChecks(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            Configures health check middleware.
+            </summary>
+            <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.WebApplication"/> instance.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Configuration.HealthChecks.SelfHealthCheck">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.HealthChecks.SelfHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)">
+            <inheritdoc/>
         </member>
         <member name="T:MeetingOrganizer.Api.Configuration.LoggerConfiguration">
             <summary>
@@ -62,6 +137,190 @@
             Start OpenAPI UI
             </summary>
             <param name="app">Web application</param>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Configuration.ValidatorConfiguration">
+            <summary>
+            Configuration class for validators.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.ValidatorConfiguration.AddAppValidator(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures application validators.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</param>
+            <returns>The modified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Configuration.VersioningConfiguration">
+            <summary>
+            Configuration class for API versioning.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Configuration.VersioningConfiguration.AddAppVersioning(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures application API versioning.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</param>
+            <returns>The modified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Controllers.Accounts.AccountsController">
+            <summary>
+            API controller for managing user accounts.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Accounts.AccountsController.Register(MeetingOrganizer.Api.Controllers.Accounts.Models.RegisterUserAccountRequest)">
+            <summary>
+            Registers a new user account.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Accounts.AccountsController.SendEmailConfirmationLink(System.String)">
+            <summary>
+            Sends a confirmation email link.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Accounts.AccountsController.ConfirmEmail(System.String,System.String)">
+            <summary>
+            Confirms the user's email address.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Accounts.AccountsController.Get">
+            <summary>
+            Gets the current user's account information.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Controllers.CommentLikes.CommentLikeController">
+            <summary>
+            API controller for managing likes on comments.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.CommentLikes.CommentLikeController.LikeComment(System.Guid)">
+            <summary>
+            Likes a comment.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.CommentLikes.CommentLikeController.UnlikeComment(System.Guid)">
+            <summary>
+            Unlikes a comment.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Controllers.Comments.CommentController">
+            <summary>
+            API controller for managing comments.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Comments.CommentController.GetAllByMeetingId(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets all comments for a meeting.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Comments.CommentController.GetAllByUserId(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets all comments by a user.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Comments.CommentController.Get(System.Guid)">
+            <summary>
+            Gets a comment by its ID.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Comments.CommentController.Create(MeetingOrganizer.Api.Controllers.Comments.CreateRequest)">
+            <summary>
+            Creates a new comment.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Comments.CommentController.Update(System.Guid,MeetingOrganizer.Services.Comments.UpdateModel)">
+            <summary>
+            Updates an existing comment.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Comments.CommentController.Delete(System.Guid)">
+            <summary>
+            Deletes a comment.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Controllers.MeetingLikes.MeetingLikeController">
+            <summary>
+            API controller for managing likes on meetings.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.MeetingLikes.MeetingLikeController.LikeMeeting(System.Guid)">
+            <summary>
+            Likes a meeting.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.MeetingLikes.MeetingLikeController.UnlikeMeeting(System.Guid)">
+            <summary>
+            Unlikes a meeting.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Controllers.Meetings.MeetingController">
+            <summary>
+            API controller for managing meetings.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Meetings.MeetingController.GetAll(System.Int32,System.Int32)">
+            <summary>
+            Gets all meetings.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Meetings.MeetingController.Get(System.Guid)">
+            <summary>
+            Gets a meeting by its ID.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Meetings.MeetingController.Create(MeetingOrganizer.Api.Controllers.Meetings.CreateRequest)">
+            <summary>
+            Creates a new meeting.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Meetings.MeetingController.Update(System.Guid,MeetingOrganizer.Services.Meetings.UpdateModel)">
+            <summary>
+            Updates an existing meeting.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Meetings.MeetingController.Delete(System.Guid)">
+            <summary>
+            Deletes a meeting.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Api.Controllers.Participants.ParticipantController">
+            <summary>
+            API controller for managing participants.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Participants.ParticipantController.GetAllByMeetingId(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets all participants of a meeting.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Participants.ParticipantController.GetAllByUserId(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets all participants of a user.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Participants.ParticipantController.GetByUserAndMeetingId(System.Guid,System.Guid)">
+            <summary>
+            Gets a participant by user and meeting IDs.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Participants.ParticipantController.Get(System.Guid)">
+            <summary>
+            Gets a participant by ID.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Participants.ParticipantController.Create(MeetingOrganizer.Api.Controllers.Participants.CreateRequest)">
+            <summary>
+            Creates a new participant.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Participants.ParticipantController.Update(System.Guid,MeetingOrganizer.Services.Participants.UpdateModel)">
+            <summary>
+            Updates an existing participant.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Api.Controllers.Participants.ParticipantController.Delete(System.Guid)">
+            <summary>
+            Deletes a participant.
+            </summary>
         </member>
     </members>
 </doc>

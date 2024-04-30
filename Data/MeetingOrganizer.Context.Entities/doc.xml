@@ -1,0 +1,258 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Context.Entities</name>
+    </assembly>
+    <members>
+        <member name="T:MeetingOrganizer.Context.Entities.Comment">
+            <summary>
+            Represents a comment entity.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Comment.Text">
+            <summary>
+            The text of the comment.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Comment.UserId">
+            <summary>
+            The identifier of the user who made the comment.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Comment.User">
+            <summary>
+            The user who made the comment.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Comment.MeetingId">
+            <summary>
+            The identifier of the meeting the comment belongs to.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Comment.Meeting">
+            <summary>
+            The meeting the comment belongs to.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Comment.Likes">
+            <summary>
+            The collection of likes for the comment.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Entities.CommentLike">
+            <summary>
+            Represents a like for a comment entity.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.CommentLike.UserId">
+            <summary>
+            The identifier of the user who liked the comment.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.CommentLike.User">
+            <summary>
+            The user who liked the comment.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.CommentLike.CommentId">
+            <summary>
+            The identifier of the comment that was liked.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.CommentLike.Comment">
+            <summary>
+            The comment that was liked.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Entities.Common.BaseEntity">
+            <summary>
+            Base entity
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Common.BaseEntity.Id">
+            <summary>
+            The identifier for the entity in database.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Common.BaseEntity.Uid">
+            <summary>
+            The unique identifier for the entity.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Common.BaseEntity.CreationTime">
+            <summary>
+            The creation time of the entity.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Entities.Meeting">
+            <summary>
+            Represents a meeting entity.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Meeting.Title">
+            <summary>
+            The title of the meeting.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Meeting.Description">
+            <summary>
+            The description of the meeting.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Meeting.Date">
+            <summary>
+            The date of the meeting.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Meeting.Image">
+            <summary>
+            The image associated with the meeting.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Meeting.Participants">
+            <summary>
+            The collection of participants attending the meeting.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Meeting.Photos">
+            <summary>
+            The collection of photos related to the meeting.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Meeting.Comments">
+            <summary>
+            The collection of comments made on the meeting.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Meeting.Likes">
+            <summary>
+            The collection of likes for the meeting.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Entities.MeetingLike">
+            <summary>
+            Represents a like for a meeting entity.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.MeetingLike.UserId">
+            <summary>
+            The identifier of the user who liked the meeting.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.MeetingLike.User">
+            <summary>
+            The user who liked the meeting.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.MeetingLike.MeetingId">
+            <summary>
+            The identifier of the meeting that was liked.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.MeetingLike.Meeting">
+            <summary>
+            The meeting that was liked.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Entities.Participant">
+            <summary>
+            Represents a participant entity.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Participant.UserId">
+            <summary>
+            The identifier of the user who is a participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Participant.User">
+            <summary>
+            The user who is a participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Participant.MeetingId">
+            <summary>
+            The identifier of the meeting the participant belongs to.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Participant.Meeting">
+            <summary>
+            The meeting the participant belongs to.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Participant.Role">
+            <summary>
+            The role of the participant.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Entities.Photo">
+            <summary>
+            Represents a photo entity.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Photo.Url">
+            <summary>
+            The URL of the photo.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Photo.MeetingId">
+            <summary>
+            The identifier of the meeting the photo belongs to.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.Photo.Meeting">
+            <summary>
+            The meeting the photo belongs to.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Entities.Role">
+            <summary>
+            Represents the roles that a participant can have in a meeting.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Entities.User">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.User.EntryId">
+            <summary>
+            The identifier for the entity in the database.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.User.FullName">
+            <summary>
+            The full name of the user.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.User.Status">
+            <summary>
+            The status of the user.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.User.Participants">
+            <summary>
+            The collection of participants associated with the user.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.User.Comments">
+            <summary>
+            The collection of comments made by the user.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.User.CommentLikes">
+            <summary>
+            The collection of comment likes made by the user.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Context.Entities.User.MeetingLikes">
+            <summary>
+            The collection of meeting likes made by the user.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Context.Entities.UserStatus">
+            <summary>
+            User status for IS4
+            </summary>
+        </member>
+    </members>
+</doc>

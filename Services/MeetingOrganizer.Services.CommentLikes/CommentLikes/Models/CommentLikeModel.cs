@@ -3,15 +3,23 @@ using FluentValidation;
 using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace MeetingOrganizer.Services.CommentLikes;
 
+/// <summary>
+/// Represents a model for a comment like.
+/// </summary>
 public class CommentLikeModel
 {
     public Guid UserId { get; set; }
     public Guid CommentId { get; set; }
 }
 
+/// <summary>
+/// Profile for mapping <see cref="CommentLikeModel"/> to <see cref="CommentLike"/>.
+/// </summary>
 public class CommentLikeModelProfile : Profile
 {
     public CommentLikeModelProfile()
@@ -22,6 +30,9 @@ public class CommentLikeModelProfile : Profile
             .AfterMap<CreateModelActions>();
     }
 
+    /// <summary>
+    /// Custom action for mapping properties after standard mapping.
+    /// </summary>
     public class CreateModelActions : IMappingAction<CommentLikeModel, CommentLike>
     {
         private readonly IDbContextFactory<MeetingOrganizerDbContext> contextFactory;
@@ -39,13 +50,15 @@ public class CommentLikeModelProfile : Profile
 
             var comment = db.Comments.FirstOrDefault(x => x.Uid == source.CommentId);
 
-            destination.UserId = user.EntryId;
-
-            destination.CommentId = comment.Id;
+            destination.UserId = user?.EntryId ?? throw new ArgumentNullException(nameof(user));
+            destination.CommentId = comment?.Id ?? throw new ArgumentNullException(nameof(comment));
         }
     }
 }
 
+/// <summary>
+/// Validator for <see cref="CommentLikeModel"/>.
+/// </summary>
 public class CommentLikeModelValidator : AbstractValidator<CommentLikeModel>
 {
     public CommentLikeModelValidator(IDbContextFactory<MeetingOrganizerDbContext> contextFactory)

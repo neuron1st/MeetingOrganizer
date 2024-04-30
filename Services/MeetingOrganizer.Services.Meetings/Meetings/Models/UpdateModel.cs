@@ -5,6 +5,9 @@ using MeetingOrganizer.Context.Entities;
 
 namespace MeetingOrganizer.Services.Meetings;
 
+/// <summary>
+/// Model for updating a meeting.
+/// </summary>
 public class UpdateModel
 {
     public string Title { get; set; }
@@ -15,6 +18,9 @@ public class UpdateModel
     public Guid UserId { get; set; }
 }
 
+/// <summary>
+/// AutoMapper profile for mapping UpdateModel to Meeting entity.
+/// </summary>
 public class UpdateModelProfile : Profile
 {
     public UpdateModelProfile()
@@ -23,6 +29,9 @@ public class UpdateModelProfile : Profile
     }
 }
 
+/// <summary>
+/// FluentValidation validator for UpdateModel.
+/// </summary>
 public class UpdateModelValidator : AbstractValidator<UpdateModel>
 {
     public UpdateModelValidator()

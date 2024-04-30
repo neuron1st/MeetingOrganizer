@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Services.Meetings</name>
+    </assembly>
+    <members>
+        <member name="T:Bootstrapper">
+            <summary>
+            Bootstrapper for configuring services related to meetings.
+            </summary>
+        </member>
+        <member name="M:Bootstrapper.AddMeetingService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the meeting service to the service collection.
+            </summary>
+            <param name="services">The service collection.</param>
+            <returns>The modified service collection.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.IMeetingService">
+            <summary>
+            Interface for a service handling meetings.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.IMeetingService.GetAll(System.Int32,System.Int32)">
+            <summary>
+            Gets all meetings with optional pagination.
+            </summary>
+            <param name="offset">The number of items to skip.</param>
+            <param name="limit">The maximum number of items to return.</param>
+            <returns>A collection of MeetingModel objects.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.IMeetingService.GetById(System.Guid)">
+            <summary>
+            Gets a meeting by its Id.
+            </summary>
+            <param name="id">The Id of the meeting to retrieve.</param>
+            <returns>The MeetingModel object.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.IMeetingService.Create(MeetingOrganizer.Services.Meetings.CreateModel)">
+            <summary>
+            Creates a new meeting.
+            </summary>
+            <param name="model">The model containing the meeting data.</param>
+            <returns>The created MeetingModel object.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.IMeetingService.Update(System.Guid,MeetingOrganizer.Services.Meetings.UpdateModel)">
+            <summary>
+            Updates an existing meeting.
+            </summary>
+            <param name="id">The Id of the meeting to update.</param>
+            <param name="model">The model containing the updated meeting data.</param>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.IMeetingService.Delete(System.Guid,System.Guid)">
+            <summary>
+            Deletes a meeting.
+            </summary>
+            <param name="id">The Id of the meeting to delete.</param>
+            <param name="userId">The Id of the user performing the delete operation.</param>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.MeetingService">
+            <summary>
+            Service for managing meetings.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.MeetingService.#ctor(Microsoft.EntityFrameworkCore.IDbContextFactory{MeetingOrganizer.Context.MeetingOrganizerDbContext},AutoMapper.IMapper,MeetingOrganizer.Services.Cache.ICacheService,MeetingOrganizer.Common.Validator.IModelValidator{MeetingOrganizer.Services.Meetings.CreateModel},MeetingOrganizer.Common.Validator.IModelValidator{MeetingOrganizer.Services.Meetings.UpdateModel},MeetingOrganizer.Services.Participants.IParticipantService,MeetingOrganizer.Services.Settings.MainSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeetingOrganizer.Services.Meetings.MeetingService"/> class.
+            </summary>
+            <param name="dbContextFactory">The database context factory.</param>
+            <param name="mapper">The mapper.</param>
+            <param name="cacheService">The cache service.</param>
+            <param name="createModelValidator">The create model validator.</param>
+            <param name="updateModelValidator">The update model validator.</param>
+            <param name="participantService">The participant service.</param>
+            <param name="mainSettings">The main settings.</param>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.MeetingService.GetAll(System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.MeetingService.GetById(System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.MeetingService.Create(MeetingOrganizer.Services.Meetings.CreateModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.MeetingService.Update(System.Guid,MeetingOrganizer.Services.Meetings.UpdateModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Meetings.MeetingService.Delete(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.CreateModel">
+            <summary>
+            Model for creating a new meeting.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.CreateModelProfile">
+            <summary>
+            AutoMapper profile for mapping CreateModel to Meeting entity.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.CreateModelValidator">
+            <summary>
+            FluentValidation validator for CreateModel.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.MeetingModel">
+            <summary>
+            Model for a meeting with additional computed properties.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.MeetingModelProfile">
+            <summary>
+            AutoMapper profile for mapping Meeting entity to MeetingModel.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.MeetingModelProfile.MeetingModelActions">
+            <summary>
+            Mapping actions for additional processing after mapping Meeting to MeetingModel.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.UpdateModel">
+            <summary>
+            Model for updating a meeting.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.UpdateModelProfile">
+            <summary>
+            AutoMapper profile for mapping UpdateModel to Meeting entity.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Meetings.UpdateModelValidator">
+            <summary>
+            FluentValidation validator for UpdateModel.
+            </summary>
+        </member>
+    </members>
+</doc>

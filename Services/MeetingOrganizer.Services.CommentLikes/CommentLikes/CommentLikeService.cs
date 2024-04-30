@@ -3,9 +3,15 @@ using MeetingOrganizer.Common.Exceptions;
 using MeetingOrganizer.Context;
 using MeetingOrganizer.Context.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MeetingOrganizer.Services.CommentLikes;
 
+/// <summary>
+/// Service for managing comment likes.
+/// </summary>
 internal class CommentLikeService : ICommentLikeService
 {
     private readonly IDbContextFactory<MeetingOrganizerDbContext> _dbContextFactory;
@@ -17,6 +23,7 @@ internal class CommentLikeService : ICommentLikeService
         _mapper = mapper;
     }
 
+    /// <inheritdoc/>
     public async Task AddLike(CommentLikeModel model)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -26,6 +33,7 @@ internal class CommentLikeService : ICommentLikeService
         await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task RemoveLike(CommentLikeModel model)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -43,6 +51,7 @@ internal class CommentLikeService : ICommentLikeService
         await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task<bool> CheckLike(Guid commentId, Guid userId)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();

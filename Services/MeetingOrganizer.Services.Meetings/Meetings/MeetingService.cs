@@ -11,6 +11,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.Meetings;
 
+/// <summary>
+/// Service for managing meetings.
+/// </summary>
 public class MeetingService : IMeetingService
 {
     private readonly IDbContextFactory<MeetingOrganizerDbContext> _dbContextFactory;
@@ -21,6 +24,16 @@ public class MeetingService : IMeetingService
     private readonly IParticipantService _participantService;
     private readonly MainSettings _mainSettings;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MeetingService"/> class.
+    /// </summary>
+    /// <param name="dbContextFactory">The database context factory.</param>
+    /// <param name="mapper">The mapper.</param>
+    /// <param name="cacheService">The cache service.</param>
+    /// <param name="createModelValidator">The create model validator.</param>
+    /// <param name="updateModelValidator">The update model validator.</param>
+    /// <param name="participantService">The participant service.</param>
+    /// <param name="mainSettings">The main settings.</param>
     public MeetingService(
         IDbContextFactory<MeetingOrganizerDbContext> dbContextFactory,
         IMapper mapper,
@@ -39,6 +52,7 @@ public class MeetingService : IMeetingService
         _mainSettings = mainSettings;
     }
 
+    /// <inheritdoc/>
     public async Task<IEnumerable<MeetingModel>> GetAll(int offset = 0, int limit = 10)
     {
         var cacheKey = $"Meetings_GetAll_{offset}_{limit}";
@@ -63,6 +77,7 @@ public class MeetingService : IMeetingService
         return result;
     }
 
+    /// <inheritdoc/>
     public async Task<MeetingModel> GetById(Guid id)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -79,6 +94,7 @@ public class MeetingService : IMeetingService
         return result;
     }
 
+    /// <inheritdoc/>
     public async Task<MeetingModel> Create(CreateModel model)
     {
         await _createModelValidator.CheckAsync(model);
@@ -107,6 +123,7 @@ public class MeetingService : IMeetingService
         return _mapper.Map<MeetingModel>(meeting);
     }
 
+    /// <inheritdoc/>
     public async Task Update(Guid id, UpdateModel model)
     {
         await _updateModelValidator.CheckAsync(model);
@@ -150,6 +167,7 @@ public class MeetingService : IMeetingService
         await context.SaveChangesAsync();
     }
 
+    /// <inheritdoc/>
     public async Task Delete(Guid id, Guid userId)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();

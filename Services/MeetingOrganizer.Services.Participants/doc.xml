@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Services.Participants</name>
+    </assembly>
+    <members>
+        <member name="T:MeetingOrganizer.Services.Participants.Bootstrapper">
+            <summary>
+            Bootstrapper for configuring services related to participants.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.Bootstrapper.AddParticipantService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the participant service to the service collection as a singleton.
+            </summary>
+            <param name="services">The service collection to add the service to.</param>
+            <returns>The modified service collection.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.IParticipantService">
+            <summary>
+            Service interface for managing participants.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.IParticipantService.GetAllByMeetingId(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets all participants for a meeting with pagination.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.IParticipantService.GetAllByUserId(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets all participants for a user with pagination.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.IParticipantService.GetByUserAndMeetingId(System.Guid,System.Guid)">
+            <summary>
+            Gets a participant by user and meeting ID.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.IParticipantService.GetById(System.Guid)">
+            <summary>
+            Gets a participant by ID.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.IParticipantService.Create(MeetingOrganizer.Services.Participants.CreateModel)">
+            <summary>
+            Creates a new participant.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.IParticipantService.Update(System.Guid,MeetingOrganizer.Services.Participants.UpdateModel)">
+            <summary>
+            Updates a participant.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.IParticipantService.Delete(System.Guid)">
+            <summary>
+            Deletes a participant.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.IParticipantService.NotifyAllParticipants(System.Guid,System.String)">
+            <summary>
+            Notifies all participants of a meeting.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.CreateModel">
+            <summary>
+            Represents a model for creating a participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.CreateModel.UserId">
+            <summary>
+            The identifier of the user who is a participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.CreateModel.MeetingId">
+            <summary>
+            The identifier of the meeting the participant belongs to.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.CreateModel.Role">
+            <summary>
+            User role in current meeting.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.CreateModelProfile">
+            <summary>
+            Profile for AutoMapper mapping of CreateModel to Participant.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.CreateModelProfile.CreateModelActions">
+            <summary>
+            Actions to be performed after mapping CreateModel to Participant.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.CreateModelValidator">
+            <summary>
+            Validator for CreateModel.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.ParticipantModel">
+            <summary>
+            Represents a model for a participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.ParticipantModel.Id">
+            <summary>
+            The identifier of the participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.ParticipantModel.UserId">
+            <summary>
+            The user ID of the participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.ParticipantModel.UserName">
+            <summary>
+            The user name of the participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.ParticipantModel.MeetingId">
+            <summary>
+            The meeting ID of the participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.ParticipantModel.MeetingTitle">
+            <summary>
+            The title of the meeting the participant belongs to.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.ParticipantModel.Role">
+            <summary>
+            The role of the participant.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.ParticipantModelProfile">
+            <summary>
+            Profile for AutoMapper mapping of Participant to ParticipantModel.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.UpdateModel">
+            <summary>
+            Represents a model for updating a participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.UpdateModel.Role">
+            <summary>
+            The role of the participant.
+            </summary>
+        </member>
+        <member name="P:MeetingOrganizer.Services.Participants.UpdateModel.UserId">
+            <summary>
+            The user ID of the participant.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.UpdateModelProfile">
+            <summary>
+            Profile for AutoMapper mapping of UpdateModel to Participant.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.UpdateModelValidator">
+            <summary>
+            Validator for UpdateModel.
+            </summary>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Participants.ParticipantService">
+            <summary>
+            Service for managing participants.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.ParticipantService.GetAllByMeetingId(System.Guid,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.ParticipantService.GetAllByUserId(System.Guid,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.ParticipantService.GetByUserAndMeetingId(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.ParticipantService.GetById(System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.ParticipantService.Create(MeetingOrganizer.Services.Participants.CreateModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.ParticipantService.Update(System.Guid,MeetingOrganizer.Services.Participants.UpdateModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.ParticipantService.Delete(System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Participants.ParticipantService.NotifyAllParticipants(System.Guid,System.String)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

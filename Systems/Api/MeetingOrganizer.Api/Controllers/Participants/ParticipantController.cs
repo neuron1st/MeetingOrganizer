@@ -1,6 +1,5 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
-using MeetingOrganizer.Api.Controllers.Meetings;
 using MeetingOrganizer.Common.Security;
 using MeetingOrganizer.Services.Logger;
 using MeetingOrganizer.Services.Participants;
@@ -10,6 +9,9 @@ using System.Security.Claims;
 
 namespace MeetingOrganizer.Api.Controllers.Participants;
 
+/// <summary>
+/// API controller for managing participants.
+/// </summary>
 [ApiController]
 [Authorize]
 [ApiVersion("1.0")]
@@ -27,6 +29,9 @@ public class ParticipantController : ControllerBase
         _participantService = participantService;
     }
 
+    /// <summary>
+    /// Gets all participants of a meeting.
+    /// </summary>
     [HttpGet("meeting/{meetingId:Guid}")]
     [Authorize(Policy = AppScopes.ParticipantsRead)]
     public async Task<IEnumerable<ParticipantResponse>> GetAllByMeetingId([FromRoute] Guid meetingId, [FromQuery] int offset = 0, [FromQuery] int limit = 10)
@@ -38,6 +43,9 @@ public class ParticipantController : ControllerBase
         return result;
     }
 
+    /// <summary>
+    /// Gets all participants of a user.
+    /// </summary>
     [HttpGet("user/{userId:Guid}")]
     [Authorize(Policy = AppScopes.ParticipantsRead)]
     public async Task<IEnumerable<ParticipantResponse>> GetAllByUserId([FromRoute] Guid userId, [FromQuery] int offset = 0, [FromQuery] int limit = 10)
@@ -49,6 +57,9 @@ public class ParticipantController : ControllerBase
         return result;
     }
 
+    /// <summary>
+    /// Gets a participant by user and meeting IDs.
+    /// </summary>
     [HttpGet("{userId:Guid}/{meetingId:Guid}")]
     [Authorize(Policy = AppScopes.ParticipantsRead)]
     public async Task<IActionResult> GetByUserAndMeetingId([FromRoute] Guid userId, [FromRoute] Guid meetingId)
@@ -63,6 +74,9 @@ public class ParticipantController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// Gets a participant by ID.
+    /// </summary>
     [HttpGet("{id:Guid}")]
     [Authorize(Policy = AppScopes.ParticipantsRead)]
     public async Task<IActionResult> Get([FromRoute] Guid id)
@@ -77,6 +91,9 @@ public class ParticipantController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// Creates a new participant.
+    /// </summary>
     [HttpPost("")]
     [Authorize(Policy = AppScopes.ParticipantsWrite)]
     public async Task<ParticipantResponse> Create(CreateRequest request)
@@ -93,6 +110,9 @@ public class ParticipantController : ControllerBase
         return result;
     }
 
+    /// <summary>
+    /// Updates an existing participant.
+    /// </summary>
     [HttpPut("{id:Guid}")]
     [Authorize(Policy = AppScopes.ParticipantsWrite)]
     public async Task<IActionResult> Update([FromRoute] Guid id, UpdateModel request)
@@ -100,13 +120,16 @@ public class ParticipantController : ControllerBase
         Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
 
         var model = _mapper.Map<UpdateModel>(request);
-        model.userId = userId;
+        model.UserId = userId;
 
         await _participantService.Update(id, model);
 
         return Ok();
     }
 
+    /// <summary>
+    /// Deletes a participant.
+    /// </summary>
     [HttpDelete("{id:Guid}")]
     [Authorize(Policy = AppScopes.ParticipantsWrite)]
     public async Task<IActionResult> Delete([FromRoute] Guid id)

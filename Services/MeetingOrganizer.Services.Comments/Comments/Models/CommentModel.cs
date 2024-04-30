@@ -3,6 +3,9 @@ using MeetingOrganizer.Context.Entities;
 
 namespace MeetingOrganizer.Services.Comments;
 
+/// <summary>
+/// Represents a comment model.
+/// </summary>
 public class CommentModel
 {
     public Guid Id { get; set; }
@@ -18,6 +21,9 @@ public class CommentModel
     public Guid MeetingId { get; set; }
 }
 
+/// <summary>
+/// Profile for mapping comment entities to comment models.
+/// </summary>
 public class CommentModelProfile : Profile
 {
     public CommentModelProfile()

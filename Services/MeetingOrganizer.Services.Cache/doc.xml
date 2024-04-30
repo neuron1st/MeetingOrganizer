@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingOrganizer.Services.Cache</name>
+    </assembly>
+    <members>
+        <member name="T:MeetingOrganizer.Services.Cache.Bootstrapper">
+            <summary>
+            Contains extension methods for configuring services related to caching.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.Bootstrapper.AddCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the cache services to the specified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add the services to.</param>
+            <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> so that additional calls can be chained.</returns>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Cache.CacheService">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.CacheService.#ctor(MeetingOrganizer.Services.Settings.CacheSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeetingOrganizer.Services.Cache.CacheService"/> class.
+            </summary>
+            <param name="settings">The cache settings.</param>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.CacheService.KeyGenerate">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.CacheService.Put``1(System.String,``0,System.Nullable{System.TimeSpan})">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.CacheService.SetStoreTime(System.String,System.Nullable{System.TimeSpan})">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.CacheService.Get``1(System.String,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.CacheService.Delete(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeetingOrganizer.Services.Cache.ICacheService">
+            <summary>
+            Represents a service for caching data.
+            </summary>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.ICacheService.KeyGenerate">
+            <summary>
+            Generates a key for caching purposes.
+            </summary>
+            <returns>A generated key.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.ICacheService.Put``1(System.String,``0,System.Nullable{System.TimeSpan})">
+            <summary>
+            Puts data into the cache.
+            </summary>
+            <typeparam name="T">The type of data to cache.</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="data">The data to cache.</param>
+            <param name="storeTime">The optional time to store the data in the cache.</param>
+            <returns>A task representing the asynchronous operation, returning true if the operation succeeded.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.ICacheService.SetStoreTime(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            Sets the store time for a cached item.
+            </summary>
+            <param name="key">The cache key.</param>
+            <param name="storeTime">The optional time to store the data in the cache.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.ICacheService.Get``1(System.String,System.Boolean)">
+            <summary>
+            Gets data from the cache.
+            </summary>
+            <typeparam name="T">The type of data to get from the cache.</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="resetLifeTime">Specifies whether to reset the cache item's life time.</param>
+            <returns>A task representing the asynchronous operation, returning the cached data if found.</returns>
+        </member>
+        <member name="M:MeetingOrganizer.Services.Cache.ICacheService.Delete(System.String)">
+            <summary>
+            Deletes data from the cache.
+            </summary>
+            <param name="key">The cache key.</param>
+            <returns>A task representing the asynchronous operation, returning true if the operation succeeded.</returns>
+        </member>
+    </members>
+</doc>

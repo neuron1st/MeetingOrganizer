@@ -17,7 +17,7 @@ namespace MeetingOrganizer.Context.MigrationsPostgreSQL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -95,7 +95,6 @@ namespace MeetingOrganizer.Context.MigrationsPostgreSQL.Migrations
                         .HasColumnType("character varying(2000)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Title")

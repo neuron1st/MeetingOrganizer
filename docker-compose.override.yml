@@ -38,7 +38,7 @@ services:
     networks:
       - shared_meetingorganizer_net
     volumes:      
-      - .docker/api/wwwroot/images:/app/wwwroot/images
+      - ~/.docker-conf/api/wwwroot/images:/app/wwwroot/images
     env_file:
       - env.api
 

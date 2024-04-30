@@ -7,13 +7,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.Participants;
 
+/// <summary>
+/// Represents a model for creating a participant.
+/// </summary>
 public class CreateModel
 {
+    /// <summary>
+    /// The identifier of the user who is a participant.
+    /// </summary>
     public Guid UserId { get; set; }
+
+    /// <summary>
+    /// The identifier of the meeting the participant belongs to.
+    /// </summary>
     public Guid MeetingId { get; set; }
+
+    /// <summary>
+    /// User role in current meeting.
+    /// </summary>
     public string Role { get; set; }
 }
 
+/// <summary>
+/// Profile for AutoMapper mapping of CreateModel to Participant.
+/// </summary>
 public class CreateModelProfile : Profile
 {
     public CreateModelProfile()
@@ -25,6 +42,9 @@ public class CreateModelProfile : Profile
             .AfterMap<CreateModelActions>();
     }
 
+    /// <summary>
+    /// Actions to be performed after mapping CreateModel to Participant.
+    /// </summary>
     public class CreateModelActions : IMappingAction<CreateModel, Participant>
     {
         private readonly IDbContextFactory<MeetingOrganizerDbContext> contextFactory;
@@ -47,9 +67,11 @@ public class CreateModelProfile : Profile
             destination.MeetingId = meeting.Id;
         }
     }
-
 }
 
+/// <summary>
+/// Validator for CreateModel.
+/// </summary>
 public class CreateModelValidator : AbstractValidator<CreateModel>
 {
     public CreateModelValidator(IDbContextFactory<MeetingOrganizerDbContext> contextFactory)

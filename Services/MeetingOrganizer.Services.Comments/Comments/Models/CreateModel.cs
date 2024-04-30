@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeetingOrganizer.Services.Comments;
 
+/// <summary>
+/// Represents a model for creating a new comment.
+/// </summary>
 public class CreateModel
 {
     public string Text { get; set; }
@@ -15,6 +18,9 @@ public class CreateModel
     public Guid MeetingId { get; set; }
 }
 
+/// <summary>
+/// Profile for mapping create model to comment entity.
+/// </summary>
 public class CreateModelProfile : Profile
 {
     public CreateModelProfile()
@@ -49,7 +55,9 @@ public class CreateModelProfile : Profile
     }
 }
 
-
+/// <summary>
+/// Validator for the create comment model.
+/// </summary>
 public class CreateModelValidator : AbstractValidator<CreateModel>
 {
     public CreateModelValidator(IDbContextFactory<MeetingOrganizerDbContext> contextFactory)
