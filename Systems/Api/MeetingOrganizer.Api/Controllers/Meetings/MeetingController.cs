@@ -66,19 +66,9 @@ public class MeetingController : ControllerBase
     /// </summary>
     [HttpPost("")]
     [Authorize(Policy = AppScopes.MeetingsWrite)]
-    public async Task<MeetingResponse> Create([FromBody] CreateRequest request/*, [FromQuery] string path*/)
+    public async Task<MeetingResponse> Create([FromBody] CreateRequest request)
     {
         Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
-
-        //// temporary solution there is no frontend yet
-        //byte[] fileContent;
-        //using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-        //{
-        //    fileContent = new byte[fs.Length];
-        //    await fs.ReadAsync(fileContent, 0, (int)fs.Length);
-        //}
-        //string base64Content = Convert.ToBase64String(fileContent);
-        //request.Image.Content = base64Content;
 
         var model = _mapper.Map<CreateModel>(request);
 

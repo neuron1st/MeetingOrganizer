@@ -1,5 +1,5 @@
 ﻿using Blazored.LocalStorage;
-using MeetingOrganizer.Web.Pages.Profiles;
+using MeetingOrganizer.Web.Pages.Users;
 using MeetingOrganizer.Web.Providers;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
@@ -31,7 +31,7 @@ public class AuthService : IAuthService
 
         var content = await response.Content.ReadAsStringAsync();
 
-        var result = JsonSerializer.Deserialize<ProfileResult>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new ProfileResult();
+        var result = JsonSerializer.Deserialize<UserResult>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new UserResult();
         result.IsSuccessful = response.IsSuccessStatusCode;
 
         if(!response.IsSuccessStatusCode)

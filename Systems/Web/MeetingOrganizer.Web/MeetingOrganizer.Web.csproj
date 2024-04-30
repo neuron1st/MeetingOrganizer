@@ -23,7 +23,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Pages\Profiles\Services\" />
 	  <Folder Include="Services\MeetingLike\" />
 	  <Folder Include="Services\CommentLike\" />
 	</ItemGroup>

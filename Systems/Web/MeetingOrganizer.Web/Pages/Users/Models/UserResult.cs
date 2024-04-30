@@ -1,12 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MeetingOrganizer.Web.Pages.Profiles;
+namespace MeetingOrganizer.Web.Pages.Users;
 
-public class ProfileResult
+public class UserResult
 {
     public bool IsSuccessful { get; set; }
-    
-    [JsonPropertyName("fieldErrors")] 
+
+    [JsonPropertyName("fieldErrors")]
     public List<ErrorInfo> Errors { get; set; }
 }
 
