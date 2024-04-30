@@ -47,6 +47,7 @@
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.MeetingLikes\MeetingOrganizer.Services.MeetingLikes.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Meetings\MeetingOrganizer.Services.Meetings.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Participants\MeetingOrganizer.Services.Participants.csproj" />
+		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Photos\MeetingOrganizer.Services.Photos.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.RabbitMq\MeetingOrganizer.Services.RabbitMq.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.Settings\MeetingOrganizer.Services.Settings.csproj" />
 		<ProjectReference Include="..\..\..\Services\MeetingOrganizer.Services.UserAccount\MeetingOrganizer.Services.UserAccount.csproj" />

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\MeetingOrganizer.Context.Entities\MeetingOrganizer.Context.Entities.csproj" />
+    <ProjectReference Include="..\..\Data\MeetingOrganizer.Context\MeetingOrganizer.Context.csproj" />
+    <ProjectReference Include="..\..\Shared\MeetingOrganizer.Common\MeetingOrganizer.Common.csproj" />
+    <ProjectReference Include="..\MeetingOrganizer.Services.Participants\MeetingOrganizer.Services.Participants.csproj" />
+    <ProjectReference Include="..\MeetingOrganizer.Services.Settings\MeetingOrganizer.Services.Settings.csproj" />
+  </ItemGroup>
+
+</Project>

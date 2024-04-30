@@ -11,6 +11,7 @@ using MeetingOrganizer.Services.Comments;
 using MeetingOrganizer.Services.CommentLikes;
 using MeetingOrganizer.Services.MeetingLikes;
 using MeetingOrganizer.Services.Actions;
+using MeetingOrganizer.Services.Photos;
 
 namespace MeetingOrganizer.Api;
 
@@ -44,6 +45,7 @@ public static class Bootstrapper
             .AddCommentService()
             .AddCommentLikeService()
             .AddMeetingLikeService()
+            .AddPhotoService()
             ;
 
         return services;

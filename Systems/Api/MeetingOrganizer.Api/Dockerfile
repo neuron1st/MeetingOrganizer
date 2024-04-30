@@ -28,6 +28,7 @@ COPY ["Services/MeetingOrganizer.Services.Participants/MeetingOrganizer.Services
 COPY ["Services/MeetingOrganizer.Services.Logger/MeetingOrganizer.Services.Logger.csproj", "Services/MeetingOrganizer.Services.Logger/"]
 COPY ["Services/MeetingOrganizer.Services.MeetingLikes/MeetingOrganizer.Services.MeetingLikes.csproj", "Services/MeetingOrganizer.Services.MeetingLikes/"]
 COPY ["Services/MeetingOrganizer.Services.Meetings/MeetingOrganizer.Services.Meetings.csproj", "Services/MeetingOrganizer.Services.Meetings/"]
+COPY ["Services/MeetingOrganizer.Services.Photos/MeetingOrganizer.Services.Photos.csproj", "Services/MeetingOrganizer.Services.Photos/"]
 RUN dotnet restore "./Systems/Api/MeetingOrganizer.Api/./MeetingOrganizer.Api.csproj"
 COPY . .
 WORKDIR "/src/Systems/Api/MeetingOrganizer.Api"

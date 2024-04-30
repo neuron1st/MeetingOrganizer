@@ -144,8 +144,7 @@ public class CommentService : ICommentService
             .Include(x => x.Meeting)
             .Include(x => x.User)
             .Include(x => x.Likes)
-            .Where(x => x.Uid == id)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(x => x.Uid == id);
 
         if (comment == null)
             throw new ProcessException($"Comment (ID = {id}) not found.");

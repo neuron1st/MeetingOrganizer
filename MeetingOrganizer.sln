@@ -67,6 +67,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{84FED6C1-C0E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganizer.Web", "Systems\Web\MeetingOrganizer.Web\MeetingOrganizer.Web.csproj", "{C6303D91-2AC9-4A4F-8DC3-40EDB8D78F19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingOrganizer.Services.Photos", "Services\MeetingOrganizer.Services.Photos\MeetingOrganizer.Services.Photos.csproj", "{B92B7172-B6C7-49D7-B2CE-F813B2498D7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,10 @@ Global
 		{C6303D91-2AC9-4A4F-8DC3-40EDB8D78F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6303D91-2AC9-4A4F-8DC3-40EDB8D78F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6303D91-2AC9-4A4F-8DC3-40EDB8D78F19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B92B7172-B6C7-49D7-B2CE-F813B2498D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B92B7172-B6C7-49D7-B2CE-F813B2498D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B92B7172-B6C7-49D7-B2CE-F813B2498D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B92B7172-B6C7-49D7-B2CE-F813B2498D7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,6 +207,7 @@ Global
 		{5B91BE54-1837-4637-86D2-2C40A8E8B138} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
 		{84FED6C1-C0EA-46ED-991F-B7B0831A26EA} = {C58D84F9-1B9B-407C-8B03-04ACB468ABAD}
 		{C6303D91-2AC9-4A4F-8DC3-40EDB8D78F19} = {84FED6C1-C0EA-46ED-991F-B7B0831A26EA}
+		{B92B7172-B6C7-49D7-B2CE-F813B2498D7F} = {5805886F-A3FF-4C7A-BD75-F136ED5B636A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3223470B-A10F-4123-B5D5-A1358692F51C}

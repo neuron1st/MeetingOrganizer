@@ -55,10 +55,6 @@ public class MeetingModelProfile : Profile
 
         public void Process(Meeting source, MeetingModel destination, ResolutionContext context)
         {
-            using var db = dbContextFactory.CreateDbContext();
-
-            var model = db.Meetings.FirstOrDefault(x => x.Id == source.Id);
-
             if (!string.IsNullOrEmpty(source.Image))
                 destination.Image = Path.Combine(mainSettings.FileDirectory, source.Image);
         }
