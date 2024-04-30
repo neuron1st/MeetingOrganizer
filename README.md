@@ -44,4 +44,5 @@ A website where you can organize collective meetings and parties
 4. Open in browser:
 - Web client: [http://localhost:10002](http://localhost:10002)
 - Swagger: [http://localhost:10000/index.html](http://localhost:10000/index.html)
+You can use existing user (login = admin@meetorg.com, password = admin) or register a new one.
 
