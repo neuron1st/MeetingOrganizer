@@ -29,7 +29,7 @@
                         <MudCard>
                             @if (!string.IsNullOrEmpty(meeting.Image))
                             {
-                                <MudImage Src="@($"app/wwwroot/images/{meeting.Image}")" Height="200" Width="300" ObjectFit="ObjectFit.Cover" />
+                                <MudImage Src="@($"{Settings.FilesRoot}/{meeting.Image}")" Height="200" Width="300" ObjectFit="ObjectFit.Cover" />
                             }
                             <MudCardContent>
                                 <MudText Typo="Typo.h5">@meeting.Title</MudText>
@@ -124,5 +124,7 @@
         {
             Snackbar.Add(ex.Message, Severity.Error);
         }
+
+        await ReloadData();
     }
 }

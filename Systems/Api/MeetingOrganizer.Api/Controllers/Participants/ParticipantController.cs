@@ -5,6 +5,7 @@ using MeetingOrganizer.Services.Logger;
 using MeetingOrganizer.Services.Participants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql;
 using System.Security.Claims;
 
 namespace MeetingOrganizer.Api.Controllers.Participants;
@@ -96,18 +97,25 @@ public class ParticipantController : ControllerBase
     /// </summary>
     [HttpPost("")]
     [Authorize(Policy = AppScopes.ParticipantsWrite)]
-    public async Task<ParticipantResponse> Create(CreateRequest request)
+    public async Task<IActionResult> Create(CreateRequest request)
     {
-        Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
+        try
+        {
+            Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userId);
 
-        var model = _mapper.Map<CreateModel>(request);
-        model.UserId = userId;
+            var model = _mapper.Map<CreateModel>(request);
+            model.UserId = userId;
 
-        var participant = await _participantService.Create(model);
+            var participant = await _participantService.Create(model);
 
-        var result = _mapper.Map<ParticipantResponse>(participant);
+            var result = _mapper.Map<ParticipantResponse>(participant);
 
-        return result;
+            return Ok(result);
+        }
+        catch (NpgsqlException ex)
+        {
+            return Conflict("Participant already exists.");
+        }
     }
 
     /// <summary>

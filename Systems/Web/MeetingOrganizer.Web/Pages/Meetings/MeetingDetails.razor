@@ -26,14 +26,14 @@
 <MudContainer>
     <MudGrid>
         <MudItem xs="12" sm="6" md="6" lg="6" xl="6">
-            <MudButton Icon="Icons.Material.Filled.ArrowBack" Color="Color.Secondary" @onclick="GoBack">Back</MudButton>
+            <MudButton Color="Color.Secondary" @onclick="GoBack">Back</MudButton>
         </MudItem>
         <MudItem>
             <MudText Typo="Typo.h5">@meetingModel.Title</MudText>
             @if (isAdmin)
             {
-                <MudButton Icon="Icons.Material.Filled.Edit" Color="Color.Primary" @onclick="EditMeeting">Edit</MudButton>
-                <MudButton Icon="Icons.Material.Filled.Delete" Color="Color.Error" @onclick="DeleteMeeting">Delete</MudButton>
+                <MudButton Color="Color.Primary" @onclick="EditMeeting">Edit</MudButton>
+                <MudButton Color="Color.Error" @onclick="DeleteMeeting">Delete</MudButton>
             }
         </MudItem>
     </MudGrid>
@@ -43,7 +43,7 @@
                 <MudItem xs="12" sm="6" md="6" lg="6" xl="6">
                     @if (!string.IsNullOrEmpty(meetingModel.Image))
                     {
-                        <MudImage Src="@($"app/wwwroot/images/{meetingModel.Image}")" Height="400" Width="600" ObjectFit="ObjectFit.Cover" />
+                        <MudImage Src="@($"{Settings.FilesRoot}/{meetingModel.Image}")" Height="400" Width="400" ObjectFit="ObjectFit.Contain" />
                     }
                 </MudItem>
                 <MudItem xs="12" sm="6" md="6" lg="6" xl="6">
@@ -57,12 +57,25 @@
                     {
                         <MudText Typo="Typo.subtitle1">Date: Soon</MudText>
                     }
-                    <MudText Typo="Typo.subtitle1">Participants:</MudText>
-                    <MudText>@meetingModel.ParticipantsNumber</MudText>
-                    <MudText Typo="Typo.subtitle1">Likes:</MudText>
-                    <MudText>@meetingModel.LikesNumber</MudText>
-                    <MudButton Icon="Icons.Material.Filled.ThumbUp" Color="Color.Primary" @onclick="AddLike">Like</MudButton>
-                    <MudButton Icon="Icons.Material.Filled.ThumbDown" Color="Color.Error" @onclick="RemoveLike">Unlike</MudButton>
+                    <MudGrid>
+                        <MudItem xs="6" sm="6">
+                            <MudText Typo="Typo.subtitle1">Participants: @meetingModel.ParticipantsNumber</MudText>
+                        </MudItem>
+                        <MudItem xs="6" sm="6">
+                            <MudButton Color="Color.Primary" @onclick="ViewParticipants">View Participants</MudButton>
+                        </MudItem>
+                    </MudGrid>
+                    @if (!isParticipant)
+                    {
+                        <MudButton Color="Color.Primary" @onclick="JoinMeeting">Join Meeting</MudButton>
+                    }
+                    else
+                    {
+                        <MudButton Color="Color.Primary" @onclick="LeaveMeeting">Leave Meeting</MudButton>
+                    }
+                    <MudText Typo="Typo.subtitle1">Likes: @meetingModel.LikesNumber</MudText>
+                    <MudButton Color="Color.Primary" @onclick="AddLike">Like</MudButton>
+                    <MudButton Color="Color.Error" @onclick="RemoveLike">Unlike</MudButton>
                 </MudItem>
             </MudGrid>
             <MudText Typo="Typo.subtitle1">Comments: (@meetingModel.CommentsNumber)</MudText>
@@ -82,11 +95,11 @@
                             @if (isModerator || comment.UserId == currentUserId)
                             {
                                 <div>
-                                    <MudButton Icon="Icons.Material.Filled.Delete" Color="Color.Error" @onclick="() => DeleteComment(comment.Id)">Delete</MudButton>
+                                    <MudButton Color="Color.Error" @onclick="() => DeleteComment(comment.Id)">Delete</MudButton>
                                 </div>
                             }
                             <div>
-                                <MudButton Icon="@(comment.IsLiked ? Icons.Material.Filled.Favorite : Icons.Material.Outlined.FavoriteBorder)" Color="Color.Primary" @onclick="() => ToggleCommentLike(comment.Id)">Like</MudButton>
+                                <MudButton Color="Color.Primary" @onclick="() => ToggleCommentLike(comment.Id)">Like</MudButton>
                             </div>
                         </div>
                     </div>
@@ -97,29 +110,26 @@
 </MudContainer>
 
 @code {
-    private MeetingModel meetingModel;
+    private MeetingModel meetingModel = new();
     private IEnumerable<CommentModel> comments = new List<CommentModel>();
     private string newCommentText = "";
 
     private Guid currentUserId;
     private bool isAdmin;
     private bool isModerator;
+    private bool isParticipant;
 
     [Parameter]
     public string Id { get; set; }
 
     private async Task ReloadData()
     {
-        var user = await UserService.Get();
-        currentUserId = user.Id;
-
         var meetingId = Guid.Parse(Id);
         meetingModel = await MeetingService.GetMeeting(meetingId);
 
         comments = await CommentService.GetAllByMeeting(meetingId);
         comments.OrderByDescending(c => c.CreatedDate);
 
-        CheckAuthority();
         StateHasChanged();
     }
 
@@ -127,6 +137,7 @@
     {
         try
         {
+            CheckAuthority();
             await ReloadData();
         }
         catch (Exception ex)
@@ -137,6 +148,8 @@
 
     private async void CheckAuthority()
     {
+        var user = await UserService.Get();
+        currentUserId = user.Id;
         var meetingId = Guid.Parse(Id);
 
         var participant = await ParticipantService.GetByUserAndMeeting(currentUserId, meetingId);
@@ -145,11 +158,13 @@
         {
             isAdmin = participant.Role == "Admin";
             isModerator = isAdmin || participant.Role == "Moderator";
+            isParticipant = isModerator || participant.Role == "Participant";
         }
         else
         {
             isAdmin = false;
             isModerator = false;
+            isParticipant = false;
         }
     }
 
@@ -210,7 +225,8 @@
             return;
 
         await MeetingService.DeleteMeeting(Guid.Parse(Id));
-        await ReloadData();
+
+        GoBack();
     }
 
     private async Task AddLike()
@@ -278,6 +294,50 @@
 
             await ReloadData();
         }
+    }
+
+    private async Task ViewParticipants()
+    {
+        var participants = await ParticipantService.GetAllByMeeting(Guid.Parse(Id));
+
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", $"Participants of {meetingModel.Title} meeting");
+        parameters.Add("ParticipantsList", participants);
+
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<ParticipantsDialog>("Participants", parameters, options);
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+            return;
+    }
+
+    private async Task JoinMeeting()
+    {
+        var meetingId = Guid.Parse(Id);
+        await ParticipantService.AddParticipant(new Participants.CreateModel()
+        {
+            MeetingId = meetingId,
+            Role = "Participant",
+        });
+
+        Snackbar.Add("You have successfully joined the meeting.", Severity.Success);
+        isParticipant = true;
+        await ReloadData();
+    }
+
+    private async Task LeaveMeeting()
+    {
+        var meetingId = Guid.Parse(Id);
+        var participant = await ParticipantService.GetByUserAndMeeting(currentUserId, meetingId);
+        if (participant == null)
+            return;
+        await ParticipantService.DeleteParticipant(participant.Id);
+        isAdmin = false;
+        isModerator = false;
+        isParticipant = false;
+        Snackbar.Add("You have successfully left the meeting.", Severity.Success);
+        await ReloadData();
     }
 
     private void GoBack()

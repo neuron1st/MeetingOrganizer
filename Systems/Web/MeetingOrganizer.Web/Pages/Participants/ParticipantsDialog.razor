@@ -1,0 +1,36 @@
+﻿@using MeetingOrganizer.Web.Pages.Participants
+
+<MudDialog>
+    <DialogContent>
+        <MudText>@ContentText</MudText>
+        @if (ParticipantsList != null && ParticipantsList.Any())
+        {
+            <ul>
+                @foreach (var participant in ParticipantsList)
+                {
+                    <li>@participant.UserName - @participant.Role</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <MudText>No participants</MudText>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public string ContentText { get; set; }
+
+    [Parameter]
+    public List<ParticipantModel> ParticipantsList { get; set; }
+
+    void Cancel() => MudDialog.Cancel();
+}

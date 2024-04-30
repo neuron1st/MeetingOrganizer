@@ -107,6 +107,15 @@ public class ParticipantService : IParticipantService
 
         using var context = await _dbContextFactory.CreateDbContextAsync();
 
+        var existingParticipant = await context
+            .Participants
+            .FirstOrDefaultAsync(p => p.Meeting.Uid == model.MeetingId && p.User.Id == model.UserId);
+
+        if (existingParticipant != null)
+        {
+            return _mapper.Map<ParticipantModel>(existingParticipant);
+        }
+
         var participant = _mapper.Map<Participant>(model);
         await context.Participants.AddAsync(participant);
         await context.SaveChangesAsync();
@@ -116,6 +125,7 @@ public class ParticipantService : IParticipantService
 
         return _mapper.Map<ParticipantModel>(participant);
     }
+
 
     /// <inheritdoc/>
     public async Task Update(Guid id, UpdateModel model)
