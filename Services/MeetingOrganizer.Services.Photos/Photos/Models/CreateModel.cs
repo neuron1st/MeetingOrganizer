@@ -41,10 +41,7 @@ public class CreateModelProfile : Profile
             var meeting = db.Meetings.FirstOrDefault(x => x.Uid == source.MeetingId);
 
             destination.MeetingId = meeting.Id;
-
-            destination.Meeting = meeting;
         }
-
     }
 }
 

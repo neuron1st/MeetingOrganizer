@@ -4,6 +4,7 @@ using MeetingOrganizer.Web.Pages.Auth;
 using MeetingOrganizer.Web.Pages.Comments;
 using MeetingOrganizer.Web.Pages.Meetings;
 using MeetingOrganizer.Web.Pages.Participants;
+using MeetingOrganizer.Web.Pages.Photos;
 using MeetingOrganizer.Web.Pages.Users;
 using MeetingOrganizer.Web.Providers;
 using MeetingOrganizer.Web.Services.CommentLike;
@@ -33,6 +34,7 @@ builder.Services.AddScoped<ICommentLikeService, CommentLikeService>();
 builder.Services.AddScoped<IMeetingLikeService, MeetingLikeService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMeetingService, MeetingService>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 await builder.Build().RunAsync();

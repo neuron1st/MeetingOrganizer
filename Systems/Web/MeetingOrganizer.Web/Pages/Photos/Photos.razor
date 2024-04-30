@@ -1,0 +1,178 @@
+﻿@page "/meetings/{MeetingId}/photos"
+@using MeetingOrganizer.Web.Common
+@using MeetingOrganizer.Web.Components
+@using MeetingOrganizer.Web.Pages.Photos
+@using MeetingOrganizer.Web.Pages.Participants
+@using MeetingOrganizer.Web.Pages.Users
+@using Microsoft.AspNetCore.Authorization
+
+@inject IPhotoService PhotoService
+@inject IUserService UserService
+@inject IParticipantService ParticipantService
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+@inject NavigationManager navigationManager
+
+@attribute [Authorize]
+@layout MainLayout
+
+<PageTitle>Album</PageTitle>
+
+<MudContainer>
+    <MudButton Color="Color.Secondary" @onclick="GoBack">Back</MudButton>
+
+    @if (isParticipant)
+    {
+        <MudButton Color="Color.Primary" @onclick="AddPhoto">Add Photo</MudButton>
+    }
+
+    @if (photos.Any())
+    {
+        <div class="row">
+            @foreach (var photo in photos)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        @if (!string.IsNullOrEmpty(photo.Image))
+                        {
+                            <MudImage Src="@($"{Settings.FilesRoot}/{photo.Image}")" />
+                        }
+                        <div class="card-body">
+                            @if (isModerator)
+                            {
+                                <MudButton Color="Color.Error" @onclick="@(() => DeletePhoto(photo.Id))">Delete</MudButton>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <MudText>No photos</MudText>
+    }
+</MudContainer>
+
+@code {
+    [Parameter]
+    public string MeetingId { get; set; }
+
+    private IEnumerable<PhotoModel> photos = new List<PhotoModel>();
+
+    private Guid currentUserId;
+    private bool isParticipant;
+    private bool isModerator;
+
+    private async Task ReloadData()
+    {
+        var meetingId = Guid.Parse(MeetingId);
+
+        photos = await PhotoService.GetPhotosByMeeting(meetingId);
+
+        StateHasChanged();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await CheckAuthority();
+            await ReloadData();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+    }
+
+    private async Task CheckAuthority()
+    {
+        var user = await UserService.Get();
+        currentUserId = user.Id;
+        var meetingId = Guid.Parse(MeetingId);
+
+        var participant = await ParticipantService.GetByUserAndMeeting(currentUserId, meetingId);
+
+        if (participant != null)
+        {
+            isModerator = participant.Role == "Admin" || participant.Role == "Moderator";
+            isParticipant = isModerator || participant.Role == "Participant";
+        }
+        else
+        {
+            isModerator = false;
+            isParticipant = false;
+        }
+    }
+
+    private async Task AddPhoto()
+    {
+        var meetingId = Guid.Parse(MeetingId);
+        var parameters = new DialogParameters { };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true };
+
+        var dialog = await DialogService.ShowAsync<PhotoDialog>("Add photo", parameters, options);
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+        {
+            return;
+        }
+
+        try
+        {
+            var model = ((PhotoDialog)dialog.Dialog).Model;
+
+            var file = ((PhotoDialog)dialog.Dialog).File;
+            var buffer = new byte[file.Size];
+
+            await file.OpenReadStream(int.MaxValue).ReadAsync(buffer);
+            var content = Convert.ToBase64String(buffer);
+
+            var createModel = new CreateModel()
+                {
+                    MeetingId = meetingId,
+                    Image = new Common.FilePayload()
+                    {
+                        FileName = file.Name,
+                        Content = content
+                    }
+                };
+            await PhotoService.AddPhoto(createModel);
+            await ReloadData();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+
+        await ReloadData();
+    }
+
+
+    private async Task DeletePhoto(Guid photoId)
+    {
+
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you really want to delete this photo? This process cannot be undone.");
+        parameters.Add("ButtonText", "Delete");
+        parameters.Add("Color", Color.Error);
+
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+
+        var dialog = await DialogService.ShowAsync<ConfirmationDialog>("Delete photo", parameters, options);
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+            return;
+
+        await PhotoService.DeletePhoto(photoId);
+        await ReloadData();
+    }
+
+    private void GoBack()
+    {
+        navigationManager.NavigateTo($"/meetings/{MeetingId}");
+    }
+}
